@@ -3,189 +3,912 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Malte Gündisch – One-Pager</title>
-    <link rel="stylesheet" href="style.css">
+    <title>Malte Gündisch – Systems, CRM & Engineering</title>
+    <meta name="description" content="Persönliche Vorstellungsseite von Malte Gündisch – Manager für Online-Marketing & CRM bei ergoflix Group. Zehn Jahre Erfahrung in Webdesign, Webentwicklung, Salesforce und Marketing-Technologie.">
+    <meta name="theme-color" content="#101318">
+    <meta property="og:type" content="profile">
+    <meta property="og:title" content="Malte Gündisch – Systems, CRM & Engineering">
+    <meta property="og:description" content="Salesforce, CRM-Architektur, Webdesign, Webentwicklung und Marketing-Technologie.">
+    <meta property="og:image" content="avatar.jpg">
+    <meta property="og:locale" content="de_DE">
+    <meta name="twitter:card" content="summary">
+    <link rel="preload" as="image" href="101451426.jpg" fetchpriority="high">
+
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "Person",
+        "name": "Malte Gündisch",
+        "jobTitle": "Manager Online Marketing & CRM",
+        "worksFor": {"@type": "Organization", "name": "ergoflix Group"},
+        "sameAs": [
+            "https://github.com/MGue95",
+            "https://www.linkedin.com/in/malte-g%C3%BCndisch-4131131ba/"
+        ],
+        "knowsAbout": ["Salesforce", "CRM Architecture", "TypeScript", "Web Engineering", "LLM Tooling"]
+    }
+    </script>
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- Devicon Icons -->
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/devicon.min.css">
+
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest" defer></script>
+
+    <link rel="stylesheet" href="style.css?v=2">
+    <link rel="stylesheet" href="terminal.css?v=1">
 </head>
 <body>
-    <!-- Language Toggle -->
-    <div class="lang-toggle">
-        <button id="lang-de" class="lang-btn active">DE</button>
-        <button id="lang-en" class="lang-btn">EN</button>
-    </div>
+    <a class="skip-link" href="#main-content">Zum Inhalt springen</a>
+    <div class="scroll-progress" id="scrollProgress" aria-hidden="true"></div>
 
-    <!-- Header -->
-    <header class="hero">
-        <div class="hero-content">
-            <h1 data-de="Malte Gündisch" data-en="Malte Gündisch">Malte Gündisch</h1>
-            <p data-de="Manager Online Marketing & CRM bei ergoflix Group" data-en="Manager Online Marketing & CRM at ergoflix Group">Manager Online Marketing & CRM bei ergoflix Group</p>
-            <p data-de="Salesforce, Marketing Automation & Web Engineering" data-en="Salesforce, Marketing Automation & Web Engineering">Salesforce, Marketing Automation & Web Engineering</p>
-            <p data-de="Deutschland" data-en="Germany">Deutschland</p>
+    <header class="header" id="navbar">
+        <div class="header-inner container">
+            <a href="#hero" class="brand-logo" aria-label="Malte Gündisch Startseite">
+                <span class="brand-mark" aria-hidden="true">MG</span>
+                <span class="brand-copy">
+                    <span class="logo-name">Malte Gündisch</span>
+                    <span class="logo-role">Marketing · Webdesign · CRM</span>
+                </span>
+            </a>
+
+            <nav class="nav-menu" id="navMenu">
+                <a href="#about" class="nav-link" data-de="Über mich" data-en="About">Über mich</a>
+                <a href="#experience" class="nav-link" data-de="Erfahrung" data-en="Experience">Erfahrung</a>
+                <a href="#skills" class="nav-link" data-de="Fähigkeiten" data-en="Skills">Fähigkeiten</a>
+                <a href="#terminal" class="nav-link" data-de="Terminal" data-en="Terminal">Terminal</a>
+                <a href="#ai-expertise" class="nav-link" data-de="KI & LLM" data-en="AI & LLM">KI & LLM</a>
+                <a href="#focus" class="nav-link" data-de="Fokus" data-en="Focus">Fokus</a>
+                <a href="#certifications" class="nav-link" data-de="Zertifikate" data-en="Certificates">Zertifikate</a>
+                <a href="#contact" class="nav-link" data-de="Kontakt" data-en="Contact">Kontakt</a>
+            </nav>
+
+            <div class="header-actions">
+                <div class="lang-toggle" role="group" aria-label="Sprachauswahl">
+                    <button id="lang-de" class="lang-btn active" type="button" aria-label="Deutsch">DE</button>
+                    <button id="lang-en" class="lang-btn" type="button" aria-label="English">EN</button>
+                </div>
+
+                <button class="mobile-toggle" id="mobileToggle" type="button" aria-label="Menü öffnen" aria-expanded="false">
+                    <i data-lucide="menu" class="mobile-icon"></i>
+                </button>
+            </div>
         </div>
     </header>
 
-    <!-- About -->
-    <section id="about" class="section">
-        <h2 data-de="Über mich" data-en="About Me">Über mich</h2>
-        <p data-de="Ich leite das Online Marketing und CRM bei der ergoflix Group, wobei ich mich auf Salesforce, Marketing Automation und Web Engineering konzentriere. Zusätzlich entwickle ich LLM-Tooling für Geschäftsprozesse, erstelle MCP-Server für sicheren LLM-Zugriff und baue KI-gestützte CRM-Lösungen mit GDPR-konformen Datenflüssen." data-en="I lead online marketing and CRM at ergoflix Group, focusing on Salesforce, marketing automation, and web engineering. I also develop LLM tooling for business systems, build MCP servers for secure LLM access, and create AI-powered CRM solutions with GDPR-compliant data flows.">
-            Ich leite das Online Marketing und CRM bei der ergoflix Group, wobei ich mich auf Salesforce, Marketing Automation und Web Engineering konzentriere. Zusätzlich entwickle ich LLM-Tooling für Geschäftsprozesse, erstelle MCP-Server für sicheren LLM-Zugriff und baue KI-gestützte CRM-Lösungen mit GDPR-konformen Datenflüssen.
-        </p>
-    </section>
+    <main id="main-content">
+        <section class="hero-section" id="hero">
+            <canvas class="hero-canvas" id="heroCanvas" aria-hidden="true"></canvas>
+            <div class="container hero-container">
+                <div class="hero-grid">
+                    <div class="hero-text-col">
+                        <div class="hero-meta mono" data-de="Online-Marketing & CRM · Webdesign · Webentwicklung" data-en="Online Marketing & CRM · Web Design · Web Development">
+                            Online-Marketing & CRM · Webdesign · Webentwicklung
+                        </div>
 
-    <!-- Skills -->
-    <section id="skills" class="section">
-        <h2 data-de="Fähigkeiten" data-en="Skills">Fähigkeiten</h2>
-        <div class="skills-grid">
-            <div class="skill-category">
-                <h3 data-de="Salesforce & CRM" data-en="Salesforce & CRM">Salesforce & CRM</h3>
-                <ul>
-                    <li>Apex</li>
-                    <li>Lightning Web Components (LWC)</li>
-                    <li>Flow Builder</li>
-                    <li>SOQL / SOSL</li>
-                    <li>Async Apex (Queueable, Batch, Future)</li>
-                </ul>
-            </div>
-            <div class="skill-category">
-                <h3 data-de="Web Development" data-en="Web Development">Webentwicklung</h3>
-                <ul>
-                    <li>TypeScript</li>
-                    <li>JavaScript / ES6+</li>
-                    <li>HTML5 & CSS3</li>
-                    <li>React (Basics)</li>
-                    <li>WordPress / Oxygen</li>
-                    <li>PHP</li>
-                </ul>
-            </div>
-            <div class="skill-category">
-                <h3 data-de="AI & LLM" data-en="AI & LLM">KI & LLM</h3>
-                <ul>
-                    <li>MCP-Server (Model Context Protocol)</li>
-                    <li>Claude Code & Anthropic SDK</li>
-                    <li>Prompt Engineering</li>
-                    <li>Agentic Workflows</li>
-                    <li>LLM‑Tooling für Business Systems</li>
-                </ul>
-            </div>
-            <div class="skill-category">
-                <h3 data-de="Marketing & Analytics" data-en="Marketing & Analytics">Marketing & Analytics</h3>
-                <ul>
-                    <li>Google Analytics 4</li>
-                    <li>Looker Studio</li>
-                    <li>Brevo (ehem. Sendinblue)</li>
-                    <li>Make.com (Integromat)</li>
-                    <li>Meta Ads, Google Ads</li>
-                    <li>SQL & Datenmodellierung</li>
-                </ul>
-            </div>
-            <div class="skill-category">
-                <h3 data-de="DevOps & Tools" data-en="DevOps & Tools">DevOps & Tools</h3>
-                <ul>
-                    <li>GitHub Actions</li>
-                    <li>Docker</li>
-                    <li>VS Code</li>
-                    <li>Linux Bash</li>
-                    <li>CI/CD Pipelines</li>
-                </ul>
-            </div>
-        </div>
-    </section>
+                        <div class="hero-skill-rail mono" aria-label="Schwerpunkte">
+                            <span><i data-lucide="layout-template"></i> Webdesign</span>
+                            <span><i data-lucide="shopping-cart"></i> E-Commerce</span>
+                            <span><i data-lucide="bar-chart-3"></i> Performance</span>
+                            <span><i data-lucide="database"></i> Salesforce</span>
+                        </div>
 
-    <!-- Certifications -->
-    <section id="certifications" class="section">
-        <h2 data-de="Zertifikate & Schulungen" data-en="Certifications & Training">Zertifikate & Schulungen</h2>
-        <div class="certs-grid">
-            <div class="cert">
-                <h4 data-de="Anthropic Education" data-en="Anthropic Education">Anthropic Education</h4>
-                <p>AI Fluency, Claude 101, Claude Code 101, Claude Code in Action</p>
-            </div>
-            <div class="cert">
-                <h4 data-de="Google Skillshop" data-en="Google Skillshop">Google Skillshop</h4>
-                <p>Ads Search, AI‑Powered Performance, Analytics</p>
-            </div>
-        </div>
-    </section>
+                        <h1 class="hero-headline" data-de="Malte Gündisch" data-en="Malte Gündisch">
+                            Malte Gündisch
+                        </h1>
 
-    <!-- Experience -->
-    <section id="experience" class="section">
-        <h2 data-de="Berufserfahrung" data-en="Experience">Berufserfahrung</h2>
-        <div class="timeline">
-            <div class="timeline-item">
-                <h3 data-de="Manager Online Marketing & CRM" data-en="Manager Online Marketing & CRM">Manager Online Marketing & CRM</h3>
-                <p class="company" data-de="ergoflix Group" data-en="ergoflix Group">ergoflix Group</p>
-                <p class="period" data-de="seit 2022" data-en="since 2022">seit 2022</p>
-                <ul>
-                    <li data-de="Leitung von Online-Marketing-Strategien und Kampagnen" data-en="Leading online marketing strategies and campaigns">Leitung von Online-Marketing-Strategien und Kampagnen</li>
-                    <li data-de="Optimierung von Salesforce‑CRM und Automatisierungsworkflows" data-en="Optimizing Salesforce CRM and automation workflows">Optimierung von Salesforce‑CRM und Automatisierungsworkflows</li>
-                    <li data-de="Entwicklung von KI‑gestützten Lösungen für Kundenkommunikation" data-en="Developing AI‑powered solutions for customer communication">Entwicklung von KI‑gestützten Lösungen für Kundenkommunikation</li>
-                </ul>
-            </div>
-            <div class="timeline-item">
-                <h3 data-de="Freelancer / Berater" data-en="Freelancer / Consultant">Freelancer / Berater</h3>
-                <p class="company" data-de="Verschiedene Kunden" data-en="Various clients">Verschiedene Kunden</p>
-                <p class="period" data-de="2019‑2022" data-en="2019‑2022">2019‑2022</p>
-                <ul>
-                    <li data-de="Webentwicklung (WordPress, Oxygen, TypeScript)" data-en="Web development (WordPress, Oxygen, TypeScript)">Webentwicklung (WordPress, Oxygen, TypeScript)</li>
-                    <li data-de="Marketing‑Automation mit Make.com und Brevo" data-en="Marketing automation with Make.com and Brevo">Marketing‑Automation mit Make.com und Brevo</li>
-                    <li data-de="Salesforce‑Beratung und Custom Development" data-en="Salesforce consulting and custom development">Salesforce‑Beratung und Custom Development</li>
-                </ul>
-            </div>
-        </div>
-    </section>
+                        <p class="hero-subline" data-de="Ich arbeite dort, wo Marketing, Kundendaten und digitale Oberflächen zusammenkommen. Bei der ergoflix Group entwickle ich Salesforce-Lösungen, gestalte Webpräsenzen und verbinde Kampagnen mit sauberem Tracking." data-en="I work where marketing, customer data, and digital interfaces meet. At ergoflix Group, I develop Salesforce solutions, shape web experiences, and connect campaigns with clean tracking.">
+                            Ich arbeite dort, wo Marketing, Kundendaten und digitale Oberflächen zusammenkommen. Bei der ergoflix Group entwickle ich Salesforce-Lösungen, gestalte Webpräsenzen und verbinde Kampagnen mit sauberem Tracking.
+                        </p>
 
-    <!-- Projects -->
-    <section id="projects" class="section">
-        <h2 data-de="Projekte" data-en="Projects">Projekte</h2>
-        <div class="projects-grid">
-            <div class="project-card">
-                <h3 data-de="WPTrustRocket" data-en="WPTrustRocket">WPTrustRocket</h3>
-                <p data-de="Open‑Source‑Plugin für WordPress, das Performance, Sicherheit und SEO optimiert." data-en="Open‑source WordPress plugin optimizing performance, security, and SEO.">
-                    Open‑Source‑Plugin für WordPress, das Performance, Sicherheit und SEO optimiert.
+                        <div class="profile-highlights">
+                            <div class="highlight-item">
+                                <span class="highlight-title mono" data-de="Position" data-en="Role">Position</span>
+                                <span class="highlight-value" data-de="Manager Online-Marketing & CRM" data-en="Manager Online Marketing & CRM">Manager Online-Marketing & CRM</span>
+                            </div>
+                            <div class="highlight-item">
+                                <span class="highlight-title mono" data-de="Unternehmen" data-en="Company">Unternehmen</span>
+                                <span class="highlight-value">ergoflix Group</span>
+                            </div>
+                            <div class="highlight-item">
+                                <span class="highlight-title mono" data-de="Erfahrung" data-en="Experience">Erfahrung</span>
+                                <span class="highlight-value" data-de="10+ Jahre Online-Marketing" data-en="10+ Years Online Marketing">10+ Jahre Online-Marketing</span>
+                            </div>
+                            <div class="highlight-item">
+                                <span class="highlight-title mono" data-de="Standort" data-en="Location">Standort</span>
+                                <span class="highlight-value" data-de="Dinslaken / NRW" data-en="Dinslaken / NRW">Dinslaken / NRW</span>
+                            </div>
+                        </div>
+
+                        <div class="hero-links">
+                            <a href="#contact" class="btn btn-primary">
+                                <i data-lucide="mail" class="icon-sm"></i>
+                                <span data-de="Kontakt aufnehmen" data-en="Get in touch">Kontakt aufnehmen</span>
+                            </a>
+                            <a href="#skills" class="btn btn-secondary">
+                                <i data-lucide="cpu" class="icon-sm"></i>
+                                <span data-de="Technischer Stack" data-en="Technical Stack">Technischer Stack</span>
+                            </a>
+                            <a href="https://www.linkedin.com/in/malte-g%C3%BCndisch-4131131ba/" target="_blank" rel="noopener noreferrer" class="btn btn-secondary">
+                                <i class="devicon-linkedin-plain"></i>
+                                <span>LinkedIn</span>
+                            </a>
+                            <a href="https://github.com/MGue95" target="_blank" rel="noopener noreferrer" class="btn btn-secondary">
+                                <i class="devicon-github-original"></i>
+                                <span>GitHub</span>
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="hero-photo-col">
+                        <div class="hero-visual">
+                            <div class="portrait-card" tabindex="0" role="button" aria-label="Steckbrief von Malte Gündisch anzeigen" aria-pressed="false">
+                                <div class="portrait-card-inner">
+                                    <div class="portrait-face portrait-front">
+                                        <div class="photo-wrapper">
+                                            <img src="101451426.jpg" alt="Malte Gündisch" class="portrait-img" width="286" height="286" loading="eager" decoding="async" fetchpriority="high">
+                                        </div>
+                                        <div class="portrait-info">
+                                            <div class="portrait-name">Malte Gündisch</div>
+                                            <div class="portrait-sub mono">@MGue95 · ergoflix Group</div>
+                                            <div class="portrait-badges mono">
+                                                <span><i class="devicon-salesforce-plain colored"></i> Salesforce</span>
+                                                <span><i class="devicon-wordpress-plain colored"></i> WordPress</span>
+                                                <span><i data-lucide="scan-search" class="pill-icon"></i> SEO &amp; SEA</span>
+                                            </div>
+                                        </div>
+                                        <span class="portrait-hint mono" aria-hidden="true">
+                                            <i data-lucide="rotate-3d"></i> Kurzprofil ansehen
+                                        </span>
+                                    </div>
+                                    <div class="portrait-face portrait-back" aria-hidden="true">
+                                        <span class="portrait-back-kicker mono">QUICK PROFILE / 2026</span>
+                                        <h2>Malte<br>Gündisch</h2>
+                                        <p class="portrait-back-intro">Marketing denkt in Wirkung. Engineering denkt in Systemen. Ich verbinde beides.</p>
+                                        <dl class="portrait-facts mono">
+                                            <div><dt>ROLE</dt><dd>Online Marketing &amp; CRM</dd></div>
+                                            <div><dt>BASE</dt><dd>Dinslaken / NRW</dd></div>
+                                            <div><dt>FOCUS</dt><dd>Salesforce · LLM · Web</dd></div>
+                                        </dl>
+                                        <div class="portrait-back-footer mono"><span>MG / 095</span><span>↗ CONNECT</span></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="brand-strip glass">
+            <div class="container">
+                <div class="brand-strip-inner">
+                    <div class="brand-item" title="Salesforce">
+                        <i class="devicon-salesforce-plain colored"></i>
+                        <span>Salesforce</span>
+                    </div>
+                    <div class="brand-item" title="TypeScript">
+                        <i class="devicon-typescript-plain colored"></i>
+                        <span>TypeScript</span>
+                    </div>
+                    <div class="brand-item" title="Python">
+                        <i class="devicon-python-plain colored"></i>
+                        <span>Python</span>
+                    </div>
+                    <div class="brand-item" title="PHP">
+                        <i class="devicon-php-plain colored"></i>
+                        <span>PHP</span>
+                    </div>
+                    <div class="brand-item" title="WordPress">
+                        <i class="devicon-wordpress-plain colored"></i>
+                        <span>WordPress</span>
+                    </div>
+                    <div class="brand-item" title="Google Analytics 4 & Ads">
+                        <i class="devicon-google-plain colored"></i>
+                        <span>Google Tech</span>
+                    </div>
+                    <div class="brand-item" title="GitHub & CI/CD">
+                        <i class="devicon-github-original"></i>
+                        <span>GitHub Actions</span>
+                    </div>
+                    <div class="brand-item" title="Claude API">
+                        <i data-lucide="bot" class="brand-icon"></i>
+                        <span>Claude API</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="section section-about reveal-section glass" id="about">
+            <div class="container">
+                <div class="section-header">
+                    <h2 class="section-title" data-de="Über mich" data-en="About Me">Über mich</h2>
+                </div>
+
+                <div class="card about-main-card">
+                    <p class="about-text" data-de="Als Manager für Online-Marketing & CRM bei der ergoflix Group verantworte ich die technische Seite von Marketing und Kundendaten. Mein Schwerpunkt liegt in der praktischen Weiterentwicklung der Salesforce-Plattform sowie im Aufbau stabiler Integrationen zwischen CRM, Marketing-Automatisierung, Telefonie und Web-Präsenz mit durchgängigem Tracking." data-en="As Manager for Online Marketing & CRM at ergoflix Group, I am responsible for the technical infrastructure behind marketing and customer data. My core focus is hands-on development on the Salesforce platform as well as robust integrations between CRM, marketing automation, telephony, and web tracking.">
+                        Als Manager für Online-Marketing & CRM bei der ergoflix Group verantworte ich die technische Seite von Marketing und Kundendaten. Mein Schwerpunkt liegt in der praktischen Weiterentwicklung der Salesforce-Plattform sowie im Aufbau stabiler Integrationen zwischen CRM, Marketing-Automatisierung, Telefonie und Web-Präsenz mit durchgängigem Tracking.
+                    </p>
+                    <p class="about-text" data-de="Aus mehr als zehn Jahren im Online-Marketing und in der Webentwicklung bringe ich fundierte Kenntnisse im Erstellen von Lightning Web Components, Apex, WordPress/PHP, modernem TypeScript-Tooling und im praktischen Einsatz von LLM-Tools mit." data-en="With more than ten years in online marketing and web engineering, I bring hands-on expertise building Lightning Web Components, Apex, WordPress/PHP, modern TypeScript tooling, and using LLM tools in practice.">
+                        Aus mehr als zehn Jahren im Online-Marketing und in der Webentwicklung bringe ich fundierte Kenntnisse im Erstellen von Lightning Web Components, Apex, WordPress/PHP, modernem TypeScript-Tooling und im praktischen Einsatz von LLM-Tools mit.
+                    </p>
+                    <p class="about-text" data-de="Ich bin jederzeit offen für den fachlichen Austausch rund um LLM-Tooling, Salesforce-Integration und -Automatisierung sowie Diskussionen über moderne CRM- und Marketing-Architektur." data-en="I am always open for technical discussions regarding LLM tooling, Salesforce integration and automation, as well as modern CRM and marketing architecture.">
+                        Ich bin jederzeit offen für den fachlichen Austausch rund um LLM-Tooling, Salesforce-Integration und -Automatisierung sowie Diskussionen über moderne CRM- und Marketing-Architektur.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <section class="section section-experience reveal-section glass" id="experience">
+            <div class="container">
+                <div class="section-header">
+                    <h2 class="section-title" data-de="Berufserfahrung" data-en="Work Experience">Berufserfahrung</h2>
+                </div>
+
+                <div class="experience-list">
+                    <div class="card experience-card">
+                        <div class="experience-header">
+                            <div>
+                                <h3 class="experience-role" data-de="Manager Online Marketing & CRM" data-en="Manager Online Marketing & CRM">Manager Online Marketing & CRM</h3>
+                                <p class="experience-company">ergoflix Group</p>
+                            </div>
+                            <div class="experience-period mono" data-de="Jan. 2026 – Heute" data-en="Jan. 2026 – Present">Jan. 2026 – Heute</div>
+                        </div>
+
+                        <ul class="experience-bullets">
+                            <li data-de="Salesforce-Plattform: Hands-on Entwicklung von Lightning Web Components (LWC), Apex, Flow-Automatisierungen, Berechtigungsarchitektur und validierten Produktionsdeployments." data-en="Salesforce Platform: Hands-on engineering of Lightning Web Components (LWC), Apex, Flow automations, permission architecture, and validated production deployments.">
+                                Salesforce-Plattform: Hands-on Entwicklung von Lightning Web Components (LWC), Apex, Flow-Automatisierungen, Berechtigungsarchitektur und validierten Produktionsdeployments.
+                            </li>
+                            <li data-de="System-Integrationen: Nahtlose Verknüpfung von Marketing-Automatisierung, Telefonie, HR und ERP mit kontinuierlicher Fehlerüberwachung und Tooling zur Datenqualität." data-en="System Integrations: Seamless connections across marketing automation, telephony, HR, and ERP with proactive error monitoring and data quality tooling.">
+                                System-Integrationen: Nahtlose Verknüpfung von Marketing-Automatisierung, Telefonie, HR und ERP mit kontinuierlicher Fehlerüberwachung und Tooling zur Datenqualität.
+                            </li>
+                            <li data-de="Webdesign & Kampagnen: Entwicklung performanter WordPress/Oxygen-Landingpages, durchgängige Tracking-Architektur, rechtssicheres Einwilligungsmanagement und präzise Konversionsmessung." data-en="Web Design & Campaigns: Building high-performance WordPress/Oxygen landing pages with end-to-end tracking, consent management, and conversion measurement.">
+                                Webdesign & Kampagnen: Entwicklung performanter WordPress/Oxygen-Landingpages, durchgängige Tracking-Architektur, rechtssicheres Einwilligungsmanagement und präzise Konversionsmessung.
+                            </li>
+                            <li data-de="Reporting & Analyse: SOQL-basierte KPI-Berichterstattung in Salesforce sowie Auswertung über Google Analytics 4 und Looker Studio." data-en="Reporting & Analysis: SOQL-based KPI reporting inside Salesforce combined with multi-channel analytics in GA4 and Looker Studio.">
+                                Reporting & Analyse: SOQL-basierte KPI-Berichterstattung in Salesforce sowie Auswertung über Google Analytics 4 und Looker Studio.
+                            </li>
+                        </ul>
+
+                        <div class="card-tags mono">
+                            <span><i class="devicon-salesforce-plain colored"></i> Salesforce</span>
+                            <span><i data-lucide="code-2" class="tag-icon"></i> Apex</span>
+                            <span><i data-lucide="layers" class="tag-icon"></i> LWC</span>
+                            <span><i data-lucide="git-branch" class="tag-icon"></i> Flow</span>
+                            <span><i class="devicon-typescript-plain colored"></i> TypeScript</span>
+                            <span><i class="devicon-php-plain colored"></i> PHP</span>
+                            <span><i class="devicon-python-plain colored"></i> Python</span>
+                            <span><i data-lucide="workflow" class="tag-icon"></i> Make.com</span>
+                            <span><i data-lucide="mail" class="tag-icon"></i> Brevo</span>
+                            <span><i class="devicon-google-plain colored"></i> GA4</span>
+                            <span><i class="devicon-google-plain colored"></i> Google Ads</span>
+                            <span><i class="devicon-wordpress-plain colored"></i> WordPress</span>
+                        </div>
+                    </div>
+
+                    <div class="card experience-card experience-card-secondary">
+                        <div class="experience-header">
+                            <div>
+                                <h3 class="experience-role" data-de="Online Marketing Specialist" data-en="Online Marketing Specialist">Online Marketing Specialist</h3>
+                                <p class="experience-company">ergoflix Group</p>
+                            </div>
+                        </div>
+
+                        <div class="experience-note">
+                            <span class="experience-note-label mono" data-de="Apr. 2022 – Jan. 2026" data-en="Apr. 2022 – Jan. 2026">Apr. 2022 – Jan. 2026</span>
+                            <p data-de="Online-Marketing und Webdesign im ergoflix-Kontext." data-en="Online marketing and web design at ergoflix.">Online-Marketing und Webdesign im ergoflix-Kontext.</p>
+                        </div>
+                        <div class="experience-mini-tags mono"><span>Online-Marketing</span><span>Webdesign</span></div>
+                    </div>
+
+                    <div class="card experience-card experience-card-secondary">
+                        <div class="experience-header">
+                            <div>
+                                <h3 class="experience-role" data-de="Marketing & E-Commerce Manager" data-en="Marketing & E-Commerce Manager">Marketing &amp; E-Commerce Manager</h3>
+                                <p class="experience-company">ToCi Vertrieb OHG</p>
+                            </div>
+                        </div>
+
+                        <div class="experience-note">
+                            <span class="experience-note-label mono" data-de="Sept. 2019 – März 2022" data-en="Sep. 2019 – Mar. 2022">Sept. 2019 – März 2022</span>
+                            <p data-de="E-Commerce-Optimierung und digitale Strategie · Hünxe, NRW" data-en="E-commerce optimization and digital strategy · Hünxe, Germany">E-Commerce-Optimierung und digitale Strategie · Hünxe, NRW</p>
+                        </div>
+                        <div class="experience-mini-tags mono"><span>E-Commerce-Optimierung</span><span>Digitale Strategie</span></div>
+                    </div>
+
+                    <div class="card experience-card experience-card-secondary">
+                        <div class="experience-header">
+                            <div>
+                                <h3 class="experience-role" data-de="Marketingexperte" data-en="Marketing Expert">Marketingexperte</h3>
+                                <p class="experience-company">Brauprojekt 777 · Freiberuflich</p>
+                            </div>
+                        </div>
+
+                        <div class="experience-note">
+                            <span class="experience-note-label mono" data-de="Mai 2015 – Heute" data-en="May 2015 – Present">Mai 2015 – Heute</span>
+                            <p data-de="Webentwicklung, Webdesign und Marketing · Voerde (Niederrhein), NRW" data-en="Web development, web design, and marketing · Voerde (Niederrhein), Germany">Webentwicklung, Webdesign und Marketing · Voerde (Niederrhein), NRW</p>
+                        </div>
+                        <div class="experience-mini-tags mono"><span>Webentwicklung</span><span>Webdesign</span><span>Marketing</span></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="section section-work reveal-section" id="selected-work">
+            <div class="container">
+                <div class="work-heading">
+                    <div>
+                        <span class="eyebrow mono" data-de="Ausgewählte Arbeitsfelder" data-en="Selected work areas">Ausgewählte Arbeitsfelder</span>
+                        <h2 class="section-title" data-de="Was ich baue" data-en="What I build">Was ich baue</h2>
+                    </div>
+                    <div class="slider-controls" aria-label="Projekt-Slider-Steuerung">
+                        <button class="slider-button" id="workPrev" type="button" aria-label="Vorheriges Arbeitsfeld"><i data-lucide="arrow-left"></i></button>
+                        <span class="slider-count mono" id="workCount" aria-live="polite">01 / 03</span>
+                        <button class="slider-button" id="workNext" type="button" aria-label="Nächstes Arbeitsfeld"><i data-lucide="arrow-right"></i></button>
+                    </div>
+                </div>
+
+                <div class="work-slider" id="workSlider" tabindex="0" aria-label="Ausgewählte Arbeitsfelder">
+                    <article class="work-slide work-slide-crm" data-slide="1">
+                        <div class="work-slide-index mono">01 / CRM PLATFORM</div>
+                        <div class="work-slide-content">
+                            <h3 data-de="CRM als Betriebssystem" data-en="CRM as an operating system">CRM als Betriebssystem</h3>
+                            <p data-de="Salesforce so weiterentwickeln, dass Vertrieb, Marketing und Service mit verlässlichen Daten und klaren Prozessen arbeiten." data-en="Evolving Salesforce so sales, marketing, and service can work from reliable data and clear processes.">Salesforce so weiterentwickeln, dass Vertrieb, Marketing und Service mit verlässlichen Daten und klaren Prozessen arbeiten.</p>
+                            <div class="work-tags mono"><span>Salesforce</span><span>Apex</span><span>LWC</span><span>Flow</span></div>
+                        </div>
+                        <div class="work-visual work-visual-crm" aria-hidden="true"><span>CRM</span><i data-lucide="database"></i><b></b><b></b><b></b></div>
+                    </article>
+
+                    <article class="work-slide work-slide-web" data-slide="2">
+                        <div class="work-slide-index mono">02 / WEB DESIGN</div>
+                        <div class="work-slide-content">
+                            <h3 data-de="Websites mit Charakter" data-en="Websites with character">Websites mit Charakter</h3>
+                            <p data-de="Webdesign und Webentwicklung so verbinden, dass Landingpages klar führen, schnell laden und Marken sichtbar machen." data-en="Combining web design and development to make landing pages clear, fast, and unmistakably on-brand.">Webdesign und Webentwicklung so verbinden, dass Landingpages klar führen, schnell laden und Marken sichtbar machen.</p>
+                            <div class="work-tags mono"><span>WordPress</span><span>Oxygen</span><span>Responsive</span><span>Performance</span></div>
+                        </div>
+                        <div class="work-visual work-visual-web" aria-hidden="true"><span>WEB</span><i data-lucide="layout-template"></i><b></b><b></b><b></b></div>
+                    </article>
+
+                    <article class="work-slide work-slide-growth" data-slide="3">
+                        <div class="work-slide-index mono">03 / MARKETING ENGINEERING</div>
+                        <div class="work-slide-content">
+                            <h3 data-de="Marketing messbar machen" data-en="Make marketing measurable">Marketing messbar machen</h3>
+                            <p data-de="Web, Kampagnen und Tracking so verbinden, dass aus einzelnen Touchpoints belastbare Entscheidungen werden." data-en="Connecting web, campaigns, and tracking so scattered touchpoints become useful decisions.">Web, Kampagnen und Tracking so verbinden, dass aus einzelnen Touchpoints belastbare Entscheidungen werden.</p>
+                            <div class="work-tags mono"><span>GA4</span><span>GTM</span><span>WordPress</span><span>Consent</span></div>
+                        </div>
+                        <div class="work-visual work-visual-growth" aria-hidden="true"><span>DATA</span><i data-lucide="bar-chart-3"></i><b></b><b></b><b></b></div>
+                    </article>
+                </div>
+                <div class="slider-progress" aria-hidden="true"><span id="workProgress"></span></div>
+            </div>
+        </section>
+
+        <section class="section-terminal" id="terminal" aria-labelledby="terminalHeading">
+            <div class="container">
+                <div class="terminal-head">
+                    <span class="terminal-eyebrow mono" data-de="03 / Terminal" data-en="03 / Terminal">03 / Terminal</span>
+                    <h2 id="terminalHeading" data-de="Frag mich per Kommandozeile." data-en="Ask me from the command line.">Frag mich per Kommandozeile.</h2>
+                    <p data-de="Der schnellste Weg durch mein Profil: eine kleine Shell mit echten Befehlen. Tippen oder klicken — beides funktioniert." data-en="The fastest way through my profile: a small shell with real commands. Type or click — both work.">Der schnellste Weg durch mein Profil: eine kleine Shell mit echten Befehlen. Tippen oder klicken — beides funktioniert.</p>
+                </div>
+
+                <div class="terminal-window">
+                    <div class="terminal-bar">
+                        <div class="terminal-dots" aria-hidden="true"><span></span><span></span><span></span></div>
+                        <span class="terminal-title">malte@guendisch — ~/profile — mg-shell</span>
+                        <span class="terminal-badge" aria-hidden="true">LIVE</span>
+                    </div>
+
+                    <div class="terminal-body" id="terminalBody" role="log" aria-live="polite" aria-atomic="false" tabindex="0"></div>
+
+                    <div class="terminal-inputline">
+                        <span class="t-prompt" aria-hidden="true">malte@guendisch<span class="t-dim">:</span><span class="t-path">~/profile</span><span class="t-dim">$</span></span>
+                        <span class="terminal-input-wrap">
+                            <span class="terminal-ghost" id="terminalGhost" aria-hidden="true"></span>
+                            <input type="text" id="terminalInput" autocomplete="off" autocapitalize="off" autocorrect="off" spellcheck="false"
+                                   placeholder="help" aria-label="Terminal-Befehl eingeben">
+                        </span>
+                    </div>
+                </div>
+
+                <div class="terminal-chips" id="terminalChips">
+                    <button type="button" class="terminal-chip" data-cmd="whoami">whoami</button>
+                    <button type="button" class="terminal-chip" data-cmd="experience">experience</button>
+                    <button type="button" class="terminal-chip" data-cmd="stack">stack</button>
+                    <button type="button" class="terminal-chip" data-cmd="ai">ai</button>
+                    <button type="button" class="terminal-chip" data-cmd="projects">projects</button>
+                    <button type="button" class="terminal-chip" data-cmd="certs">certs</button>
+                    <button type="button" class="terminal-chip" data-cmd="neofetch">neofetch</button>
+                    <button type="button" class="terminal-chip" data-cmd="contact">contact</button>
+                </div>
+
+                <p class="terminal-hint">
+                    <span data-de="Tastatur:" data-en="Keyboard:">Tastatur:</span>
+                    <kbd>Tab</kbd> <span data-de="vervollständigen" data-en="complete">vervollständigen</span> ·
+                    <kbd>↑</kbd><kbd>↓</kbd> <span data-de="History" data-en="history">History</span> ·
+                    <kbd>Ctrl</kbd>+<kbd>L</kbd> <span data-de="leeren" data-en="clear">leeren</span>
                 </p>
-                <a href="https://github.com/MGue95/WPTrustRocket" target="_blank" rel="noopener" class="btn">GitHub</a>
             </div>
-            <div class="project-card">
-                <h3 data-de="MCP‑Server‑Template" data-en="MCP Server Template">MCP‑Server‑Template</h3>
-                <p data-de="Vorlage für sichere Model Context Protocol Server, die LLM‑Zugriff auf Geschäftssysteme ermöglichen." data-en="Template for secure Model Context Protocol servers enabling LLM access to business systems.">
-                    Vorlage für sichere Model Context Protocol Server, die LLM‑Zugriff auf Geschäftssysteme ermöglichen.
-                </p>
-                <a href="https://github.com/MGue95/mcp-server-template" target="_blank" rel="noopener" class="btn">GitHub</a>
-            </div>
-            <div class="project-card">
-                <h3 data-de="LLM‑CRM‑Summarizer" data-en="LLM CRM Summarizer">LLM‑CRM‑Summarizer</h3>
-                <p data-de="KI‑Tool, das CRM‑Einträge automatisch zusammenfasst und dabei datenschutzkonforme Filter (GDPR) anwendet." data-en="AI tool that automatically summarizes CRM entries while applying GDPR‑compliant filters.">
-                    KI‑Tool, das CRM‑Einträge automatisch zusammenfasst und dabei datenschutzkonforme Filter (GDPR) anwendet.
-                </p>
-                <a href="https://github.com/MGue95/llm-crm-summarizer" target="_blank" rel="noopener" class="btn">GitHub</a>
-            </div>
-        </div>
-    </section>
+        </section>
 
-    <!-- Contact -->
-    <section id="contact" class="section">
-        <h2 data-de="Kontakt" data-en="Contact">Kontakt</h2>
-        <p data-de="Du kannst mich über GitHub erreichen oder mir eine Nachricht auf LinkedIn senden." data-en="You can reach me via GitHub or send me a message on LinkedIn.">
-            Du kannst mich über GitHub erreichen oder mir eine Nachricht auf LinkedIn senden.
-        </p>
-        <div class="contact-links">
-            <a href="https://github.com/MGue95" target="_blank" rel="noopener" class="btn btn-outline">
-                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-github" viewBox="0 0 16 16">
-                    <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.19 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"/>
-                </svg>
-                GitHub
-            </a>
-            <a href="https://linkedin.com/in/malte-guendisch" target="_blank" rel="noopener" class="btn btn-outline">
-                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-linkedin" viewBox="0 0 16 16">
-                    <path d="M0 1.146C0 .513.526 0 1.175 0h13.65C15.474 0 16 .513 16 1.146v13.708c0 .633-.526 1.146-1.175 1.146H1.175C.526 12.984 0 12.471 0 11.825V1.146zm4.943 12.248V6.169H2.542v7.225h2.401zm-1.2-8.212c.837 0 1.358-.554 1.358-1.248-.015-.709-.52-1.248-1.342-1.248-.822 0-1.359.54-1.359 1.248 0 .694.521 1.248 1.327 1.248h.016zm4.908 8.212V9.359c0-.216.016-.432.08-.586.17-.246.499-.862.986-1.195 1.389-.948 1.836-1.882 1.836-2.808 0-1.871-1.29-2.742-2.894-2.742-1.626 0-2.58.937-2.58 2.661v4.273h2.402V9.803h.032c.436.191.815.536.986 1.195.171.246.082.37.082.586v4.615z"/>
-                </svg>
-                LinkedIn
-            </a>
-        </div>
-    </section>
+        <section class="section section-skills reveal-section glass" id="skills">
+            <div class="container">
+                <div class="section-header">
+                    <h2 class="section-title" data-de="Fähigkeiten & Stack" data-en="Skills & Stack">Fähigkeiten & Stack</h2>
+                    <p class="section-desc" data-de="Strukturierte Übersicht der Technologien, Sprachen und Werkzeuge aus meinem täglichen Arbeitsumfeld." data-en="Structured overview of the technologies, languages, and tools from my daily work environment.">
+                        Strukturierte Übersicht der Technologien, Sprachen und Werkzeuge aus meinem täglichen Arbeitsumfeld.
+                    </p>
+                </div>
 
-    <footer>
-        <p>&copy; <span id="year"></span> Malte Gündisch. Alle Rechte vorbehalten.</p>
+                <div class="stack-controls">
+                    <div class="stack-filters" role="tablist" aria-label="Filter für Stack">
+                        <button class="filter-btn active" data-filter="all" role="tab" aria-selected="true" data-de="Alle" data-en="All">Alle</button>
+                        <button class="filter-btn" data-filter="crm" role="tab" aria-selected="false" data-de="CRM & Plattform" data-en="CRM & Platform">CRM & Plattform</button>
+                        <button class="filter-btn" data-filter="ai" role="tab" aria-selected="false" data-de="KI & LLM" data-en="AI & LLM">KI & LLM</button>
+                        <button class="filter-btn" data-filter="dev" role="tab" aria-selected="false" data-de="Sprachen & Web" data-en="Languages & Web">Sprachen & Web</button>
+                        <button class="filter-btn" data-filter="marketing" role="tab" aria-selected="false" data-de="Analytics & Ads" data-en="Analytics & Ads">Analytics & Ads</button>
+                        <button class="filter-btn" data-filter="tools" role="tab" aria-selected="false" data-de="Tools & Workflow" data-en="Tools & Workflow">Tools & Workflow</button>
+                    </div>
+
+                    <div class="stack-search-wrap">
+                        <i data-lucide="search" class="search-icon"></i>
+                        <input type="text" id="stackSearch" class="stack-search-input" placeholder="Technologie suchen (z. B. Apex, Claude, GA4)..." aria-label="Technologie suchen">
+                    </div>
+                </div>
+
+                <div class="skills-grid" id="skillsGrid">
+                    <div class="card skill-card" data-category="crm">
+                        <div class="skill-card-top">
+                            <i class="devicon-salesforce-plain colored card-main-icon"></i>
+                            <h3 class="skill-category-title" data-de="CRM & Plattform" data-en="CRM & Platform">CRM & Plattform</h3>
+                        </div>
+                        <p class="skill-category-desc" data-de="Salesforce-Architektur, Automatisierungen und Schnittstellen." data-en="Salesforce architecture, automations, and data pipelines.">Salesforce-Architektur, Automatisierungen und Schnittstellen.</p>
+                        <div class="skill-pills mono">
+                            <span><i class="devicon-salesforce-plain colored"></i> Salesforce Core</span>
+                            <span><i data-lucide="code-2" class="pill-icon"></i> Apex</span>
+                            <span><i data-lucide="layers" class="pill-icon"></i> LWC</span>
+                            <span><i data-lucide="git-branch" class="pill-icon"></i> Flow Builder</span>
+                            <span><i data-lucide="database" class="pill-icon"></i> SOQL / SOSL</span>
+                            <span><i data-lucide="terminal" class="pill-icon"></i> Salesforce CLI</span>
+                            <span><i data-lucide="upload-cloud" class="pill-icon"></i> Data Loader</span>
+                            <span><i data-lucide="award" class="pill-icon"></i> Trailhead</span>
+                            <span><i data-lucide="workflow" class="pill-icon"></i> Make.com</span>
+                            <span><i data-lucide="mail" class="pill-icon"></i> Brevo</span>
+                            <span><i data-lucide="form-input" class="pill-icon"></i> HeyFlow</span>
+                            <span><i data-lucide="phone" class="pill-icon"></i> Matelso</span>
+                            <span><i class="devicon-html5-plain colored"></i> HTML Email Templates</span>
+                        </div>
+                    </div>
+
+                    <div class="card skill-card" data-category="ai">
+                        <div class="skill-card-top">
+                            <i data-lucide="sparkles" class="card-main-icon text-accent"></i>
+                            <h3 class="skill-category-title" data-de="Künstliche Intelligenz" data-en="Artificial Intelligence">Künstliche Intelligenz</h3>
+                        </div>
+                        <p class="skill-category-desc" data-de="APIs, Schnittstellen und produktive Workflows mit LLMs." data-en="APIs, protocols, and production workflows with LLMs.">APIs, Schnittstellen und produktive Workflows mit LLMs.</p>
+                        <div class="skill-pills mono">
+                            <span><i data-lucide="bot" class="pill-icon"></i> Claude API</span>
+                            <span><i data-lucide="cpu" class="pill-icon"></i> LLM Workflows</span>
+                            <span><i data-lucide="terminal" class="pill-icon"></i> Claude Code</span>
+                            <span><i data-lucide="message-square" class="pill-icon"></i> ChatGPT</span>
+                            <span><i class="devicon-google-plain colored"></i> Gemini</span>
+                            <span><i data-lucide="compass" class="pill-icon"></i> Perplexity</span>
+                            <span><i data-lucide="image" class="pill-icon"></i> Midjourney</span>
+                            <span><i data-lucide="phone-call" class="pill-icon"></i> Telli</span>
+                            <span><i data-lucide="mic" class="pill-icon"></i> Voico</span>
+                        </div>
+                    </div>
+
+                    <div class="card skill-card" data-category="dev">
+                        <div class="skill-card-top">
+                            <i class="devicon-typescript-plain colored card-main-icon"></i>
+                            <h3 class="skill-category-title" data-de="Sprachen" data-en="Programming Languages">Sprachen</h3>
+                        </div>
+                        <p class="skill-category-desc" data-de="Typisierte und dynamische Sprachen für Web und Backend." data-en="Typed and dynamic languages for web and backend systems.">Typisierte und dynamische Sprachen für Web und Backend.</p>
+                        <div class="skill-pills mono">
+                            <span><i class="devicon-typescript-plain colored"></i> TypeScript</span>
+                            <span><i class="devicon-javascript-plain colored"></i> JavaScript</span>
+                            <span><i class="devicon-php-plain colored"></i> PHP</span>
+                            <span><i class="devicon-python-plain colored"></i> Python</span>
+                            <span><i class="devicon-html5-plain colored"></i> HTML5</span>
+                            <span><i class="devicon-css3-plain colored"></i> CSS3</span>
+                            <span><i data-lucide="database" class="pill-icon"></i> SQL</span>
+                        </div>
+                    </div>
+
+                    <div class="card skill-card" data-category="dev">
+                        <div class="skill-card-top">
+                            <i class="devicon-wordpress-plain colored card-main-icon"></i>
+                            <h3 class="skill-category-title" data-de="Frontend & CMS" data-en="Frontend & CMS">Frontend & CMS</h3>
+                        </div>
+                        <p class="skill-category-desc" data-de="Webentwicklung, Themes, Hosting und Pagespeed." data-en="Website engineering, themes, hosting, and pagespeed.">Webentwicklung, Themes, Hosting und Pagespeed.</p>
+                        <div class="skill-pills mono">
+                            <span><i class="devicon-wordpress-plain colored"></i> WordPress</span>
+                            <span><i data-lucide="layout" class="pill-icon"></i> Oxygen Builder</span>
+                            <span><i class="devicon-jquery-plain colored"></i> jQuery</span>
+                            <span><i class="devicon-javascript-plain colored"></i> Vanilla JS / CSS</span>
+                            <span><i data-lucide="search" class="pill-icon"></i> RankMath / Yoast</span>
+                            <span><i data-lucide="server" class="pill-icon"></i> Plesk / cPanel</span>
+                        </div>
+                    </div>
+
+                    <div class="card skill-card" data-category="marketing">
+                        <div class="skill-card-top">
+                            <i class="devicon-google-plain colored card-main-icon"></i>
+                            <h3 class="skill-category-title" data-de="Analytics & Tracking" data-en="Analytics & Tracking">Analytics & Tracking</h3>
+                        </div>
+                        <p class="skill-category-desc" data-de="Datenerfassung, Modellierung und Reporting." data-en="Data collection, event modeling, and reporting.">Datenerfassung, Modellierung und Reporting.</p>
+                        <div class="skill-pills mono">
+                            <span><i class="devicon-google-plain colored"></i> Google Analytics 4</span>
+                            <span><i data-lucide="tag" class="pill-icon"></i> Google Tag Manager</span>
+                            <span><i class="devicon-google-plain colored"></i> Search Console</span>
+                            <span><i data-lucide="bar-chart-2" class="pill-icon"></i> Looker Studio</span>
+                            <span><i data-lucide="pie-chart" class="pill-icon"></i> Power BI</span>
+                            <span><i data-lucide="eye" class="pill-icon"></i> Hotjar</span>
+                            <span><i data-lucide="activity" class="pill-icon"></i> Microsoft Clarity</span>
+                            <span><i data-lucide="check-circle" class="pill-icon"></i> Tag Assistant</span>
+                            <span><i data-lucide="trending-up" class="pill-icon"></i> Google Trends</span>
+                        </div>
+                    </div>
+
+                    <div class="card skill-card" data-category="marketing">
+                        <div class="skill-card-top">
+                            <i data-lucide="target" class="card-main-icon text-accent"></i>
+                            <h3 class="skill-category-title" data-de="Werbung & Paid Media" data-en="Advertising & Paid Media">Werbung & Paid Media</h3>
+                        </div>
+                        <p class="skill-category-desc" data-de="Kampagnensteuerung und Conversion-Optimierung." data-en="Campaign delivery and conversion optimization.">Kampagnensteuerung und Conversion-Optimierung.</p>
+                        <div class="skill-pills mono">
+                            <span><i class="devicon-google-plain colored"></i> Google Ads</span>
+                            <span><i data-lucide="zap" class="pill-icon"></i> Performance Max</span>
+                            <span><i data-lucide="monitor" class="pill-icon"></i> Microsoft Ads</span>
+                            <span><i data-lucide="share-2" class="pill-icon"></i> Meta Ads</span>
+                            <span><i data-lucide="video" class="pill-icon"></i> YouTube Ads</span>
+                            <span><i data-lucide="newspaper" class="pill-icon"></i> Outbrain</span>
+                            <span><i data-lucide="globe" class="pill-icon"></i> Taboola</span>
+                            <span><i data-lucide="shopping-bag" class="pill-icon"></i> Merchant Center</span>
+                            <span><i data-lucide="shopping-cart" class="pill-icon"></i> Amazon Ads</span>
+                        </div>
+                    </div>
+
+                    <div class="card skill-card" data-category="marketing">
+                        <div class="skill-card-top">
+                            <i data-lucide="shield-check" class="card-main-icon text-accent"></i>
+                            <h3 class="skill-category-title" data-de="SEO & Einwilligung" data-en="SEO & Consent">SEO & Einwilligung</h3>
+                        </div>
+                        <p class="skill-category-desc" data-de="Technische SEO und DSGVO-konforme Consent-Logik." data-en="Technical search optimization and GDPR consent logic.">Technische SEO und DSGVO-konforme Consent-Logik.</p>
+                        <div class="skill-pills mono">
+                            <span><i data-lucide="line-chart" class="pill-icon"></i> Sistrix</span>
+                            <span><i data-lucide="crosshair" class="pill-icon"></i> Screaming Frog</span>
+                            <span><i data-lucide="gauge" class="pill-icon"></i> PageSpeed / Lighthouse</span>
+                            <span><i data-lucide="code" class="pill-icon"></i> Schema.org / Rich Results</span>
+                            <span><i data-lucide="cookie" class="pill-icon"></i> Borlabs Consent</span>
+                            <span><i data-lucide="shield" class="pill-icon"></i> Usercentrics / Cookiebot</span>
+                            <span><i data-lucide="store" class="pill-icon"></i> Shopify</span>
+                            <span><i data-lucide="star" class="pill-icon"></i> Trusted Shops</span>
+                        </div>
+                    </div>
+
+                    <div class="card skill-card" data-category="tools">
+                        <div class="skill-card-top">
+                            <i class="devicon-git-plain colored card-main-icon"></i>
+                            <h3 class="skill-category-title" data-de="Entwicklertools & Design" data-en="Developer Tools & Design">Entwicklertools & Design</h3>
+                        </div>
+                        <p class="skill-category-desc" data-de="Versionsverwaltung, CI/CD und visuelle Gestaltung." data-en="Version control, CI/CD, and visual creation.">Versionsverwaltung, CI/CD und visuelle Gestaltung.</p>
+                        <div class="skill-pills mono">
+                            <span><i class="devicon-git-plain colored"></i> Git</span>
+                            <span><i class="devicon-github-original"></i> GitHub</span>
+                            <span><i class="devicon-githubactions-plain colored"></i> GitHub Actions</span>
+                            <span><i class="devicon-npm-original-wordmark colored"></i> npm</span>
+                            <span><i class="devicon-vscode-plain colored"></i> VS Code</span>
+                            <span><i class="devicon-postman-plain colored"></i> Postman</span>
+                            <span><i class="devicon-figma-plain colored"></i> Figma</span>
+                            <span><i class="devicon-photoshop-plain colored"></i> Photoshop</span>
+                            <span><i class="devicon-illustrator-plain colored"></i> Illustrator</span>
+                            <span><i class="devicon-premierepro-plain colored"></i> Premiere</span>
+                            <span><i data-lucide="video" class="pill-icon"></i> Loom</span>
+                        </div>
+                    </div>
+
+                    <div class="card skill-card" data-category="tools">
+                        <div class="skill-card-top">
+                            <i data-lucide="users" class="card-main-icon text-accent"></i>
+                            <h3 class="skill-category-title" data-de="Workflow & Kollaboration" data-en="Workflow & Collaboration">Workflow & Kollaboration</h3>
+                        </div>
+                        <p class="skill-category-desc" data-de="Organisation, Dokumentation und Kommunikation." data-en="Project planning, documentation, and communication.">Organisation, Dokumentation und Kommunikation.</p>
+                        <div class="skill-pills mono">
+                            <span><i data-lucide="check-square" class="pill-icon"></i> ClickUp</span>
+                            <span><i data-lucide="trello" class="pill-icon"></i> Asana</span>
+                            <span><i data-lucide="file-text" class="pill-icon"></i> Notion</span>
+                            <span><i class="devicon-google-plain colored"></i> Google Workspace</span>
+                            <span><i data-lucide="file-code" class="pill-icon"></i> Apps Script</span>
+                            <span><i data-lucide="message-circle" class="pill-icon"></i> Microsoft Teams</span>
+                            <span><i data-lucide="mic" class="pill-icon"></i> Granola</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="section section-ai reveal-section glass" id="ai-expertise">
+            <div class="container">
+                <div class="section-header">
+                    <h2 class="section-title" data-de="KI, Web & Tooling" data-en="AI, Web & Tooling">KI, Web &amp; Tooling</h2>
+                    <p class="section-desc" data-de="Werkzeuge und Arbeitsweisen für Webdesign, Marketing-Automation und einen pragmatischen Einsatz von KI." data-en="Tools and working practices for web design, marketing automation, and a pragmatic use of AI.">
+                        Werkzeuge und Arbeitsweisen für Webdesign, Marketing-Automation und einen pragmatischen Einsatz von KI.
+                    </p>
+                </div>
+
+                <div class="ai-grid">
+                    <div class="card ai-card">
+                        <div class="ai-card-level mono" data-de="Fortgeschritten" data-en="Advanced">Fortgeschritten</div>
+                        <h3 class="ai-card-title" data-de="KI-Tooling & Prompting" data-en="AI Tooling & Prompting">KI-Tooling &amp; Prompting</h3>
+                        <p class="ai-card-text" data-de="Erfahrung mit Claude API, Prompt-Design und strukturierten Ausgaben für unterstützende Arbeitsabläufe." data-en="Experience with the Claude API, prompt design, and structured outputs for supportive workflows.">
+                            Erfahrung mit Claude API, Prompt-Design und strukturierten Ausgaben für unterstützende Arbeitsabläufe.
+                        </p>
+                    </div>
+
+                    <div class="card ai-card">
+                        <div class="ai-card-level mono" data-de="Fortgeschritten" data-en="Advanced">Fortgeschritten</div>
+                        <h3 class="ai-card-title" data-de="KI im Arbeitsalltag" data-en="AI in Everyday Work">KI im Arbeitsalltag</h3>
+                        <p class="ai-card-text" data-de="Sinnvolle Einsatzmöglichkeiten für Recherche, Textarbeit und wiederkehrende Aufgaben prüfen und in den Workflow einordnen." data-en="Evaluating useful applications for research, content work, and recurring tasks and fitting them into the workflow.">
+                            Sinnvolle Einsatzmöglichkeiten für Recherche, Textarbeit und wiederkehrende Aufgaben prüfen und in den Workflow einordnen.
+                        </p>
+                    </div>
+
+                    <div class="card ai-card">
+                        <div class="ai-card-level mono" data-de="Fortgeschritten" data-en="Advanced">Fortgeschritten</div>
+                        <h3 class="ai-card-title" data-de="Webdesign & digitale Oberflächen" data-en="Web Design & Digital Interfaces">Webdesign &amp; digitale Oberflächen</h3>
+                        <p class="ai-card-text" data-de="WordPress- und Oxygen-Landingpages mit klarer Nutzerführung, responsivem Design, sauberem Tracking und Fokus auf Performance." data-en="WordPress and Oxygen landing pages with clear user flows, responsive design, clean tracking, and a focus on performance.">
+                            WordPress- und Oxygen-Landingpages mit klarer Nutzerführung, responsivem Design, sauberem Tracking und Fokus auf Performance.
+                        </p>
+                    </div>
+
+                    <div class="card ai-card">
+                        <div class="ai-card-level mono" data-de="Fortgeschritten" data-en="Advanced">Fortgeschritten</div>
+                        <h3 class="ai-card-title" data-de="Marketing-Automation & Tracking" data-en="Marketing Automation & Tracking">Marketing-Automation &amp; Tracking</h3>
+                        <p class="ai-card-text" data-de="Verknüpfung von Kampagnen, Consent, Analytics und CRM, damit Marketing-Maßnahmen nachvollziehbar und messbar bleiben." data-en="Connecting campaigns, consent, analytics, and CRM so marketing activities stay traceable and measurable.">
+                            Verknüpfung von Kampagnen, Consent, Analytics und CRM, damit Marketing-Maßnahmen nachvollziehbar und messbar bleiben.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="section section-focus reveal-section glass" id="focus">
+            <div class="container">
+                <div class="section-header">
+                    <h2 class="section-title" data-de="Aktueller Fokus" data-en="Current Focus">Aktueller Fokus</h2>
+                    <p class="section-desc" data-de="Schwerpunkte, die mich in der täglichen Arbeit und Weiterbildung derzeit besonders beschäftigen." data-en="Key topics and technical areas I am currently deepening.">
+                        Schwerpunkte, die mich in der täglichen Arbeit und Weiterbildung derzeit besonders beschäftigen.
+                    </p>
+                </div>
+
+                <div class="focus-grid">
+                    <div class="card focus-card">
+                        <div class="focus-pill mono" data-de="CRM" data-en="CRM">CRM</div>
+                        <h3 class="focus-card-title" data-de="CRM & Salesforce Administration" data-en="CRM & Salesforce Administration">CRM &amp; Salesforce Administration</h3>
+                        <p class="focus-card-text" data-de="Salesforce-Administration mit Flows, Automatisierung, Berechtigungen und einer Datenbasis, auf die Marketing und Vertrieb bauen können." data-en="Salesforce administration with flows, automation, permissions, and a data foundation marketing and sales can rely on.">
+                            Salesforce-Administration mit Flows, Automatisierung, Berechtigungen und einer Datenbasis, auf die Marketing und Vertrieb bauen können.
+                        </p>
+                    </div>
+
+                    <div class="card focus-card">
+                        <div class="focus-pill mono" data-de="DATA" data-en="DATA">DATA</div>
+                        <h3 class="focus-card-title" data-de="Data Strategy & Lead Management" data-en="Data Strategy & Lead Management">Data Strategy &amp; Lead Management</h3>
+                        <p class="focus-card-text" data-de="Unübersichtliche Daten in Entscheidungen übersetzen: Lead-Management, Scoring, Nurturing und Reporting mit Blick auf den tatsächlichen Geschäftswert." data-en="Turning messy data into decisions: lead management, scoring, nurturing, and reporting with a focus on real business value.">
+                            Unübersichtliche Daten in Entscheidungen übersetzen: Lead-Management, Scoring, Nurturing und Reporting mit Blick auf den tatsächlichen Geschäftswert.
+                        </p>
+                    </div>
+
+                    <div class="card focus-card">
+                        <div class="focus-pill mono" data-de="WEB / GROWTH" data-en="WEB / GROWTH">WEB / GROWTH</div>
+                        <h3 class="focus-card-title" data-de="Webdesign, SEO & Performance Marketing" data-en="Web Design, SEO & Performance Marketing">Webdesign, SEO &amp; Performance Marketing</h3>
+                        <p class="focus-card-text" data-de="Websites und Kampagnen für Menschen, Suchmaschinen und messbare Ergebnisse: klare Gestaltung, gute Auffindbarkeit und nachvollziehbarer ROI." data-en="Websites and campaigns for people, search engines, and measurable outcomes: clear design, discoverability, and traceable ROI.">
+                            Websites und Kampagnen für Menschen, Suchmaschinen und messbare Ergebnisse: klare Gestaltung, gute Auffindbarkeit und nachvollziehbarer ROI.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="section section-certs reveal-section" id="certifications">
+            <div class="container">
+                <div class="section-header">
+                    <h2 class="section-title" data-de="Zertifizierungen" data-en="Certifications">Zertifizierungen</h2>
+                </div>
+
+                <div class="certs-overview" aria-label="Zertifizierungsübersicht">
+                    <div class="certs-total"><strong>09</strong><span class="mono" data-de="verifizierte Nachweise" data-en="verified credentials">verifizierte Nachweise</span></div>
+                    <div class="certs-overview-line"></div>
+                    <div class="certs-overview-meta mono"><span>ANTHROPIC / 04</span><span>GOOGLE / 03</span><span>HUBSPOT / 01</span><span>MEDIENREICH / 01</span></div>
+                </div>
+
+                <div class="certs-grid">
+                    <div class="card cert-card">
+                        <div class="cert-header">
+                            <div class="cert-issuer-badge mono">
+                                <i data-lucide="sparkles" class="cert-icon text-accent"></i> Anthropic
+                            </div>
+                            <span class="cert-verified-pill mono"><i data-lucide="check" class="cert-check"></i> Verified</span>
+                        </div>
+                        <h3 class="cert-title">Anthropic Education</h3>
+                        <p class="cert-date mono" data-de="Ausgestellt April 2026" data-en="Issued April 2026">Ausgestellt April 2026</p>
+                        <ul class="cert-list">
+                            <li><a href="https://verify.skilljar.com/c/a6cvqewhwag3" target="_blank" rel="noopener noreferrer">AI Fluency – Framework &amp; Foundations <i data-lucide="arrow-up-right"></i></a></li>
+                            <li><a href="https://verify.skilljar.com/c/p4gkiewcuvvk" target="_blank" rel="noopener noreferrer">Claude-101 (Prompting &amp; Capabilities) <i data-lucide="arrow-up-right"></i></a></li>
+                            <li><a href="https://verify.skilljar.com/c/wrm8nnuctwxa" target="_blank" rel="noopener noreferrer">Claude Code-101 (Agentic CLI &amp; Tooling) <i data-lucide="arrow-up-right"></i></a></li>
+                            <li><a href="https://verify.skilljar.com/c/mbshc59y6f8j" target="_blank" rel="noopener noreferrer">Claude Code in Action (Production Workflows) <i data-lucide="arrow-up-right"></i></a></li>
+                        </ul>
+                    </div>
+
+                    <div class="card cert-card">
+                        <div class="cert-header">
+                            <div class="cert-issuer-badge mono">
+                                <i class="devicon-google-plain colored cert-icon"></i> Google
+                            </div>
+                            <span class="cert-verified-pill mono"><i data-lucide="check" class="cert-check"></i> Verified</span>
+                        </div>
+                        <h3 class="cert-title">Google Skillshop</h3>
+                        <p class="cert-date mono" data-de="Ausgestellt April 2026 · Gültig bis April 2027" data-en="Issued April 2026 · Valid until April 2027">Ausgestellt April 2026 · Gültig bis April 2027</p>
+                        <ul class="cert-list">
+                            <li><a href="https://skillshop.credential.net/b5969066-e41c-4694-b071-f008a63ac3ba" target="_blank" rel="noopener noreferrer">Google Ads Search-Zertifizierung <i data-lucide="arrow-up-right"></i></a></li>
+                            <li><a href="https://skillshop.credential.net/93e31f05-4336-417a-9f30-ad0204412522" target="_blank" rel="noopener noreferrer">AI-Powered Performance &amp; Smart Bidding <i data-lucide="arrow-up-right"></i></a></li>
+                            <li><a href="https://skillshop.credential.net/7ec71068-8beb-4e49-8dfa-823dc09df9e6" target="_blank" rel="noopener noreferrer">Google Analytics-Zertifizierung (GA4) <i data-lucide="arrow-up-right"></i></a></li>
+                        </ul>
+                    </div>
+
+                    <div class="card cert-card">
+                        <div class="cert-header">
+                            <div class="cert-issuer-badge mono">
+                                <i data-lucide="award" class="cert-icon text-accent"></i> HubSpot
+                            </div>
+                            <span class="cert-verified-pill mono"><i data-lucide="check" class="cert-check"></i> Verified</span>
+                        </div>
+                        <h3 class="cert-title">HubSpot Academy</h3>
+                        <p class="cert-date mono" data-de="Offizielle Zertifizierung" data-en="Official Certification">Offizielle Zertifizierung</p>
+                        <ul class="cert-list">
+                            <li><a href="https://app-eu1.hubspot.com/academy/achievements/t8yvkpln/de/1/malte-gundisch/digitale-marketing-zertifizierung" target="_blank" rel="noopener noreferrer">Digital Marketing-Zertifizierung <i data-lucide="arrow-up-right"></i></a></li>
+                        </ul>
+                    </div>
+
+                    <div class="card cert-card cert-card-training">
+                        <div class="cert-header">
+                            <div class="cert-issuer-badge mono">
+                                <i data-lucide="code-2" class="cert-icon text-accent"></i> medienreich
+                            </div>
+                            <span class="cert-verified-pill mono"><i data-lucide="check" class="cert-check"></i> Verified</span>
+                        </div>
+                        <h3 class="cert-title">Web Development with JavaScript</h3>
+                        <p class="cert-date mono">Ausgestellt Januar 2024</p>
+                        <ul class="cert-list">
+                            <li>Schulung Webentwicklung mit JavaScript</li>
+                            <li>JavaScript</li>
+                            <li>Webentwicklung</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="section section-contact reveal-section" id="contact">
+            <div class="container">
+                <div class="contact-wrapper">
+                    <div class="section-header contact-header">
+                        <h2 class="section-title" data-de="Kontakt & Dialog" data-en="Contact & Dialog">Kontakt & Dialog</h2>
+                        <p class="section-desc" data-de="Interesse an einem Austausch zu Salesforce, Webdesign, SEO, Performance Marketing oder Lead Management? Schreibe mir gerne direkt eine Nachricht." data-en="Interested in a conversation about Salesforce, web design, SEO, performance marketing, or lead management? Feel free to send me a direct message.">
+                            Interesse an einem Austausch zu Salesforce, Webdesign, SEO, Performance Marketing oder Lead Management? Schreibe mir gerne direkt eine Nachricht.
+                        </p>
+                    </div>
+
+                    <div class="contact-grid">
+                        <div class="card contact-form-card glass">
+                            <form id="contactForm" class="contact-form" action="mailto:malte.guendisch@ergoflix.de" method="post" enctype="text/plain">
+                                <div class="form-row">
+                                    <div class="form-group">
+                                        <label for="formName" class="form-label mono" data-de="Name *" data-en="Name *">Name *</label>
+                                        <input type="text" id="formName" name="name" class="form-input" required placeholder="z. B. Dr. Alex Weber" autocomplete="name">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="formEmail" class="form-label mono" data-de="Geschäftliche E-Mail *" data-en="Business Email *">Geschäftliche E-Mail *</label>
+                                        <input type="email" id="formEmail" name="email" class="form-input" required placeholder="alex.weber@company.com" autocomplete="email">
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="formTopic" class="form-label mono" data-de="Themenbereich" data-en="Topic">Themenbereich</label>
+                                    <select id="formTopic" name="topic" class="form-input form-select">
+                                        <option value="Salesforce / CRM Architektur" data-de="Salesforce & CRM Architektur" data-en="Salesforce & CRM Architecture">Salesforce & CRM Architektur</option>
+                                        <option value="LLM-Tooling & KI-Workflows" data-de="LLM-Tooling & KI-Workflows" data-en="LLM Tooling & AI Workflows">LLM-Tooling & KI-Workflows</option>
+                                        <option value="Marketing Automation & Tracking" data-de="Marketing-Automation & Analytics / Tracking" data-en="Marketing Automation & Analytics / Tracking">Marketing-Automation & Analytics / Tracking</option>
+                                        <option value="Fachlicher Austausch allgemein" data-de="Allgemeiner fachlicher Austausch" data-en="General Technical Exchange">Allgemeiner fachlicher Austausch</option>
+                                    </select>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="formMessage" class="form-label mono" data-de="Nachricht *" data-en="Message *">Nachricht *</label>
+                                    <textarea id="formMessage" name="message" class="form-input form-textarea" rows="4" required placeholder="Worum geht es in deinem Vorhaben oder deiner Frage?"></textarea>
+                                </div>
+
+                                <div class="form-footer">
+                                    <button type="submit" class="btn btn-primary btn-submit" id="submitFormBtn">
+                                        <i data-lucide="send" class="icon-sm"></i>
+                                        <span data-de="Nachricht senden" data-en="Send message">Nachricht senden</span>
+                                    </button>
+                                    <span class="form-notice mono" data-de="Öffnet einen E-Mail-Entwurf. Keine Zwischenspeicherung." data-en="Opens an email draft. No intermediate storage.">Öffnet einen E-Mail-Entwurf. Keine Zwischenspeicherung.</span>
+                                </div>
+                            </form>
+                        </div>
+
+                        <div class="contact-info-col">
+                            <div class="card contact-channel-card">
+                                <div class="channel-kicker mono" data-de="VERNETZEN / WEITERDENKEN" data-en="CONNECT / KEEP BUILDING">VERNETZEN / WEITERDENKEN</div>
+                                <h3 class="channel-title" data-de="Lass uns im Austausch bleiben." data-en="Let’s keep the conversation going.">Lass uns im Austausch bleiben.</h3>
+                                <p class="channel-desc" data-de="Code, Architektur oder ein gutes Problem: Auf diesen beiden Kanälen findest du mich direkt." data-en="Code, architecture, or a good problem to solve: these are the two places to find me directly.">
+                                    Code, Architektur oder ein gutes Problem: Auf diesen beiden Kanälen findest du mich direkt.
+                                </p>
+
+                                <div class="channel-list">
+                                    <a href="https://www.linkedin.com/in/malte-g%C3%BCndisch-4131131ba/" target="_blank" rel="noopener noreferrer" class="channel-item">
+                                        <div class="channel-icon-wrap">
+                                            <i class="devicon-linkedin-plain colored"></i>
+                                        </div>
+                                        <div class="channel-meta">
+                                            <span class="channel-name">LinkedIn</span>
+                                            <span class="channel-handle mono">/in/malte-guendisch · NETWORK</span>
+                                        </div>
+                                        <i data-lucide="arrow-up-right" class="channel-arrow"></i>
+                                    </a>
+
+                                    <a href="https://github.com/MGue95" target="_blank" rel="noopener noreferrer" class="channel-item">
+                                        <div class="channel-icon-wrap">
+                                            <i class="devicon-github-original"></i>
+                                        </div>
+                                        <div class="channel-meta">
+                                            <span class="channel-name">GitHub</span>
+                                            <span class="channel-handle mono">@MGue95 · BUILD</span>
+                                        </div>
+                                        <i data-lucide="arrow-up-right" class="channel-arrow"></i>
+                                    </a>
+                                </div>
+                            </div>
+
+                            <div class="card contact-specs-card">
+                                <div class="spec-row">
+                                    <span class="spec-label mono" data-de="Standort" data-en="Location">Standort</span>
+                                    <span class="spec-val" data-de="Deutschland (NRW)" data-en="Germany (NRW)">Deutschland (NRW)</span>
+                                </div>
+                                <div class="spec-row">
+                                    <span class="spec-label mono" data-de="Verfügbarkeit" data-en="Availability">Verfügbarkeit</span>
+                                    <span class="spec-val" data-de="Fachlicher Austausch & Vorträge" data-en="Technical exchange & talks">Fachlicher Austausch & Vorträge</span>
+                                </div>
+                                <div class="spec-row">
+                                    <span class="spec-label mono" data-de="Fokus" data-en="Focus">Fokus</span>
+                                    <span class="spec-val">Salesforce · LLM · Web Tech</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="container footer-inner">
+            <p>&copy; <span id="year"></span> Malte Gündisch · <span data-de="Manager Online-Marketing & CRM bei ergoflix Group" data-en="Manager Online Marketing & CRM at ergoflix Group">Manager Online-Marketing & CRM bei ergoflix Group</span></p>
+            <a href="#hero" class="back-to-top mono" aria-label="Nach oben scrollen">↑ Nach oben</a>
+        </div>
     </footer>
 
-    <script src="script.js"></script>
+    <div class="toast" id="toast" role="alert" aria-live="polite">
+        <span class="toast-message" id="toastMessage">E-Mail-Adresse kopiert!</span>
+    </div>
+
+    <script src="script.js?v=2"></script>
+    <script src="terminal.js?v=1"></script>
 </body>
 </html>

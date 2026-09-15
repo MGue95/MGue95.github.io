@@ -1,0 +1,7 @@
+# Editor- und Systemdateien
+.lh/
+.DS_Store
+Thumbs.db
+
+# Lokale Render-/Testartefakte
+_t.html

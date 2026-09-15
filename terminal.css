@@ -1,0 +1,351 @@
+/* ==========================================================================
+   TERMINAL-SEKTION — interaktive Konsole "mg-shell"
+   Dunkler Kontrastblock zwischen den hellen Editorial-Sektionen.
+   Eigene Datei: bricht bewusst nichts am bestehenden Stylesheet.
+   ========================================================================== */
+
+.section-terminal {
+    position: relative;
+    isolation: isolate;
+    overflow: hidden;
+    padding: 6rem 0 6.5rem;
+    color: #d7e2dc;
+    background: #0b0e12;
+}
+
+/* Rasterlinien + weicher Lichtkegel hinter dem Fenster */
+.section-terminal::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: -2;
+    background-image:
+        linear-gradient(rgba(143, 211, 255, 0.055) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(143, 211, 255, 0.055) 1px, transparent 1px);
+    background-size: 56px 56px;
+    mask-image: radial-gradient(ellipse 80% 65% at 50% 40%, #000 30%, transparent 78%);
+    -webkit-mask-image: radial-gradient(ellipse 80% 65% at 50% 40%, #000 30%, transparent 78%);
+}
+
+.section-terminal::after {
+    content: '';
+    position: absolute;
+    z-index: -1;
+    top: -22%;
+    left: 50%;
+    width: min(1100px, 120%);
+    aspect-ratio: 1.6;
+    transform: translateX(-50%);
+    background: radial-gradient(ellipse at center, rgba(101, 190, 160, 0.16), transparent 62%);
+    pointer-events: none;
+}
+
+.terminal-head {
+    max-width: 640px;
+    margin-bottom: 2.25rem;
+}
+
+.terminal-eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    margin-bottom: 1rem;
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: #8fd3ff;
+}
+
+.terminal-eyebrow::before {
+    content: '';
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: #65be9f;
+    box-shadow: 0 0 0 0 rgba(101, 190, 160, 0.6);
+    animation: terminal-pulse 2.4s ease-out infinite;
+}
+
+@keyframes terminal-pulse {
+    0%   { box-shadow: 0 0 0 0 rgba(101, 190, 160, 0.55); }
+    70%  { box-shadow: 0 0 0 9px rgba(101, 190, 160, 0); }
+    100% { box-shadow: 0 0 0 0 rgba(101, 190, 160, 0); }
+}
+
+.terminal-head h2 {
+    font-family: var(--font-display);
+    font-size: clamp(2rem, 4.4vw, 3.15rem);
+    font-weight: 700;
+    line-height: 1.05;
+    letter-spacing: -0.025em;
+    color: #f4f6f4;
+}
+
+.terminal-head p {
+    margin-top: 0.9rem;
+    max-width: 52ch;
+    color: #93a09a;
+    font-size: 1rem;
+}
+
+/* --- Fenster ------------------------------------------------------------ */
+.terminal-window {
+    border: 1px solid rgba(143, 211, 255, 0.17);
+    border-radius: 14px;
+    background: linear-gradient(180deg, #11161c 0%, #0d1116 100%);
+    box-shadow:
+        0 32px 70px rgba(0, 0, 0, 0.55),
+        0 0 0 1px rgba(255, 255, 255, 0.03) inset;
+    overflow: hidden;
+}
+
+.terminal-bar {
+    display: flex;
+    align-items: center;
+    gap: 0.85rem;
+    padding: 0.7rem 1rem;
+    border-bottom: 1px solid rgba(143, 211, 255, 0.12);
+    background: rgba(255, 255, 255, 0.025);
+}
+
+.terminal-dots {
+    display: flex;
+    gap: 0.45rem;
+    flex-shrink: 0;
+}
+
+.terminal-dots span {
+    width: 11px;
+    height: 11px;
+    border-radius: 50%;
+    background: #2c343d;
+}
+
+.terminal-dots span:nth-child(1) { background: #e0674f; }
+.terminal-dots span:nth-child(2) { background: #dfae4a; }
+.terminal-dots span:nth-child(3) { background: #62b083; }
+
+.terminal-title {
+    flex: 1;
+    min-width: 0;
+    text-align: center;
+    font-family: var(--font-mono);
+    font-size: 0.76rem;
+    color: #7d8a84;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.terminal-badge {
+    flex-shrink: 0;
+    padding: 0.2rem 0.5rem;
+    border: 1px solid rgba(143, 211, 255, 0.2);
+    border-radius: var(--radius-full);
+    font-family: var(--font-mono);
+    font-size: 0.64rem;
+    letter-spacing: 0.08em;
+    color: #8fd3ff;
+}
+
+/* --- Ausgabe ------------------------------------------------------------ */
+.terminal-body {
+    height: clamp(340px, 52vh, 460px);
+    overflow-y: auto;
+    overflow-x: hidden;
+    padding: 1.15rem 1.25rem 0.5rem;
+    font-family: var(--font-mono);
+    font-size: 0.84rem;
+    line-height: 1.75;
+    scrollbar-width: thin;
+    scrollbar-color: #2c343d transparent;
+    scroll-behavior: smooth;
+    overscroll-behavior: contain;
+}
+
+.terminal-body::-webkit-scrollbar { width: 9px; }
+.terminal-body::-webkit-scrollbar-track { background: transparent; }
+.terminal-body::-webkit-scrollbar-thumb {
+    background: #2c343d;
+    border: 3px solid transparent;
+    background-clip: content-box;
+    border-radius: 99px;
+}
+
+.t-line { white-space: pre-wrap; overflow-wrap: anywhere; max-width: 100%; }
+.t-line + .t-line { margin-top: 0.05rem; }
+
+.t-art {
+    line-height: 1.02;
+    white-space: pre;
+    overflow-wrap: normal;
+    letter-spacing: 0;
+}
+
+.t-rule {
+    height: 1px;
+    margin: 0.35rem 0 0.6rem;
+    background: linear-gradient(90deg, rgba(143, 211, 255, 0.28), transparent);
+}
+
+.t-cmd     { color: #e6ede9; margin-top: 0.85rem; }
+.t-prompt  { color: #65be9f; }
+.t-path    { color: #8fd3ff; }
+.t-dim     { color: #6f7b75; }
+.t-key     { color: #8fd3ff; }
+.t-val     { color: #d7e2dc; }
+.t-ok      { color: #7fd6a8; }
+.t-warn    { color: #e0b24f; }
+.t-err     { color: #e08472; }
+.t-head    { color: #f4f6f4; font-weight: 600; }
+.t-accent  { color: #c9a9f5; }
+
+.t-line a {
+    color: #8fd3ff;
+    text-decoration: underline;
+    text-underline-offset: 2px;
+}
+
+.t-line a:hover { color: #b9e2ff; }
+
+.t-run {
+    color: #8fd3ff;
+    background: none;
+    border: none;
+    padding: 0;
+    font: inherit;
+    cursor: pointer;
+    text-decoration: underline dotted;
+    text-underline-offset: 3px;
+}
+
+.t-run:hover { color: #b9e2ff; }
+
+/* --- Eingabezeile ------------------------------------------------------- */
+.terminal-inputline {
+    display: flex;
+    align-items: center;
+    gap: 0.55rem;
+    padding: 0.85rem 1.25rem 1.05rem;
+    border-top: 1px solid rgba(143, 211, 255, 0.1);
+    background: rgba(255, 255, 255, 0.015);
+    font-family: var(--font-mono);
+    font-size: 0.84rem;
+}
+
+.terminal-inputline .t-prompt { flex-shrink: 0; }
+
+.terminal-input-wrap {
+    position: relative;
+    flex: 1;
+    min-width: 0;
+    display: flex;
+    align-items: center;
+}
+
+/* Vorschlag als Geistertext hinter der Eingabe */
+.terminal-ghost {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    color: #4d5852;
+    pointer-events: none;
+    white-space: pre;
+    overflow: hidden;
+}
+
+#terminalInput {
+    position: relative;
+    z-index: 1;
+    width: 100%;
+    color: #e6ede9;
+    background: transparent;
+    border: none;
+    outline: none;
+    font: inherit;
+    caret-color: #65be9f;
+}
+
+#terminalInput::placeholder { color: #4d5852; }
+.terminal-input-wrap[data-empty="true"] #terminalInput { padding-left: 14px; }
+
+/* Ruhender Blink-Block, solange nichts eingegeben ist */
+.terminal-input-wrap[data-empty="true"]::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    width: 8px;
+    height: 1.05em;
+    background: #65be9f;
+    animation: terminal-blink 1.15s steps(1) infinite;
+    pointer-events: none;
+}
+
+@keyframes terminal-blink {
+    0%, 49%   { opacity: 1; }
+    50%, 100% { opacity: 0; }
+}
+
+/* --- Vorschlags-Chips --------------------------------------------------- */
+.terminal-chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-top: 1.15rem;
+}
+
+.terminal-chip {
+    padding: 0.42rem 0.8rem;
+    color: #a9b6b0;
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(143, 211, 255, 0.16);
+    border-radius: var(--radius-full);
+    font-family: var(--font-mono);
+    font-size: 0.74rem;
+    cursor: pointer;
+    transition: color 0.2s ease, border-color 0.2s ease, background 0.2s ease, transform 0.2s ease;
+}
+
+.terminal-chip:hover,
+.terminal-chip:focus-visible {
+    color: #0b0e12;
+    background: #8fd3ff;
+    border-color: #8fd3ff;
+    transform: translateY(-1px);
+}
+
+.terminal-hint {
+    margin-top: 0.9rem;
+    color: #6f7b75;
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+}
+
+.terminal-hint kbd {
+    padding: 0.1rem 0.35rem;
+    color: #a9b6b0;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(143, 211, 255, 0.18);
+    border-radius: 4px;
+    font: inherit;
+}
+
+@media (max-width: 640px) {
+    .section-terminal { padding: 4.25rem 0 4.5rem; }
+    .terminal-body {
+        height: 62vh;
+        padding: 0.9rem 0.9rem 0.4rem;
+        font-size: 0.78rem;
+    }
+    .terminal-inputline { padding: 0.75rem 0.9rem 0.95rem; font-size: 0.78rem; }
+    .terminal-title { font-size: 0.68rem; }
+    .terminal-badge { display: none; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .terminal-input-wrap[data-empty="true"]::after,
+    .terminal-eyebrow::before { animation: none; }
+    .terminal-body { scroll-behavior: auto; }
+}
