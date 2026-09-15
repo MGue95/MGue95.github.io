@@ -10,35 +10,10 @@
     overflow: hidden;
     padding: 6rem 0 6.5rem;
     color: #d7e2dc;
-    background: #0b0e12;
 }
 
-/* Rasterlinien + weicher Lichtkegel hinter dem Fenster */
-.section-terminal::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    z-index: -2;
-    background-image:
-        linear-gradient(rgba(143, 211, 255, 0.055) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(143, 211, 255, 0.055) 1px, transparent 1px);
-    background-size: 56px 56px;
-    mask-image: radial-gradient(ellipse 80% 65% at 50% 40%, #000 30%, transparent 78%);
-    -webkit-mask-image: radial-gradient(ellipse 80% 65% at 50% 40%, #000 30%, transparent 78%);
-}
-
-.section-terminal::after {
-    content: '';
-    position: absolute;
-    z-index: -1;
-    top: -22%;
-    left: 50%;
-    width: min(1100px, 120%);
-    aspect-ratio: 1.6;
-    transform: translateX(-50%);
-    background: radial-gradient(ellipse at center, rgba(101, 190, 160, 0.16), transparent 62%);
-    pointer-events: none;
-}
+/* Hintergrund kommt aus backdrop.js — dieselbe System-Map wie im Hero
+   und bei "Was ich baue". */
 
 .terminal-head {
     max-width: 640px;

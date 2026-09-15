@@ -310,11 +310,11 @@ a { color: inherit; }
     isolation: isolate;
     overflow: hidden;
     padding: 7.5rem 0 6rem;
-    background: #101318;
     --hero-shift: 0px;
 }
 
-.hero-canvas {
+/* Ein Canvas-Stil für alle Sektionen mit [data-backdrop] */
+.backdrop-canvas {
     position: absolute;
     inset: 0;
     z-index: 0;
@@ -325,6 +325,9 @@ a { color: inherit; }
     mix-blend-mode: screen;
     pointer-events: none;
 }
+
+[data-backdrop] { background: var(--backdrop-bg, #101318); }
+[data-backdrop] > .container { position: relative; z-index: 1; }
 
 .hero-container {
     position: relative;
@@ -903,20 +906,10 @@ a { color: inherit; }
     position: relative;
     isolation: isolate;
     padding: 7rem 0;
-    background: #151c19;
     overflow: hidden;
 }
 
-.section-work::before {
-    position: absolute;
-    inset: 0;
-    background-image:
-        linear-gradient(rgba(185, 210, 196, 0.045) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(185, 210, 196, 0.045) 1px, transparent 1px);
-    background-size: 72px 72px;
-    content: '';
-    pointer-events: none;
-}
+
 
 .section-work .container { position: relative; z-index: 1; }
 

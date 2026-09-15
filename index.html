@@ -106,8 +106,8 @@
     </header>
 
     <main id="main-content">
-        <section class="hero-section" id="hero">
-            <canvas class="hero-canvas" id="heroCanvas" aria-hidden="true"></canvas>
+        <section class="hero-section" id="hero" data-backdrop>
+            <canvas class="hero-canvas backdrop-canvas" id="heroCanvas" aria-hidden="true"></canvas>
             <div class="container hero-container">
                 <div class="hero-grid">
                     <div class="hero-text-col">
@@ -363,7 +363,7 @@
             </div>
         </section>
 
-        <section class="section section-work reveal-section" id="selected-work">
+        <section class="section section-work reveal-section" id="selected-work" data-backdrop>
             <div class="container">
                 <div class="work-heading">
                     <div>
@@ -412,7 +412,7 @@
             </div>
         </section>
 
-        <section class="section-terminal" id="terminal" aria-labelledby="terminalHeading">
+        <section class="section-terminal" id="terminal" aria-labelledby="terminalHeading" data-backdrop>
             <div class="container">
                 <div class="terminal-head">
                     <span class="terminal-eyebrow mono" data-de="03 / Terminal" data-en="03 / Terminal">03 / Terminal</span>
@@ -975,6 +975,7 @@
 
     <script src="mail.js?v=1"></script>
     <script src="script.js?v=2"></script>
+    <script src="backdrop.js?v=1"></script>
     <script src="terminal.js?v=1"></script>
     <script src="cards.js?v=1"></script>
     <script src="contact.js?v=1"></script>
