@@ -1709,7 +1709,15 @@ a { color: inherit; }
     .experience-card { padding-left: 1rem; }
     .experience-card::before { left: -1.19rem; }
 
+    /* Zweispaltig bleiben hieße rund 150px pro Spalte — Überschriften wie
+       "Administration" passen dort nicht mehr hinein und ragten aus der Karte. */
+    .ai-grid, .focus-grid, .certs-grid { grid-template-columns: 1fr; }
     .ai-card, .focus-card, .cert-card { min-height: auto; padding: 1.5rem; border-left: 0; }
+
+    /* Absicherung gegen einzelne lange Wörter */
+    .ai-card-title, .focus-card-title, .cert-title, .skill-category-title {
+        overflow-wrap: anywhere;
+    }
     .section-ai .ai-card:nth-child(1),
     .section-focus .focus-card:first-child,
     .section-certs .cert-card:first-child { min-height: auto; }

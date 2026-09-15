@@ -350,6 +350,8 @@
     .section-terminal { padding: 4.25rem 0 4.5rem; }
     .terminal-body {
         height: 62vh;
+        max-height: 520px;
+        min-height: 300px;
         padding: 0.9rem 0.9rem 0.4rem;
         font-size: 0.78rem;
     }
@@ -468,4 +470,12 @@ body.terminal-overlay-open { overflow: hidden; }
 @media (prefers-reduced-motion: reduce) {
     .terminal-overlay-backdrop,
     .terminal-overlay-panel { transition: none; }
+}
+
+
+/* Auf Touch-Geräten gibt es weder Tab-Vervollständigung noch ⌘K — der
+   Hinweis würde etwas versprechen, das dort nicht existiert. Die Chips
+   über dieser Zeile bleiben der Weg. */
+@media (hover: none) and (pointer: coarse) {
+    .terminal-hint { display: none; }
 }

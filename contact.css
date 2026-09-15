@@ -225,3 +225,12 @@
    Sie steht im Markup, damit die Adresse in keiner ausgelieferten Datei
    als Klartext auftaucht; gefüllt wird sie von mail.js. */
 .print-contact-line { display: none; }
+
+/* ⌘K gibt es auf Touch-Geräten nicht; der Knopf öffnet die Shell dort per
+   Tipp, also trägt er dann auch die passende Beschriftung. */
+.hint-touch { display: none; }
+
+@media (hover: none) and (pointer: coarse) {
+    .hint-pointer { display: none; }
+    .hint-touch { display: inline; }
+}

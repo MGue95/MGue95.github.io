@@ -17,6 +17,7 @@
     if (!bodyEl || !inputEl) return;
 
     const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const touchDevice = window.matchMedia('(hover: none) and (pointer: coarse)').matches;
     const lang = () => (document.documentElement.lang === 'en' ? 'en' : 'de');
     const t = (pair) => (typeof pair === 'string' ? pair : pair[lang()]);
 
@@ -569,11 +570,17 @@
                 RAW('t-line', `<span class="t-ok">✓</span> <span class="t-dim">${esc(t({ de: 'Stack initialisiert (Salesforce · Web · LLM)', en: 'stack initialised (Salesforce · web · LLM)' }))}</span>`),
                 RAW('t-line', `<span class="t-ok">✓</span> <span class="t-dim">${esc(t({ de: '9 Zertifikate verifiziert', en: '9 certifications verified' }))}</span>`),
                 GAP(),
-                RAW('t-line',
-                    `<span class="t-val">${esc(t({ de: 'Tippe ', en: 'Type ' }))}</span>` +
-                    `<button type="button" class="t-run" data-cmd="help">help</button>` +
-                    `<span class="t-val">${esc(t({ de: ' — oder öffne die Shell überall mit ', en: ' — or open the shell anywhere with ' }))}</span>` +
-                    `<span class="t-key">⌘K</span><span class="t-val">.</span>`)
+                // ⌘K gibt es auf Touch-Geräten nicht — dort auf die Chips verweisen
+                touchDevice
+                    ? RAW('t-line',
+                        `<span class="t-val">${esc(t({ de: 'Tipp ', en: 'Tap ' }))}</span>` +
+                        `<button type="button" class="t-run" data-cmd="help">help</button>` +
+                        `<span class="t-val">${esc(t({ de: ' oder wähl unten einen Befehl.', en: ' or pick a command below.' }))}</span>`)
+                    : RAW('t-line',
+                        `<span class="t-val">${esc(t({ de: 'Tippe ', en: 'Type ' }))}</span>` +
+                        `<button type="button" class="t-run" data-cmd="help">help</button>` +
+                        `<span class="t-val">${esc(t({ de: ' — oder öffne die Shell überall mit ', en: ' — or open the shell anywhere with ' }))}</span>` +
+                        `<span class="t-key">⌘K</span><span class="t-val">.</span>`)
             ];
 
             const first = then || 'whoami';
