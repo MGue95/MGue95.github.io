@@ -280,7 +280,7 @@ h2, h3 { page-break-after: avoid; break-after: avoid; }
     margin-top: 1mm;
     font-family: var(--font-mono);
     color: #666666;
-    content: 'mgue95.github.io/personal-onepager';
+    content: 'mgue95.github.io';
 }
 
 /* --------------------------------------------------------------------------

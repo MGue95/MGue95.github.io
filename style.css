@@ -1078,12 +1078,12 @@ a { color: inherit; }
    -------------------------------------------------------------------------- */
 .section-skills { background: var(--bg-surface); }
 
-.section-skills .section-header {
-    display: grid;
-    grid-template-columns: minmax(0, 1fr) minmax(280px, 0.7fr);
-    align-items: end;
-    gap: 2rem;
-}
+/* Die Sektion hatte einen zweispaltigen Kopf: Kapitelnummer links, Titel rechts,
+   Beschreibung wieder links — das zerriss die Leseordnung. Jetzt untereinander,
+   wie in allen anderen Sektionen. */
+.section-skills .section-header { display: block; }
+.section-skills .section-title { margin-bottom: 0.85rem; }
+.section-skills .section-desc { max-width: 52ch; }
 
 .section-skills .section-desc { margin: 0; }
 
@@ -1139,20 +1139,34 @@ a { color: inherit; }
 
 .stack-search-input:focus { border-color: var(--accent-dark); box-shadow: 0 0 0 2px rgba(23, 26, 32, 0.08); }
 
-.skills-grid { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); gap: 1rem; }
+/* Karten wachsen mit ihrem Inhalt: `align-items: start` verhindert, dass das
+   Grid sie auf Reihenhöhe streckt — sonst klafft zwischen Beschreibung und
+   Technologien eine leere Fläche. */
+.skills-grid {
+    display: grid;
+    grid-template-columns: repeat(12, minmax(0, 1fr));
+    align-items: start;
+    gap: 1rem;
+}
 
 .skill-card {
     grid-column: span 4;
     display: flex;
     flex-direction: column;
-    min-height: 270px;
     padding: 1.5rem;
     background: var(--glass-bg);
     border-color: var(--glass-border);
     border-radius: 4px;
+    transition: border-color 0.25s ease, background 0.25s ease, transform 0.25s ease;
 }
 
-.skill-card:nth-child(1), .skill-card:nth-child(2) { grid-column: span 6; min-height: 300px; }
+.skill-card:hover {
+    border-color: var(--border-strong);
+    background: rgba(255, 255, 255, 0.78);
+    transform: translateY(-2px);
+}
+
+.skill-card:nth-child(1), .skill-card:nth-child(2) { grid-column: span 6; }
 .skill-card.hidden { display: none; }
 
 .skill-card-top { display: flex; align-items: center; gap: 0.6rem; margin-bottom: 0.45rem; }
@@ -1160,25 +1174,52 @@ a { color: inherit; }
 .text-accent { color: #0d6efd; }
 
 .skill-category-title { font-family: var(--font-display); font-size: 1.2rem; font-weight: 700; letter-spacing: -0.03em; color: var(--text-primary); }
-.skill-category-desc { margin-bottom: 1.25rem; color: var(--text-muted); font-size: 0.88rem; line-height: 1.5; }
+.skill-category-desc {
+    margin-bottom: 1rem;
+    padding-bottom: 0.9rem;
+    border-bottom: 1px solid var(--border-subtle);
+    color: var(--text-muted);
+    font-size: 0.88rem;
+    line-height: 1.5;
+}
 
-.skill-pills { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-top: auto; }
+/* Kein `margin-top: auto` mehr — die Liste sitzt direkt unter der Beschreibung. */
+.skill-pills { display: flex; flex-wrap: wrap; gap: 0.3rem 0.4rem; }
 
+/* Rahmenlos: 60+ gerahmte Kästchen haben die Sektion zur Gitterwand gemacht. */
 .skill-pills span {
     display: inline-flex;
     align-items: center;
-    gap: 0.35rem;
-    padding: 0.25rem 0.55rem;
+    gap: 0.4rem;
+    padding: 0.28rem 0.6rem;
     color: var(--text-secondary);
-    background: transparent;
-    border: 1px solid #d5d8d3;
-    border-radius: 2px;
-    font-size: 0.74rem;
+    background: var(--accent-sage-soft);
+    border: 1px solid rgba(157, 170, 160, 0.22);
+    border-radius: var(--radius-full);
+    font-size: 0.75rem;
     font-weight: 500;
-    transition: var(--transition);
+    transition: color 0.2s ease, background 0.2s ease, border-color 0.2s ease;
 }
 
-.skill-pills span i { font-size: 0.85rem; }
+.skill-pills span:hover {
+    color: var(--text-primary);
+    background: #ffffff;
+    border-color: var(--border-strong);
+}
+
+/* Die bunten Hersteller-Icons beruhigen: Farbe erst bei Berührung der Karte. */
+.skill-pills span i {
+    font-size: 0.85rem;
+    filter: grayscale(1);
+    opacity: 0.8;
+    transition: filter 0.25s ease, opacity 0.25s ease;
+}
+
+.skill-card:hover .skill-pills span i,
+.skill-pills span:hover i {
+    filter: none;
+    opacity: 1;
+}
 
 .skill-pills span.matched {
     color: #92400e;

@@ -1,9 +1,10 @@
 # Malte Gündisch — One-Pager
 
 Persönliche Vorstellungsseite: Online-Marketing & CRM, Webdesign, Salesforce.
-Statisches HTML/CSS/JS ohne Build-Schritt, ausgeliefert über GitHub Pages.
+Statisches HTML/CSS/JS ohne Build-Schritt, ausgeliefert über GitHub Pages als
+User-Site (`MGue95.github.io`) — deshalb ohne Pfad direkt unter der Domain.
 
-**Live:** https://mgue95.github.io/personal-onepager/
+**Live:** https://mgue95.github.io/
 
 ## Aufbau
 
@@ -46,7 +47,7 @@ das eine zweite Instanz derselben Factory (`createShell`) — geteilt wird nur d
 Ausgabe dieses Befehls:
 
 ```
-https://mgue95.github.io/personal-onepager/?cmd=certs
+https://mgue95.github.io/?cmd=certs
 ```
 
 Der Befehl `share <befehl>` baut so einen Link und legt ihn in die Zwischenablage.
