@@ -54,6 +54,7 @@
     <link rel="stylesheet" href="style.css?v=2">
     <link rel="stylesheet" href="terminal.css?v=1">
     <link rel="stylesheet" href="cards.css?v=1">
+    <link rel="stylesheet" href="contact.css?v=1">
     <link rel="stylesheet" href="print.css?v=1" media="print">
 </head>
 <body>
@@ -823,6 +824,25 @@
                         </p>
                     </div>
 
+                    <div class="contact-direct">
+                        <div class="contact-direct-main">
+                            <span class="contact-direct-label mono" data-de="Direkt per Mail" data-en="Straight to my inbox">Direkt per Mail</span>
+                            <a href="mailto:malte.guendisch@ergoflix.de" class="contact-direct-mail" id="contactMail">malte.guendisch@ergoflix.de</a>
+                        </div>
+                        <div class="contact-direct-actions">
+                            <button type="button" class="contact-copy" id="copyMailBtn"
+                                    data-de="Adresse kopieren" data-en="Copy address">
+                                <i data-lucide="copy" class="icon-sm"></i>
+                                <span data-de="Adresse kopieren" data-en="Copy address">Adresse kopieren</span>
+                            </button>
+                            <button type="button" class="contact-shell-hint" data-open-shell
+                                    aria-label="Terminal öffnen">
+                                <span class="mono" aria-hidden="true">&gt;_</span>
+                                <span class="mono" data-de="oder ⌘K · contact" data-en="or ⌘K · contact">oder ⌘K · contact</span>
+                            </button>
+                        </div>
+                    </div>
+
                     <div class="contact-grid">
                         <div class="card contact-form-card glass">
                             <form id="contactForm" class="contact-form" action="mailto:malte.guendisch@ergoflix.de" method="post" enctype="text/plain">
@@ -849,7 +869,8 @@
 
                                 <div class="form-group">
                                     <label for="formMessage" class="form-label mono" data-de="Nachricht *" data-en="Message *">Nachricht *</label>
-                                    <textarea id="formMessage" name="message" class="form-input form-textarea" rows="4" required placeholder="Worum geht es in deinem Vorhaben oder deiner Frage?"></textarea>
+                                    <textarea id="formMessage" name="message" class="form-input form-textarea" rows="4" required maxlength="1200" placeholder="Worum geht es in deinem Vorhaben oder deiner Frage?"></textarea>
+                                    <span class="form-count mono" id="formCount" aria-hidden="true">0 / 1200</span>
                                 </div>
 
                                 <div class="form-footer">
@@ -858,6 +879,21 @@
                                         <span data-de="Nachricht senden" data-en="Send message">Nachricht senden</span>
                                     </button>
                                     <span class="form-notice mono" data-de="Öffnet einen E-Mail-Entwurf. Keine Zwischenspeicherung." data-en="Opens an email draft. No intermediate storage.">Öffnet einen E-Mail-Entwurf. Keine Zwischenspeicherung.</span>
+                                </div>
+
+                                <div class="form-fallback" id="formFallback" hidden>
+                                    <p class="form-fallback-lead" data-de="Es hat sich kein Mailprogramm geöffnet?" data-en="No mail app opened?">Es hat sich kein Mailprogramm geöffnet?</p>
+                                    <p class="form-fallback-text mono" data-de="Dann kopier dir die Nachricht und schick sie von Hand." data-en="Then copy the message and send it by hand.">Dann kopier dir die Nachricht und schick sie von Hand.</p>
+                                    <div class="form-fallback-actions">
+                                        <button type="button" class="contact-copy" id="copyMailBtn2">
+                                            <i data-lucide="at-sign" class="icon-sm"></i>
+                                            <span data-de="Adresse kopieren" data-en="Copy address">Adresse kopieren</span>
+                                        </button>
+                                        <button type="button" class="contact-copy" id="copyDraftBtn">
+                                            <i data-lucide="clipboard-copy" class="icon-sm"></i>
+                                            <span data-de="Nachricht kopieren" data-en="Copy message">Nachricht kopieren</span>
+                                        </button>
+                                    </div>
                                 </div>
                             </form>
                         </div>
@@ -930,5 +966,6 @@
     <script src="script.js?v=2"></script>
     <script src="terminal.js?v=1"></script>
     <script src="cards.js?v=1"></script>
+    <script src="contact.js?v=1"></script>
 </body>
 </html>
