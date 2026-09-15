@@ -824,10 +824,13 @@
                         </p>
                     </div>
 
+                    <p class="print-contact-line" aria-hidden="true"><span data-mail="text"></span> · linkedin.com/in/malte-guendisch · github.com/MGue95</p>
+
                     <div class="contact-direct">
                         <div class="contact-direct-main">
                             <span class="contact-direct-label mono" data-de="Direkt per Mail" data-en="Straight to my inbox">Direkt per Mail</span>
-                            <a href="mailto:malte.guendisch@ergoflix.de" class="contact-direct-mail" id="contactMail">malte.guendisch@ergoflix.de</a>
+                            <a href="#contact" class="contact-direct-mail" id="contactMail" data-mail="link">E-Mail-Adresse wird geladen …</a>
+                            <noscript><span class="contact-direct-mail">malteguendisch (at) gmail (punkt) com</span></noscript>
                         </div>
                         <div class="contact-direct-actions">
                             <button type="button" class="contact-copy" id="copyMailBtn"
@@ -845,7 +848,7 @@
 
                     <div class="contact-grid">
                         <div class="card contact-form-card glass">
-                            <form id="contactForm" class="contact-form" action="mailto:malte.guendisch@ergoflix.de" method="post" enctype="text/plain">
+                            <form id="contactForm" class="contact-form" novalidate>
                                 <div class="form-row">
                                     <div class="form-group">
                                         <label for="formName" class="form-label mono" data-de="Name *" data-en="Name *">Name *</label>
@@ -963,6 +966,7 @@
         <span class="toast-message" id="toastMessage">E-Mail-Adresse kopiert!</span>
     </div>
 
+    <script src="mail.js?v=1"></script>
     <script src="script.js?v=2"></script>
     <script src="terminal.js?v=1"></script>
     <script src="cards.js?v=1"></script>

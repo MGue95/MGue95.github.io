@@ -8,7 +8,7 @@
 (() => {
     'use strict';
 
-    const MAIL = 'malte.guendisch@ergoflix.de';
+    const MAIL = window.MG_MAIL.address();
     const form = document.getElementById('contactForm');
     if (!form) return;
 

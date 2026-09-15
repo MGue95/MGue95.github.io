@@ -245,7 +245,7 @@
             run: () => [
                 L('t-head', t({ de: '# Kontakt', en: '# Contact' })),
                 GAP(),
-                RAW('t-line', `<span class="t-key">${esc('E-Mail'.padEnd(12))}</span><a href="mailto:malte.guendisch@ergoflix.de">malte.guendisch@ergoflix.de</a>`),
+                RAW('t-line', `<span class="t-key">${esc('E-Mail'.padEnd(12))}</span><a href="${esc(window.MG_MAIL.mailto())}">${esc(window.MG_MAIL.address())}</a>`),
                 RAW('t-line', `<span class="t-key">${esc('LinkedIn'.padEnd(12))}</span><a href="https://www.linkedin.com/in/malte-g%C3%BCndisch-4131131ba/" target="_blank" rel="noopener">/in/malte-guendisch</a>`),
                 RAW('t-line', `<span class="t-key">${esc('GitHub'.padEnd(12))}</span><a href="https://github.com/MGue95" target="_blank" rel="noopener">@MGue95</a>`),
                 GAP(),

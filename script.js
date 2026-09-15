@@ -527,7 +527,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
             const subject = encodeURIComponent(topic ? `${topic} - Anfrage von ${name}` : `Anfrage von ${name}`);
             const body = encodeURIComponent(`Name: ${name}\nE-Mail: ${email}\nThema: ${topic || 'Allgemein'}\n\n${message}`);
-            const mailtoUrl = `mailto:malte.guendisch@ergoflix.de?subject=${subject}&body=${body}`;
+            const mailtoUrl = `${window.MG_MAIL.mailto()}?subject=${subject}&body=${body}`;
 
             const submitBtn = document.getElementById('submitFormBtn');
             const originalBtnHtml = submitBtn ? submitBtn.innerHTML : '';

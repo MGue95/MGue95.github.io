@@ -206,3 +206,8 @@
     .contact-shell-hint,
     .contact-direct-mail { transition: none; }
 }
+
+/* Kontaktzeile ausschließlich für den Druck — im Browser unsichtbar.
+   Sie steht im Markup, damit die Adresse in keiner ausgelieferten Datei
+   als Klartext auftaucht; gefüllt wird sie von mail.js. */
+.print-contact-line { display: none; }

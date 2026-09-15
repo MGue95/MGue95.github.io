@@ -148,16 +148,16 @@ body * {
     background: none !important;
 }
 
-/* Kontaktzeile, die es im Druck sonst nirgends gäbe */
-.hero-text-col::after {
-    display: block;
-    margin-top: 3mm;
-    padding-top: 2mm;
-    border-top: 0.4pt solid #bbbbbb;
-    font-family: var(--font-mono);
-    font-size: 9pt;
-    color: #000000;
-    content: 'malte.guendisch@ergoflix.de  ·  linkedin.com/in/malte-guendisch  ·  github.com/MGue95';
+/* Die Kontaktzeile steht im Markup (von mail.js gefüllt) statt hier als
+   content: — so taucht die Adresse in keiner ausgelieferten Datei auf. */
+.print-contact-line {
+    display: block !important;
+    margin: 0 0 4mm !important;
+    padding-bottom: 2mm;
+    border-bottom: 0.4pt solid #bbbbbb;
+    font-family: var(--font-mono) !important;
+    font-size: 9pt !important;
+    color: #000000 !important;
 }
 
 /* --- Überschriften ------------------------------------------------------ */
