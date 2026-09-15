@@ -188,6 +188,25 @@
 .hero-section {
     padding-top: calc(clamp(1.6rem, 6vh, 7.5rem) + var(--header-h, 60px));
     padding-bottom: clamp(1.5rem, 4vh, 6rem);
+
+    /* Hero und Techleiste zusammen genau eine Bildschirmhöhe: darunter
+       beginnt die nächste Sektion sauber an der Kante, statt als Streifen
+       hervorzublitzen. Der Hero liegt um die Kopfzeilenhöhe höher (negativer
+       Rand) genau an den oberen Rand — der sticky Header belegt seinen Platz
+       im Fluss, der Hero startet dadurch bei null. Also nur die Leiste
+       abziehen, nicht zusätzlich die Kopfzeile.
+       min-height, nicht height: reicht der Platz nicht, wächst er mit. */
+    min-height: calc(100svh - var(--strip-h, 56px));
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+/* svh kennen ältere Browser nicht — für die der klassische Wert */
+@supports not (height: 100svh) {
+    .hero-section {
+        min-height: calc(100vh - var(--strip-h, 56px));
+    }
 }
 
 .hero-headline {

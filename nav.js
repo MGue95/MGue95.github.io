@@ -75,9 +75,14 @@
 
     // Der Hero rückt um die Kopfzeilenhöhe nach oben — die Höhe ändert sich
     // mit dem gescrollten Zustand, deshalb messen statt raten.
+    const strip = document.querySelector('.brand-strip');
+
     const publishHeight = () => {
-        document.documentElement.style.setProperty(
-            '--header-h', `${Math.round(header.getBoundingClientRect().height)}px`);
+        const root = document.documentElement.style;
+        root.setProperty('--header-h', `${Math.round(header.getBoundingClientRect().height)}px`);
+        // Die Techleiste bricht je nach Breite um — ihre Höhe muss gemessen
+        // werden, damit sie zusammen mit dem Hero genau den Schirm füllt.
+        if (strip) root.setProperty('--strip-h', `${Math.round(strip.getBoundingClientRect().height)}px`);
     };
 
     const update = () => { publishHeight(); updateTone(); moveMarker(); };
@@ -90,6 +95,12 @@
 
     // Schriften verschieben die Linkbreiten — danach neu messen.
     if (document.fonts?.ready) document.fonts.ready.then(moveMarker);
+
+    if (typeof ResizeObserver !== 'undefined') {
+        const ro = new ResizeObserver(publishHeight);
+        ro.observe(header);
+        if (strip) ro.observe(strip);
+    }
 
     update();
     window.addEventListener('load', update);
