@@ -64,10 +64,6 @@
         }, 2200);
     }
 
-    document.querySelectorAll('#copyMailBtn, #copyMailBtn2').forEach((btn) => {
-        btn.addEventListener('click', async () => feedback(btn, await copy(MAIL)));
-    });
-
     /* ------------------------------------------ Zeichenzähler im Textfeld */
 
     const message = document.getElementById('formMessage');

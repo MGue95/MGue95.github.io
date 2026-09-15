@@ -59,6 +59,7 @@
     <link rel="stylesheet" href="terminal.css?v=1">
     <link rel="stylesheet" href="cards.css?v=1">
     <link rel="stylesheet" href="contact.css?v=1">
+    <link rel="stylesheet" href="reveal.css?v=1">
     <link rel="stylesheet" href="print.css?v=1" media="print">
 </head>
 <body>
@@ -840,11 +841,6 @@
                             </a>
                         </div>
                         <div class="contact-direct-actions">
-                            <button type="button" class="contact-copy" id="copyMailBtn"
-                                    data-de="Adresse kopieren" data-en="Copy address">
-                                <i data-lucide="copy" class="icon-sm"></i>
-                                <span data-de="Adresse kopieren" data-en="Copy address">Adresse kopieren</span>
-                            </button>
                             <button type="button" class="contact-shell-hint" data-open-shell
                                     aria-label="Terminal öffnen">
                                 <span class="mono" aria-hidden="true">&gt;_</span>
@@ -874,7 +870,7 @@
                                         <option value="Salesforce / CRM Architektur" data-de="Salesforce & CRM Architektur" data-en="Salesforce & CRM Architecture">Salesforce & CRM Architektur</option>
                                         <option value="LLM-Tooling & KI-Workflows" data-de="LLM-Tooling & KI-Workflows" data-en="LLM Tooling & AI Workflows">LLM-Tooling & KI-Workflows</option>
                                         <option value="Marketing Automation & Tracking" data-de="Marketing-Automation & Analytics / Tracking" data-en="Marketing Automation & Analytics / Tracking">Marketing-Automation & Analytics / Tracking</option>
-                                        <option value="Fachlicher Austausch allgemein" data-de="Allgemeiner fachlicher Austausch" data-en="General Technical Exchange">Allgemeiner fachlicher Austausch</option>
+                                        <option value="Fachlicher Austausch allgemein" selected data-de="Allgemeiner fachlicher Austausch" data-en="General Technical Exchange">Allgemeiner fachlicher Austausch</option>
                                     </select>
                                 </div>
 
@@ -896,10 +892,6 @@
                                     <p class="form-fallback-lead" data-de="Es hat sich kein Mailprogramm geöffnet?" data-en="No mail app opened?">Es hat sich kein Mailprogramm geöffnet?</p>
                                     <p class="form-fallback-text mono" data-de="Dann kopier dir die Nachricht und schick sie von Hand." data-en="Then copy the message and send it by hand.">Dann kopier dir die Nachricht und schick sie von Hand.</p>
                                     <div class="form-fallback-actions">
-                                        <button type="button" class="contact-copy" id="copyMailBtn2">
-                                            <i data-lucide="at-sign" class="icon-sm"></i>
-                                            <span data-de="Adresse kopieren" data-en="Copy address">Adresse kopieren</span>
-                                        </button>
                                         <button type="button" class="contact-copy" id="copyDraftBtn">
                                             <i data-lucide="clipboard-copy" class="icon-sm"></i>
                                             <span data-de="Nachricht kopieren" data-en="Copy message">Nachricht kopieren</span>
@@ -980,5 +972,6 @@
     <script src="terminal.js?v=1"></script>
     <script src="cards.js?v=1"></script>
     <script src="contact.js?v=1"></script>
+    <script src="reveal.js?v=1"></script>
 </body>
 </html>
