@@ -1465,19 +1465,22 @@ a { color: inherit; }
     min-height: 390px;
     padding: 2.25rem;
     overflow: hidden;
-    background: rgba(23, 26, 24, 0.88);
-    border-color: rgba(185, 210, 196, 0.34);
+    background: #171a18;
+    border-color: rgba(185, 210, 196, 0.2);
 }
 
+/* Statt eines angeschnittenen Kreis-Ornaments dasselbe Raster wie in der
+   Terminal-Sektion: die Karte gehört damit sichtbar zur Seite, statt ein
+   eigenes Motiv einzuführen. Es blendet nach unten links aus. */
 .contact-channel-card::before {
     position: absolute;
-    top: -90px;
-    right: -70px;
-    width: 220px;
-    height: 220px;
-    border: 1px solid rgba(185, 210, 196, 0.28);
-    border-radius: 50%;
-    box-shadow: 0 0 0 24px rgba(185, 210, 196, 0.04), 0 0 0 48px rgba(185, 210, 196, 0.03);
+    inset: 0;
+    background-image:
+        linear-gradient(rgba(185, 210, 196, 0.11) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(185, 210, 196, 0.11) 1px, transparent 1px);
+    background-size: 40px 40px;
+    mask-image: radial-gradient(ellipse 85% 75% at 78% 12%, #000 18%, transparent 74%);
+    -webkit-mask-image: radial-gradient(ellipse 85% 75% at 78% 12%, #000 18%, transparent 74%);
     content: '';
     pointer-events: none;
 }
