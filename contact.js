@@ -9,6 +9,15 @@
     'use strict';
 
     const MAIL = window.MG_MAIL.address();
+
+    /* Lebenslauf drucken — print.css macht aus der Seite einen Lebenslauf,
+       aber ohne sichtbaren Auslöser fand das niemand: der Weg dorthin war
+       der Terminal-Befehl "cv" oder Strg+P. Steht vor dem Formular-Guard,
+       damit der Knopf auch ohne Formular funktioniert. */
+    document.querySelectorAll('[data-print]').forEach((btn) => {
+        btn.addEventListener('click', () => window.print());
+    });
+
     const form = document.getElementById('contactForm');
     if (!form) return;
 

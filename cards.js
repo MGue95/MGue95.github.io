@@ -11,6 +11,9 @@
     const lang = () => (document.documentElement.lang === 'en' ? 'en' : 'de');
     const t = (de, en) => (lang() === 'en' ? en : de);
 
+    const esc = (s) => String(s).replace(/[&<>"']/g, (c) => (
+        { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+
     const CARD_SELECTOR = '.skill-card, .ai-card, .focus-card, .cert-card, .channel-item';
     const cards = Array.from(document.querySelectorAll(CARD_SELECTOR));
     if (!cards.length) return;
@@ -79,6 +82,40 @@
         <span class="stack-meter-status" id="meterStatus" role="status" aria-live="polite"></span>`;
     header.appendChild(meter);
 
+    /* ---- Verteilung: ein Balken je Kategorie -------------------------------
+       Eine Serie, eine Farbe — die Identität tragen die Labels, nicht die
+       Farbe. Ein gestapeltes Band hätte neun kategoriale Farben gebraucht,
+       die sich bei Farbsehschwäche nicht mehr sicher trennen lassen. */
+    const dist = document.createElement('div');
+    dist.className = 'stack-dist';
+    const rows = skillCards.map((card) => ({
+        card,
+        label: card.querySelector('.skill-category-title')?.textContent.trim() || '',
+        count: card.querySelectorAll('.skill-pills span').length
+    })).sort((a, b) => b.count - a.count);
+    const maxCount = Math.max(...rows.map((r) => r.count), 1);
+
+    dist.innerHTML = rows.map((r, i) => `
+        <button type="button" class="stack-dist-row" data-index="${i}">
+            <span class="stack-dist-label">${esc(r.label)}</span>
+            <span class="stack-dist-track">
+                <span class="stack-dist-bar" style="--w:${Math.round((r.count / maxCount) * 100)}%"></span>
+            </span>
+            <span class="stack-dist-value">${r.count}</span>
+        </button>`).join('');
+    header.appendChild(dist);
+
+    dist.addEventListener('click', (e) => {
+        const row = e.target.closest('.stack-dist-row');
+        if (!row) return;
+        const target = rows[Number(row.dataset.index)]?.card;
+        if (!target) return;
+        // Zur Karte springen und sie kurz markieren
+        target.scrollIntoView({ behavior: reduceMotion ? 'auto' : 'smooth', block: 'center' });
+        target.dataset.settling = 'true';
+        target.addEventListener('animationend', () => { delete target.dataset.settling; }, { once: true });
+    });
+
     const numCategories = meter.querySelector('#meterCategories');
     const numTech = meter.querySelector('#meterTech');
     const status = meter.querySelector('#meterStatus');
@@ -104,6 +141,7 @@
             counted = true;
             countUp(numCategories, skillCards.length);
             countUp(numTech, totalPills);
+            dist.dataset.grown = 'true';
             countObserver.disconnect();
         });
     }, { threshold: 0.3 });

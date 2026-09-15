@@ -326,8 +326,33 @@ a { color: inherit; }
     pointer-events: none;
 }
 
-[data-backdrop] { background: var(--backdrop-bg, #101318); }
+[data-backdrop] {
+    position: relative;
+    background: var(--backdrop-bg, #101318);
+}
+
 [data-backdrop] > .container { position: relative; z-index: 1; }
+
+/* Zwei dunkle Sektionen direkt hintereinander verschmelzen zu einem Block —
+   eine Fuge trennt sie, ohne den gemeinsamen Hintergrund aufzugeben. */
+[data-backdrop] + [data-backdrop] {
+    border-top: 1px solid rgba(185, 210, 196, 0.16);
+    padding-top: 8rem;
+}
+
+[data-backdrop] + [data-backdrop]::after {
+    content: '';
+    position: absolute;
+    z-index: 2;
+    top: -1px;
+    left: 50%;
+    width: min(620px, 78%);
+    height: 2px;
+    transform: translateX(-50%);
+    background: linear-gradient(90deg, transparent, rgba(143, 211, 255, 0.85), transparent);
+    box-shadow: 0 0 18px rgba(143, 211, 255, 0.35);
+    pointer-events: none;
+}
 
 .hero-container {
     position: relative;

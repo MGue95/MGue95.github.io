@@ -176,3 +176,86 @@
 .section-contact .channel-item .devicon-github-original {
     color: #f4f6f4;
 }
+
+/* ==========================================================================
+   VERTEILUNG DER TECHNOLOGIEN — ein Balken je Kategorie
+
+   Eine Serie, eine Farbe (#158a62, gegen die Sektionsfläche auf Chroma und
+   Kontrast geprüft). Die Identität tragen die Labels, nicht die Farbe —
+   deshalb braucht es weder Legende noch neun unterscheidbare Töne.
+   ========================================================================== */
+.stack-dist {
+    --bar: #158a62;
+    display: grid;
+    gap: 0.3rem;
+    margin-top: 1.6rem;
+    max-width: 640px;
+}
+
+.stack-dist-row {
+    display: grid;
+    grid-template-columns: minmax(0, 11rem) 1fr 2.5rem;
+    align-items: center;
+    gap: 0.9rem;
+    padding: 0.28rem 0.4rem;
+    background: none;
+    border: 0;
+    border-radius: var(--radius-sm);
+    font: inherit;
+    text-align: left;
+    cursor: pointer;
+    transition: background 0.2s ease;
+}
+
+.stack-dist-row:hover,
+.stack-dist-row:focus-visible {
+    background: rgba(255, 255, 255, 0.55);
+}
+
+.stack-dist-label {
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    color: var(--text-secondary);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.stack-dist-track {
+    position: relative;
+    height: 10px;
+    border-radius: 2px;
+    background: rgba(32, 34, 31, 0.07);
+}
+
+/* Datenende gerundet, an der Grundlinie verankert */
+.stack-dist-bar {
+    display: block;
+    width: 0;
+    height: 100%;
+    background: var(--bar);
+    border-radius: 2px 4px 4px 2px;
+    transition: width 0.9s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.stack-dist[data-grown="true"] .stack-dist-bar { width: var(--w); }
+
+.stack-dist-value {
+    font-family: var(--font-mono);
+    font-size: 0.78rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    font-variant-numeric: tabular-nums;
+    text-align: right;
+}
+
+.stack-dist-row:hover .stack-dist-bar { filter: brightness(1.12); }
+
+@media (max-width: 640px) {
+    .stack-dist-row { grid-template-columns: minmax(0, 8rem) 1fr 2.2rem; gap: 0.6rem; }
+    .stack-dist-label { font-size: 0.66rem; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .stack-dist-bar { transition: none; }
+}
