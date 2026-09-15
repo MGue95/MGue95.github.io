@@ -175,3 +175,50 @@
 
     .mobile-toggle { display: flex; }
 }
+
+/* --------------------------------------------------------------------------
+   HERO AUF FENSTERHÖHE
+
+   Hero (926px) und Techleiste (56px) ergaben zusammen 982px — auf einem
+   740px hohen Fenster fehlten 242px, die Leiste lag komplett unter der
+   Kante. Statt feste Werte zu kürzen, folgen Abstände und Schriftgrad
+   jetzt der Fensterhöhe: auf hohen Bildschirmen bleibt es großzügig, auf
+   flachen rückt alles zusammen, bis die Leiste mit ins Bild passt.
+   -------------------------------------------------------------------------- */
+.hero-section {
+    padding-top: calc(clamp(1.6rem, 6vh, 7.5rem) + var(--header-h, 60px));
+    padding-bottom: clamp(1.5rem, 4vh, 6rem);
+}
+
+.hero-headline {
+    font-size: clamp(2.4rem, min(7vw, 11vh), 6.4rem);
+    margin-bottom: clamp(0.7rem, 1.8vh, 1.5rem);
+}
+
+.hero-skill-rail {
+    margin-top: clamp(0.5rem, 1.2vh, 0.9rem);
+    margin-bottom: clamp(0.7rem, 1.8vh, 1.5rem);
+}
+
+.hero-subline {
+    margin-bottom: clamp(0.9rem, 2.4vh, 2rem);
+    font-size: clamp(0.98rem, 1.6vh, 1.08rem);
+}
+
+.profile-highlights,
+.hero-facts {
+    margin-bottom: clamp(0.9rem, 2.4vh, 2rem);
+    padding: clamp(0.8rem, 1.8vh, 1.15rem) 1.35rem;
+    gap: clamp(0.5rem, 1.2vh, 0.85rem);
+}
+
+/* Das Porträt darf auf flachen Fenstern nicht die Höhe diktieren */
+@media (max-height: 860px) {
+    .hero-visual { max-width: 330px; }
+    .portrait-card { width: 288px; min-height: 0; }
+}
+
+@media (max-height: 760px) {
+    .hero-visual { max-width: 290px; }
+    .portrait-card { width: 252px; }
+}
