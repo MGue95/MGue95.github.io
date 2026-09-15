@@ -6,12 +6,22 @@
     <title>Malte Gündisch – Systems, CRM & Engineering</title>
     <meta name="description" content="Persönliche Vorstellungsseite von Malte Gündisch – Manager für Online-Marketing & CRM bei ergoflix Group. Zehn Jahre Erfahrung in Webdesign, Webentwicklung, Salesforce und Marketing-Technologie.">
     <meta name="theme-color" content="#101318">
+    <link rel="canonical" href="https://mgue95.github.io/personal-onepager/">
+
     <meta property="og:type" content="profile">
+    <meta property="og:url" content="https://mgue95.github.io/personal-onepager/">
+    <meta property="og:site_name" content="Malte Gündisch">
     <meta property="og:title" content="Malte Gündisch – Systems, CRM & Engineering">
     <meta property="og:description" content="Salesforce, CRM-Architektur, Webdesign, Webentwicklung und Marketing-Technologie.">
-    <meta property="og:image" content="avatar.jpg">
+    <meta property="og:image" content="https://mgue95.github.io/personal-onepager/og.jpg">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:image:alt" content="Malte Gündisch – Online Marketing & CRM, Terminal-Prompt mit dem Befehl whoami">
     <meta property="og:locale" content="de_DE">
-    <meta name="twitter:card" content="summary">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Malte Gündisch – Systems, CRM & Engineering">
+    <meta name="twitter:description" content="Salesforce, CRM-Architektur, Webdesign, Webentwicklung und Marketing-Technologie.">
+    <meta name="twitter:image" content="https://mgue95.github.io/personal-onepager/og.jpg">
     <link rel="preload" as="image" href="101451426.jpg" fetchpriority="high">
 
     <script type="application/ld+json">
@@ -30,18 +40,20 @@
     </script>
 
     <!-- Fonts -->
+    <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
 
     <!-- Devicon Icons -->
-    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/devicon.min.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/devicons/devicon@v2.17.0/devicon.min.css">
 
     <!-- Lucide Icons -->
-    <script src="https://unpkg.com/lucide@latest" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/lucide@1.46.0/dist/umd/lucide.min.js" defer></script>
 
     <link rel="stylesheet" href="style.css?v=2">
     <link rel="stylesheet" href="terminal.css?v=1">
+    <link rel="stylesheet" href="print.css?v=1" media="print">
 </head>
 <body>
     <a class="skip-link" href="#main-content">Zum Inhalt springen</a>
@@ -69,6 +81,12 @@
             </nav>
 
             <div class="header-actions">
+                <button type="button" class="shell-trigger" data-open-shell
+                        aria-label="Terminal öffnen (Befehlstaste K)">
+                    <span aria-hidden="true">&gt;_</span>
+                    <kbd>⌘K</kbd>
+                </button>
+
                 <div class="lang-toggle" role="group" aria-label="Sprachauswahl">
                     <button id="lang-de" class="lang-btn active" type="button" aria-label="Deutsch">DE</button>
                     <button id="lang-en" class="lang-btn" type="button" aria-label="English">EN</button>

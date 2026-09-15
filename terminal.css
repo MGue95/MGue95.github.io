@@ -256,7 +256,8 @@
     overflow: hidden;
 }
 
-#terminalInput {
+#terminalInput,
+#overlayInput {
     position: relative;
     z-index: 1;
     width: 100%;
@@ -268,8 +269,21 @@
     caret-color: #65be9f;
 }
 
-#terminalInput::placeholder { color: #4d5852; }
-.terminal-input-wrap[data-empty="true"] #terminalInput { padding-left: 14px; }
+#terminalInput::placeholder,
+#overlayInput::placeholder { color: #4d5852; }
+
+/* Der globale Fokusring passt im Terminal nicht — die Eingabezeile selbst
+   markiert den Fokus. */
+#terminalInput:focus-visible,
+#overlayInput:focus-visible { outline: none; }
+
+.terminal-inputline:focus-within {
+    background: rgba(143, 211, 255, 0.05);
+    border-top-color: rgba(143, 211, 255, 0.28);
+}
+/* Platz für den ruhenden Blink-Block, solange nichts eingegeben ist */
+.terminal-input-wrap[data-empty="true"] #terminalInput,
+.terminal-input-wrap[data-empty="true"] #overlayInput { padding-left: 14px; }
 
 /* Ruhender Blink-Block, solange nichts eingegeben ist */
 .terminal-input-wrap[data-empty="true"]::after {
@@ -348,4 +362,110 @@
     .terminal-input-wrap[data-empty="true"]::after,
     .terminal-eyebrow::before { animation: none; }
     .terminal-body { scroll-behavior: auto; }
+}
+
+/* ==========================================================================
+   ⌘K-OVERLAY — dieselbe Shell, über jeder Stelle der Seite
+   ========================================================================== */
+
+.terminal-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 2000;
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    padding: clamp(1rem, 8vh, 6rem) 1rem 2rem;
+}
+
+.terminal-overlay[hidden] { display: none; }
+
+.terminal-overlay-backdrop {
+    position: absolute;
+    inset: 0;
+    background: rgba(8, 10, 13, 0.72);
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+    opacity: 0;
+    transition: opacity 0.18s ease;
+}
+
+.terminal-overlay.is-open .terminal-overlay-backdrop { opacity: 1; }
+
+.terminal-overlay-panel {
+    position: relative;
+    width: 100%;
+    max-width: 780px;
+    opacity: 0;
+    transform: translateY(-10px) scale(0.985);
+    transition: opacity 0.18s ease, transform 0.18s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.terminal-overlay.is-open .terminal-overlay-panel {
+    opacity: 1;
+    transform: none;
+}
+
+/* Im Overlay eigene Höhe: kompakter als die Sektion */
+.terminal-overlay .terminal-body {
+    height: min(58vh, 420px);
+}
+
+.terminal-close {
+    flex-shrink: 0;
+    padding: 0.2rem 0.55rem;
+    color: #7d8a84;
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(143, 211, 255, 0.2);
+    border-radius: var(--radius-full);
+    font-family: var(--font-mono);
+    font-size: 0.64rem;
+    letter-spacing: 0.08em;
+    cursor: pointer;
+    transition: color 0.2s ease, border-color 0.2s ease;
+}
+
+.terminal-close:hover { color: #e6ede9; border-color: rgba(143, 211, 255, 0.45); }
+
+body.terminal-overlay-open { overflow: hidden; }
+
+/* Auslöser in der Navigation */
+.shell-trigger {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45rem;
+    padding: 0.32rem 0.6rem 0.32rem 0.7rem;
+    color: var(--text-secondary);
+    background: transparent;
+    border: 1px solid var(--border-strong);
+    border-radius: var(--radius-full);
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    cursor: pointer;
+    transition: var(--transition);
+}
+
+.shell-trigger:hover {
+    color: var(--text-primary);
+    border-color: var(--accent-dark);
+    background: rgba(255, 255, 255, 0.6);
+}
+
+.shell-trigger kbd {
+    padding: 0.05rem 0.3rem;
+    color: var(--text-muted);
+    background: var(--bg-card-subtle);
+    border: 1px solid var(--border-subtle);
+    border-radius: 4px;
+    font: inherit;
+    font-size: 0.66rem;
+}
+
+@media (max-width: 900px) {
+    .shell-trigger { display: none; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .terminal-overlay-backdrop,
+    .terminal-overlay-panel { transition: none; }
 }

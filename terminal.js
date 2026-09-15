@@ -258,7 +258,7 @@
 
         neofetch: {
             desc: { de: 'Systeminfo im ASCII-Stil', en: 'System info, ASCII style' },
-            run: () => {
+            run: (args, ctx) => {
                 const art = [
                     '   ███╗   ███╗ ██████╗ ',
                     '   ████╗ ████║██╔════╝ ',
@@ -279,7 +279,7 @@
                     ['Locale', t({ de: 'Dinslaken / NRW · de_DE', en: 'Dinslaken / NRW · de_DE' })]
                 ];
                 const out = [GAP()];
-                const narrow = bodyEl.clientWidth < 520;
+                const narrow = ctx.width < 520;
 
                 if (narrow) {
                     // Nebeneinander passt auf schmalen Displays nicht — gestapelt.
@@ -363,11 +363,11 @@
 
         history: {
             desc: { de: 'Eingegebene Befehle', en: 'Entered commands' },
-            run: () => {
-                if (!history.length) {
+            run: (args, ctx) => {
+                if (!ctx.history.length) {
                     return [L('t-dim', t({ de: '(noch nichts eingegeben)', en: '(nothing entered yet)' }))];
                 }
-                return history.map((cmd, i) =>
+                return ctx.history.map((cmd, i) =>
                     RAW('t-line', `<span class="t-dim">  ${String(i + 1).padStart(3)}  </span><span class="t-val">${esc(cmd)}</span>`));
             }
         },
@@ -383,9 +383,61 @@
             ]
         },
 
+        cv: {
+            desc: { de: 'Lebenslauf als PDF drucken', en: 'Print CV as PDF' },
+            run: () => {
+                setTimeout(() => window.print(), 400);
+                return [
+                    L('t-ok', t({
+                        de: '→ Druckdialog wird geöffnet. Als Ziel "Als PDF sichern" wählen.',
+                        en: '→ Opening the print dialog. Choose "Save as PDF" as the destination.'
+                    })),
+                    L('t-dim', t({
+                        de: 'Die Seite kennt ein eigenes Druck-Layout: Lebenslauf statt Website.',
+                        en: 'The page has a dedicated print layout: CV instead of website.'
+                    }))
+                ];
+            }
+        },
+
+        share: {
+            desc: { de: 'Link zu einem Befehl kopieren — share <befehl>', en: 'Copy a link to a command — share <command>' },
+            run: (args) => {
+                const cmd = (args[0] || 'whoami').toLowerCase();
+                if (!COMMANDS[cmd]) {
+                    return [L('t-err', `share: ${cmd}: ` + t({ de: 'unbekannter Befehl.', en: 'unknown command.' }))];
+                }
+                const url = `${location.origin}${location.pathname}?cmd=${encodeURIComponent(cmd)}`;
+                const out = [
+                    L('t-dim', t({ de: 'Dieser Link führt direkt zu dieser Ausgabe:', en: 'This link leads straight to that output:' })),
+                    RAW('t-line', `<a href="${esc(url)}">${esc(url)}</a>`)
+                ];
+                navigator.clipboard?.writeText(url).then(
+                    () => {},
+                    () => {}
+                );
+                out.push(L('t-ok', t({ de: '✓ in die Zwischenablage kopiert', en: '✓ copied to clipboard' })));
+                return out;
+            }
+        },
+
+        keys: {
+            desc: { de: 'Tastenkürzel', en: 'Keyboard shortcuts' },
+            run: () => [
+                L('t-head', t({ de: '# Tastenkürzel', en: '# Keyboard shortcuts' })),
+                GAP(),
+                kv('⌘/Ctrl + K', t({ de: 'Terminal überall öffnen', en: 'open the terminal anywhere' }), 16),
+                kv('Tab', t({ de: 'Befehl vervollständigen', en: 'complete the command' }), 16),
+                kv('→', t({ de: 'Vorschlag übernehmen', en: 'accept the suggestion' }), 16),
+                kv('↑ / ↓', t({ de: 'durch die History blättern', en: 'cycle through history' }), 16),
+                kv('⌘/Ctrl + L', t({ de: 'Konsole leeren', en: 'clear the console' }), 16),
+                kv('Esc', t({ de: 'Eingabe leeren / Overlay schließen', en: 'clear input / close overlay' }), 16)
+            ]
+        },
+
         clear: {
             desc: { de: 'Konsole leeren', en: 'Clear the console' },
-            run: () => { bodyEl.innerHTML = ''; return []; }
+            run: (args, ctx) => { ctx.clear(); return []; }
         }
     };
 
@@ -395,246 +447,387 @@
             `<button type="button" class="t-run" data-cmd="open ${esc(section)}">open ${esc(section)}</button>`);
     }
 
-    /* ------------------------------------------------------------- Ausgabe */
-
     function esc(str) {
         return String(str).replace(/[&<>"']/g, (c) => (
             { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]
         ));
     }
 
-    function print(entry) {
-        const el = document.createElement('div');
-        el.className = 't-line ' + (entry.cls || '');
-        if (entry.html !== undefined) el.innerHTML = entry.html;
-        else el.textContent = entry.text === '' ? ' ' : entry.text;
-        bodyEl.appendChild(el);
-        bodyEl.scrollTop = bodyEl.scrollHeight;
-        return el;
-    }
-
-    function printPrompt(cmd) {
-        print(RAW('t-cmd',
-            `<span class="t-prompt">${esc(HOST)}</span><span class="t-dim">:</span>` +
-            `<span class="t-path">${esc(CWD)}</span><span class="t-dim">$ </span>` +
-            `<span class="t-val">${esc(cmd)}</span>`));
-    }
-
-    /* ------------------------------------------------------------ Ausführen */
-
-    const history = [];
-    let historyIndex = -1;
-    let busy = false;
-
-    function execute(raw) {
-        const line = raw.trim();
-        printPrompt(line);
-        if (!line) return;
-
-        history.push(line);
-        historyIndex = history.length;
-
-        const [name, ...args] = line.split(/\s+/);
-        const cmd = COMMANDS[name.toLowerCase()];
-
-        if (name.toLowerCase() === 'echo') {
-            print(L('t-val', args.join(' ')));
-            return;
-        }
-        if (['exit', 'quit', 'logout'].includes(name.toLowerCase())) {
-            print(L('t-dim', t({ de: 'Du kannst hier nicht raus — aber "contact" hilft weiter.', en: 'There is no way out — but "contact" helps.' })));
-            return;
-        }
-        if (!cmd) {
-            print(L('t-err', `${name}: ` + t({ de: 'Befehl nicht gefunden.', en: 'command not found.' })));
-            print(RAW('t-line',
-                `<span class="t-dim">${esc(t({ de: 'Probier ', en: 'Try ' }))}</span>` +
-                `<button type="button" class="t-run" data-cmd="help">help</button>`));
-            return;
-        }
-        cmd.run(args).forEach(print);
-    }
-
-    /* ------------------------------------- Tipp-Animation (Chips & Boot) */
-
-    function typeAndRun(cmd) {
-        if (busy) return;
-        busy = true;
-        inputEl.value = '';
-        updateGhost();
-        if (reduceMotion) {
-            execute(cmd);
-            busy = false;
-            inputEl.focus();
-            return;
-        }
-        let i = 0;
-        const tick = () => {
-            inputEl.value = cmd.slice(0, ++i);
-            if (i < cmd.length) {
-                setTimeout(tick, 28);
-            } else {
-                setTimeout(() => {
-                    inputEl.value = '';
-                    execute(cmd);
-                    busy = false;
-                    updateGhost();
-                    inputEl.focus({ preventScroll: true });
-                }, 160);
-            }
-        };
-        tick();
-    }
-
-    /* --------------------------------------------------------- Boot-Sequenz */
-
-    let booted = false;
-
-    function boot() {
-        if (booted) return;
-        booted = true;
-
-        const steps = [
-            L('t-dim', 'mg-shell 1.0 — ' + t({ de: 'interaktives Kurzprofil', en: 'interactive profile shell' })),
-            RAW('t-rule', ''),
-            RAW('t-line', `<span class="t-ok">✓</span> <span class="t-dim">${esc(t({ de: 'Profil geladen', en: 'profile loaded' }))}</span>`),
-            RAW('t-line', `<span class="t-ok">✓</span> <span class="t-dim">${esc(t({ de: 'Stack initialisiert (Salesforce · Web · LLM)', en: 'stack initialised (Salesforce · web · LLM)' }))}</span>`),
-            RAW('t-line', `<span class="t-ok">✓</span> <span class="t-dim">${esc(t({ de: '9 Zertifikate verifiziert', en: '9 certifications verified' }))}</span>`),
-            GAP(),
-            RAW('t-line',
-                `<span class="t-val">${esc(t({ de: 'Tippe ', en: 'Type ' }))}</span>` +
-                `<button type="button" class="t-run" data-cmd="help">help</button>` +
-                `<span class="t-val">${esc(t({ de: ' oder klick dich durch die Vorschläge unten.', en: ' or click your way through the suggestions below.' }))}</span>`)
-        ];
-
-        if (reduceMotion) {
-            steps.forEach(print);
-            typeAndRun('whoami');
-            return;
-        }
-
-        busy = true;
-        let i = 0;
-        const next = () => {
-            if (i < steps.length) {
-                print(steps[i++]);
-                setTimeout(next, i <= 2 ? 90 : 230);
-            } else {
-                busy = false;
-                setTimeout(() => typeAndRun('whoami'), 320);
-            }
-        };
-        next();
-    }
-
-    /* ------------------------------------------------------------- Eingabe */
-
     function completions(prefix) {
         return Object.keys(COMMANDS).filter((c) => c.startsWith(prefix) && c !== prefix);
     }
 
-    function updateGhost() {
-        if (!ghostEl) return;
-        const value = inputEl.value;
-        const match = value && !value.includes(' ') ? completions(value.toLowerCase())[0] : null;
-        ghostEl.textContent = match ? value + match.slice(value.length) : '';
-        ghostEl.parentElement.dataset.empty = String(!value);
+    /* ======================================================================
+       Shell-Instanz
+
+       Bewusst als Factory: dieselbe Logik trägt die Sektion auf der Seite und
+       das ⌘K-Overlay. Geteilt wird nur COMMANDS — History, Busy-Zustand und
+       DOM gehören jeder Instanz für sich.
+       ====================================================================== */
+
+    function createShell({ scope, bodyEl, inputEl, ghostEl, chipsEl, onCommand }) {
+        const history = [];
+        let historyIndex = -1;
+        let busy = false;
+        let booted = false;
+
+        const ctx = {
+            get width() { return bodyEl.clientWidth; },
+            get history() { return history; },
+            clear() { bodyEl.innerHTML = ''; }
+        };
+
+        function print(entry) {
+            const el = document.createElement('div');
+            el.className = 't-line ' + (entry.cls || '');
+            if (entry.html !== undefined) el.innerHTML = entry.html;
+            else el.textContent = entry.text === '' ? ' ' : entry.text;
+            bodyEl.appendChild(el);
+            bodyEl.scrollTop = bodyEl.scrollHeight;
+            return el;
+        }
+
+        function printPrompt(cmd) {
+            print(RAW('t-cmd',
+                `<span class="t-prompt">${esc(HOST)}</span><span class="t-dim">:</span>` +
+                `<span class="t-path">${esc(CWD)}</span><span class="t-dim">$ </span>` +
+                `<span class="t-val">${esc(cmd)}</span>`));
+        }
+
+        function execute(raw) {
+            const line = raw.trim();
+            printPrompt(line);
+            if (!line) return;
+
+            history.push(line);
+            historyIndex = history.length;
+
+            const [name, ...args] = line.split(/\s+/);
+            const key = name.toLowerCase();
+
+            if (key === 'echo') {
+                print(L('t-val', args.join(' ')));
+            } else if (['exit', 'quit', 'logout'].includes(key)) {
+                print(L('t-dim', t({
+                    de: 'Du kannst hier nicht raus — aber "contact" hilft weiter.',
+                    en: 'There is no way out — but "contact" helps.'
+                })));
+            } else if (!COMMANDS[key]) {
+                print(L('t-err', `${name}: ` + t({ de: 'Befehl nicht gefunden.', en: 'command not found.' })));
+                print(RAW('t-line',
+                    `<span class="t-dim">${esc(t({ de: 'Probier ', en: 'Try ' }))}</span>` +
+                    `<button type="button" class="t-run" data-cmd="help">help</button>`));
+            } else {
+                COMMANDS[key].run(args, ctx).forEach(print);
+            }
+
+            onCommand?.(key, args);
+        }
+
+        function typeAndRun(cmd) {
+            if (busy) return;
+            busy = true;
+            inputEl.value = '';
+            updateGhost();
+
+            if (reduceMotion) {
+                execute(cmd);
+                busy = false;
+                inputEl.focus({ preventScroll: true });
+                return;
+            }
+
+            let i = 0;
+            const tick = () => {
+                inputEl.value = cmd.slice(0, ++i);
+                if (i < cmd.length) {
+                    setTimeout(tick, 28);
+                } else {
+                    setTimeout(() => {
+                        inputEl.value = '';
+                        execute(cmd);
+                        busy = false;
+                        updateGhost();
+                        inputEl.focus({ preventScroll: true });
+                    }, 160);
+                }
+            };
+            tick();
+        }
+
+        function boot(then) {
+            if (booted) {
+                if (then) typeAndRun(then);
+                return;
+            }
+            booted = true;
+
+            const steps = [
+                L('t-dim', 'mg-shell 1.1 — ' + t({ de: 'interaktives Kurzprofil', en: 'interactive profile shell' })),
+                RAW('t-rule', ''),
+                RAW('t-line', `<span class="t-ok">✓</span> <span class="t-dim">${esc(t({ de: 'Profil geladen', en: 'profile loaded' }))}</span>`),
+                RAW('t-line', `<span class="t-ok">✓</span> <span class="t-dim">${esc(t({ de: 'Stack initialisiert (Salesforce · Web · LLM)', en: 'stack initialised (Salesforce · web · LLM)' }))}</span>`),
+                RAW('t-line', `<span class="t-ok">✓</span> <span class="t-dim">${esc(t({ de: '9 Zertifikate verifiziert', en: '9 certifications verified' }))}</span>`),
+                GAP(),
+                RAW('t-line',
+                    `<span class="t-val">${esc(t({ de: 'Tippe ', en: 'Type ' }))}</span>` +
+                    `<button type="button" class="t-run" data-cmd="help">help</button>` +
+                    `<span class="t-val">${esc(t({ de: ' — oder öffne die Shell überall mit ', en: ' — or open the shell anywhere with ' }))}</span>` +
+                    `<span class="t-key">⌘K</span><span class="t-val">.</span>`)
+            ];
+
+            const first = then || 'whoami';
+
+            if (reduceMotion) {
+                steps.forEach(print);
+                typeAndRun(first);
+                return;
+            }
+
+            busy = true;
+            let i = 0;
+            const next = () => {
+                if (i < steps.length) {
+                    print(steps[i++]);
+                    setTimeout(next, i <= 2 ? 90 : 230);
+                } else {
+                    busy = false;
+                    setTimeout(() => typeAndRun(first), 320);
+                }
+            };
+            next();
+        }
+
+        function updateGhost() {
+            if (!ghostEl) return;
+            const value = inputEl.value;
+            const match = value && !value.includes(' ') ? completions(value.toLowerCase())[0] : null;
+            ghostEl.textContent = match ? value + match.slice(value.length) : '';
+            ghostEl.parentElement.dataset.empty = String(!value);
+        }
+
+        inputEl.addEventListener('input', updateGhost);
+        updateGhost();
+
+        inputEl.addEventListener('keydown', (e) => {
+            if (busy && e.key !== 'Escape') { e.preventDefault(); return; }
+
+            if (e.key === 'Enter') {
+                e.preventDefault();
+                const value = inputEl.value;
+                inputEl.value = '';
+                updateGhost();
+                execute(value);
+                return;
+            }
+
+            if (e.key === 'Tab') {
+                e.preventDefault();
+                const value = inputEl.value.toLowerCase();
+                const matches = completions(value);
+                if (matches.length === 1) {
+                    inputEl.value = matches[0];
+                } else if (matches.length > 1) {
+                    printPrompt(inputEl.value);
+                    print(L('t-dim', '  ' + matches.join('   ')));
+                }
+                updateGhost();
+                return;
+            }
+
+            if (e.key === 'ArrowUp') {
+                e.preventDefault();
+                if (!history.length) return;
+                historyIndex = Math.max(0, historyIndex - 1);
+                inputEl.value = history[historyIndex] || '';
+                updateGhost();
+                return;
+            }
+
+            if (e.key === 'ArrowDown') {
+                e.preventDefault();
+                if (!history.length) return;
+                historyIndex = Math.min(history.length, historyIndex + 1);
+                inputEl.value = history[historyIndex] || '';
+                updateGhost();
+                return;
+            }
+
+            if (e.key === 'ArrowRight' && ghostEl && ghostEl.textContent) {
+                inputEl.value = ghostEl.textContent;
+                updateGhost();
+                return;
+            }
+
+            if (e.key === 'l' && (e.ctrlKey || e.metaKey)) {
+                e.preventDefault();
+                ctx.clear();
+                return;
+            }
+
+            if (e.key === 'Escape' && inputEl.value) {
+                e.stopPropagation();
+                inputEl.value = '';
+                updateGhost();
+            }
+        });
+
+        scope.querySelector('.terminal-window')?.addEventListener('click', (e) => {
+            if (e.target.closest('a, button')) return;
+            if (window.getSelection()?.toString()) return;
+            inputEl.focus({ preventScroll: true });
+        });
+
+        const runFromTarget = (e) => {
+            const btn = e.target.closest('[data-cmd]');
+            if (!btn) return;
+            e.preventDefault();
+            typeAndRun(btn.dataset.cmd);
+        };
+        bodyEl.addEventListener('click', runFromTarget);
+        chipsEl?.addEventListener('click', runFromTarget);
+
+        return {
+            boot,
+            run: typeAndRun,
+            focus: () => inputEl.focus({ preventScroll: true }),
+            reset: () => { ctx.clear(); booted = false; busy = false; },
+            isBooted: () => booted
+        };
     }
 
-    inputEl.addEventListener('input', updateGhost);
-    updateGhost();
+    /* ---------------------------------------------- Instanz 1: die Sektion */
 
-    inputEl.addEventListener('keydown', (e) => {
-        if (busy && e.key !== 'Escape') { e.preventDefault(); return; }
+    const sectionShell = createShell({
+        scope: root,
+        bodyEl: root.querySelector('#terminalBody'),
+        inputEl: root.querySelector('#terminalInput'),
+        ghostEl: root.querySelector('#terminalGhost'),
+        chipsEl: root.querySelector('#terminalChips')
+    });
 
-        if (e.key === 'Enter') {
-            e.preventDefault();
-            const value = inputEl.value;
-            inputEl.value = '';
-            updateGhost();
-            execute(value);
+    /* --------------------------------------------- Instanz 2: ⌘K-Overlay */
+
+    const CHIPS = ['whoami', 'experience', 'stack', 'ai', 'projects', 'certs', 'contact', 'cv'];
+
+    const overlay = document.createElement('div');
+    overlay.className = 'terminal-overlay';
+    overlay.id = 'terminalOverlay';
+    overlay.hidden = true;
+    overlay.innerHTML = `
+        <div class="terminal-overlay-backdrop" data-close></div>
+        <div class="terminal-overlay-panel" role="dialog" aria-modal="true" aria-label="mg-shell">
+            <div class="terminal-window">
+                <div class="terminal-bar">
+                    <div class="terminal-dots" aria-hidden="true"><span></span><span></span><span></span></div>
+                    <span class="terminal-title">malte@guendisch — ~/profile — mg-shell</span>
+                    <button type="button" class="terminal-close" data-close aria-label="Schließen">ESC</button>
+                </div>
+                <div class="terminal-body" id="overlayBody" role="log" aria-live="polite" tabindex="0"></div>
+                <div class="terminal-inputline">
+                    <span class="t-prompt" aria-hidden="true">malte@guendisch<span class="t-dim">:</span><span class="t-path">~/profile</span><span class="t-dim">$</span></span>
+                    <span class="terminal-input-wrap">
+                        <span class="terminal-ghost" id="overlayGhost" aria-hidden="true"></span>
+                        <input type="text" id="overlayInput" autocomplete="off" autocapitalize="off"
+                               autocorrect="off" spellcheck="false" placeholder="help"
+                               aria-label="Terminal-Befehl eingeben">
+                    </span>
+                </div>
+            </div>
+            <div class="terminal-chips" id="overlayChips">
+                ${CHIPS.map((c) => `<button type="button" class="terminal-chip" data-cmd="${c}">${c}</button>`).join('')}
+            </div>
+        </div>`;
+    document.body.appendChild(overlay);
+
+    const overlayPanel = overlay.querySelector('.terminal-overlay-panel');
+    let lastFocused = null;
+
+    const overlayShell = createShell({
+        scope: overlay,
+        bodyEl: overlay.querySelector('#overlayBody'),
+        inputEl: overlay.querySelector('#overlayInput'),
+        ghostEl: overlay.querySelector('#overlayGhost'),
+        chipsEl: overlay.querySelector('#overlayChips'),
+        // "open" soll die Sektion zeigen und "cv" die Seite drucken —
+        // beides funktioniert nur, wenn das Overlay vorher aus dem Weg ist.
+        onCommand: (name) => {
+            if (name === 'open') setTimeout(closeOverlay, 260);
+            if (name === 'cv') closeOverlay();
+        }
+    });
+
+    function openOverlay(command) {
+        if (!overlay.hidden) {
+            if (command) overlayShell.run(command);
             return;
         }
+        lastFocused = document.activeElement;
+        overlay.hidden = false;
+        document.body.classList.add('terminal-overlay-open');
+        requestAnimationFrame(() => overlay.classList.add('is-open'));
+        overlayShell.boot(command);
+        overlayShell.focus();
+    }
 
-        if (e.key === 'Tab') {
+    function closeOverlay() {
+        if (overlay.hidden) return;
+        overlay.classList.remove('is-open');
+        document.body.classList.remove('terminal-overlay-open');
+        const finish = () => {
+            overlay.hidden = true;
+            if (lastFocused instanceof HTMLElement) lastFocused.focus({ preventScroll: true });
+        };
+        if (reduceMotion) finish();
+        else setTimeout(finish, 180);
+    }
+
+    overlay.addEventListener('click', (e) => {
+        if (e.target.closest('[data-close]')) closeOverlay();
+    });
+
+    document.addEventListener('keydown', (e) => {
+        if (e.key.toLowerCase() === 'k' && (e.metaKey || e.ctrlKey)) {
             e.preventDefault();
-            const value = inputEl.value.toLowerCase();
-            const matches = completions(value);
-            if (matches.length === 1) {
-                inputEl.value = matches[0];
-            } else if (matches.length > 1) {
-                printPrompt(inputEl.value);
-                print(L('t-dim', '  ' + matches.join('   ')));
+            overlay.hidden ? openOverlay() : closeOverlay();
+            return;
+        }
+        if (e.key === 'Escape' && !overlay.hidden) {
+            closeOverlay();
+            return;
+        }
+        // Fokus im Overlay halten
+        if (e.key === 'Tab' && !overlay.hidden) {
+            const focusables = overlayPanel.querySelectorAll('button, input, a[href]');
+            if (!focusables.length) return;
+            const first = focusables[0];
+            const last = focusables[focusables.length - 1];
+            if (e.shiftKey && document.activeElement === first) {
+                e.preventDefault();
+                last.focus();
+            } else if (!e.shiftKey && document.activeElement === last) {
+                e.preventDefault();
+                first.focus();
             }
-            updateGhost();
-            return;
-        }
-
-        if (e.key === 'ArrowUp') {
-            e.preventDefault();
-            if (!history.length) return;
-            historyIndex = Math.max(0, historyIndex - 1);
-            inputEl.value = history[historyIndex] || '';
-            updateGhost();
-            return;
-        }
-
-        if (e.key === 'ArrowDown') {
-            e.preventDefault();
-            if (!history.length) return;
-            historyIndex = Math.min(history.length, historyIndex + 1);
-            inputEl.value = history[historyIndex] || '';
-            updateGhost();
-            return;
-        }
-
-        if (e.key === 'ArrowRight' && ghostEl && ghostEl.textContent) {
-            inputEl.value = ghostEl.textContent;
-            updateGhost();
-            return;
-        }
-
-        if (e.key === 'l' && (e.ctrlKey || e.metaKey)) {
-            e.preventDefault();
-            bodyEl.innerHTML = '';
-            return;
-        }
-
-        if (e.key === 'Escape') {
-            inputEl.value = '';
-            updateGhost();
         }
     });
 
-    // Klick irgendwo ins Fenster fokussiert die Eingabe (außer auf Links/Buttons)
-    root.querySelector('.terminal-window')?.addEventListener('click', (e) => {
-        if (e.target.closest('a, button')) return;
-        if (window.getSelection()?.toString()) return;
-        inputEl.focus({ preventScroll: true });
+    // Auslöser in der Navigation
+    document.querySelectorAll('[data-open-shell]').forEach((el) => {
+        el.addEventListener('click', (e) => {
+            e.preventDefault();
+            openOverlay();
+        });
     });
 
-    // Klickbare Befehle in der Ausgabe und die Chips darunter
-    const runFromTarget = (e) => {
-        const btn = e.target.closest('[data-cmd]');
-        if (!btn) return;
-        e.preventDefault();
-        typeAndRun(btn.dataset.cmd);
-    };
-    bodyEl.addEventListener('click', runFromTarget);
-    chipsEl?.addEventListener('click', runFromTarget);
-
-    /* ------------------------------------- Sprachwechsel: Konsole neu füllen */
+    /* ------------------------------------- Sprachwechsel: Konsolen neu füllen */
 
     ['lang-de', 'lang-en'].forEach((id) => {
         document.getElementById(id)?.addEventListener('click', () => {
-            if (!booted) return;
-            // Die bereits gedruckte Ausgabe bleibt in der alten Sprache stehen —
-            // deshalb neu aufsetzen statt sie stehen zu lassen.
             setTimeout(() => {
-                bodyEl.innerHTML = '';
-                booted = false;
-                busy = false;
-                boot();
+                // Bereits gedruckte Ausgabe bliebe in der alten Sprache stehen.
+                if (sectionShell.isBooted()) { sectionShell.reset(); sectionShell.boot(); }
+                if (overlayShell.isBooted()) { overlayShell.reset(); if (!overlay.hidden) overlayShell.boot(); }
             }, 60);
         });
     });
@@ -645,13 +838,31 @@
         const io = new IntersectionObserver((entries) => {
             entries.forEach((entry) => {
                 if (entry.isIntersecting) {
-                    boot();
+                    sectionShell.boot();
                     io.disconnect();
                 }
             });
         }, { threshold: 0.25 });
         io.observe(root);
     } else {
-        boot();
+        sectionShell.boot();
+    }
+
+    /* ------------------------------------------------ Teilbare Befehls-Links */
+
+    // ?cmd=stack (oder #cmd=stack) öffnet die Seite direkt auf dieser Ausgabe.
+    const requested = (() => {
+        const fromQuery = new URLSearchParams(location.search).get('cmd');
+        if (fromQuery) return fromQuery;
+        const m = location.hash.match(/^#cmd=(.+)$/);
+        return m ? decodeURIComponent(m[1]) : null;
+    })();
+
+    if (requested) {
+        const name = requested.trim().split(/\s+/)[0].toLowerCase();
+        if (COMMANDS[name]) {
+            root.scrollIntoView({ behavior: reduceMotion ? 'auto' : 'smooth', block: 'start' });
+            setTimeout(() => sectionShell.boot(requested.trim()), reduceMotion ? 0 : 700);
+        }
     }
 })();

@@ -1,0 +1,420 @@
+/* ==========================================================================
+   DRUCK-LAYOUT — aus der Website wird ein Lebenslauf
+   Eingebunden mit media="print"; im Browser hat diese Datei keine Wirkung.
+   Ziel: zwei bis drei saubere A4-Seiten, schwarz auf weiß, ohne Deko.
+   ========================================================================== */
+
+@page {
+    size: A4 portrait;
+    margin: 16mm 15mm 18mm;
+}
+
+/* --- Alles ausblenden, was zur Website gehört, nicht zum Lebenslauf ------ */
+.header,
+.scroll-progress,
+.skip-link,
+.hero-canvas,
+.hero-skill-rail,
+.hero-links,
+.portrait-hint,
+.portrait-back,
+.tech-marquee,
+.marquee,
+.section-work,
+.section-terminal,
+.terminal-overlay,
+.stack-controls,
+.contact-form,
+.contact-form-wrap,
+.footer-nav,
+.back-to-top,
+.toast,
+.mobile-toggle,
+.lang-toggle,
+.shell-trigger,
+.slider-controls,
+.slider-progress {
+    display: none !important;
+}
+
+/* --- Grundlage ---------------------------------------------------------- */
+html, body {
+    background: #ffffff !important;
+    color: #000000 !important;
+    font-size: 10.5pt;
+    line-height: 1.45;
+}
+
+body * {
+    background-image: none !important;
+    box-shadow: none !important;
+    text-shadow: none !important;
+    animation: none !important;
+    transition: none !important;
+}
+
+/* Reveal-Animationen dürfen im Druck nichts verstecken */
+.reveal-section,
+.reveal-section * {
+    opacity: 1 !important;
+    transform: none !important;
+    visibility: visible !important;
+}
+
+/* Filter der Stack-Sektion im Druck aufheben: alles zeigen */
+.skills-grid .card.hidden,
+.skills-grid .hidden {
+    display: block !important;
+}
+
+.section,
+.hero-section {
+    padding: 0 0 6mm !important;
+    background: #ffffff !important;
+    color: #000000 !important;
+    border: 0 !important;
+}
+
+.container { max-width: none !important; padding: 0 !important; }
+
+.card,
+.glass {
+    background: #ffffff !important;
+    border: 0 !important;
+    border-top: 0.4pt solid #bbbbbb !important;
+    border-radius: 0 !important;
+    padding: 3mm 0 !important;
+}
+
+/* --- Kopf: Name, Rolle, Kontakt ----------------------------------------- */
+.hero-grid {
+    display: flex !important;
+    flex-direction: row !important;
+    align-items: flex-start !important;
+    gap: 8mm !important;
+}
+
+.hero-photo-col { flex: 0 0 30mm; }
+
+.portrait-card,
+.portrait-card-inner,
+.portrait-face {
+    position: static !important;
+    transform: none !important;
+    width: 30mm !important;
+    height: auto !important;
+    background: none !important;
+    border: 0 !important;
+    padding: 0 !important;
+}
+
+.portrait-img {
+    width: 30mm !important;
+    height: 30mm !important;
+    object-fit: cover;
+    border: 0.4pt solid #999999;
+}
+
+.portrait-info,
+.portrait-badges { display: none !important; }
+
+.hero-headline {
+    font-size: 24pt !important;
+    line-height: 1.05 !important;
+    color: #000000 !important;
+    margin-bottom: 1.5mm !important;
+}
+
+.hero-meta {
+    font-size: 9pt !important;
+    color: #333333 !important;
+    margin-bottom: 2mm !important;
+}
+
+.hero-subline {
+    font-size: 10pt !important;
+    color: #222222 !important;
+    max-width: none !important;
+}
+
+.hero-facts,
+.hero-fact-grid {
+    display: grid !important;
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 1mm 6mm !important;
+    margin-top: 3mm !important;
+    padding: 0 !important;
+    border: 0 !important;
+    background: none !important;
+}
+
+/* Kontaktzeile, die es im Druck sonst nirgends gäbe */
+.hero-text-col::after {
+    display: block;
+    margin-top: 3mm;
+    padding-top: 2mm;
+    border-top: 0.4pt solid #bbbbbb;
+    font-family: var(--font-mono);
+    font-size: 9pt;
+    color: #000000;
+    content: 'malte.guendisch@ergoflix.de  ·  linkedin.com/in/malte-guendisch  ·  github.com/MGue95';
+}
+
+/* --- Überschriften ------------------------------------------------------ */
+.section-title {
+    font-size: 14pt !important;
+    color: #000000 !important;
+    margin-bottom: 2mm !important;
+}
+
+.section-header { margin-bottom: 3mm !important; }
+.section-header::after { display: none !important; }
+
+.section:not(.section-work):not(.section-contact) .section-header::before {
+    color: #666666 !important;
+    font-size: 7.5pt !important;
+    margin-bottom: 1mm !important;
+}
+
+/* --- Berufserfahrung ---------------------------------------------------- */
+.experience-card { page-break-inside: avoid; break-inside: avoid; }
+
+.experience-header {
+    display: flex !important;
+    justify-content: space-between !important;
+    align-items: baseline !important;
+    gap: 4mm;
+}
+
+.experience-role { font-size: 11.5pt !important; color: #000000 !important; }
+.experience-company { font-size: 10pt !important; color: #333333 !important; }
+.experience-period { font-size: 9pt !important; color: #333333 !important; white-space: nowrap; }
+
+.experience-bullets { margin: 2mm 0 0 4mm !important; }
+.experience-bullets li { margin-bottom: 1mm !important; font-size: 9.5pt !important; }
+
+/* Technologie-Chips: als Fließtext statt als Pillen */
+.card-tags {
+    display: block !important;
+    margin-top: 2mm !important;
+    font-size: 8.5pt !important;
+    color: #444444 !important;
+}
+
+.card-tags span {
+    display: inline !important;
+    padding: 0 !important;
+    border: 0 !important;
+    background: none !important;
+}
+
+.card-tags span::after { content: ' · '; color: #999999; }
+.card-tags span:last-child::after { content: ''; }
+
+.card-tags i,
+.tag-icon,
+.pill-icon,
+.icon-sm,
+[data-lucide],
+[class^="devicon-"] { display: none !important; }
+
+/* --- Stack, Fokus, Zertifikate ------------------------------------------ */
+.skills-grid,
+.focus-grid,
+.certs-grid,
+.ai-grid {
+    display: grid !important;
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 3mm 8mm !important;
+}
+
+.skills-grid .card,
+.focus-card,
+.cert-card {
+    page-break-inside: avoid;
+    break-inside: avoid;
+}
+
+.skill-pills,
+.pill-list {
+    display: block !important;
+    font-size: 8.5pt !important;
+    color: #333333 !important;
+}
+
+.skill-pills span,
+.pill-list span,
+.pill {
+    display: inline !important;
+    padding: 0 !important;
+    border: 0 !important;
+    background: none !important;
+}
+
+.skill-pills span::after,
+.pill-list span::after { content: ' · '; color: #999999; }
+
+h3 { font-size: 10.5pt !important; color: #000000 !important; }
+p, li, dd, dt, span { color: #222222 !important; }
+
+a { color: #000000 !important; text-decoration: none !important; }
+
+/* --- Seitenumbrüche ----------------------------------------------------- */
+.section-experience { page-break-before: auto; }
+.section-certs { page-break-before: auto; }
+.section-skills { page-break-inside: auto; }
+
+h2, h3 { page-break-after: avoid; break-after: avoid; }
+
+/* Fußzeile mit Quelle — sonst weiß niemand, woher das Blatt kommt */
+.footer {
+    padding: 3mm 0 0 !important;
+    border-top: 0.4pt solid #bbbbbb !important;
+    background: none !important;
+    color: #444444 !important;
+    font-size: 8.5pt !important;
+}
+
+.footer::after {
+    display: block;
+    margin-top: 1mm;
+    font-family: var(--font-mono);
+    color: #666666;
+    content: 'mgue95.github.io/personal-onepager';
+}
+
+/* --------------------------------------------------------------------------
+   KORREKTUREN GEGEN DAS BILDSCHIRM-LAYOUT
+
+   Die Karten sind am Bildschirm auf gleiche Höhe getrimmt (min-height) und
+   schieben ihre Pill-Listen mit `margin-top: auto` nach unten. Im Druck
+   erzeugt das große weiße Löcher — hier wird beides aufgehoben.
+   -------------------------------------------------------------------------- */
+.skill-card,
+.skill-card:nth-child(1),
+.skill-card:nth-child(2),
+.ai-card,
+.focus-card,
+.cert-card,
+.experience-card,
+.contact-channel-card,
+.card {
+    min-height: 0 !important;
+    height: auto !important;
+}
+
+.skill-pills,
+.pill-list,
+.card-tags,
+.experience-mini-tags,
+.cert-list {
+    margin-top: 1.5mm !important;
+}
+
+/* Sekundäre Stationen tragen eigene Mini-Chips */
+.experience-mini-tags {
+    display: block !important;
+    font-size: 8.5pt !important;
+    color: #444444 !important;
+}
+
+.experience-mini-tags span {
+    display: inline !important;
+    padding: 0 !important;
+    border: 0 !important;
+    background: none !important;
+}
+
+.experience-mini-tags span::after { content: ' · '; color: #999999; }
+.experience-mini-tags span:last-child::after { content: ''; }
+
+/* Kapitelnummer und Überschrift gehören zusammen auf eine Seite */
+.section-header,
+.section-skills .section-header,
+.section-about .section-header {
+    display: block !important;
+    position: static !important;
+    page-break-inside: avoid;
+    break-inside: avoid;
+    page-break-after: avoid;
+    break-after: avoid;
+}
+
+/* Die Stack-Sektion ist am Bildschirm zweispaltig aufgeteilt */
+.section-skills .section-header,
+.section-skills .skills-intro {
+    grid-column: 1 / -1 !important;
+    max-width: none !important;
+}
+
+/* Kompakter: der Lebenslauf soll nicht acht Seiten füllen */
+.skill-card,
+.ai-card,
+.focus-card,
+.cert-card { padding: 2mm 0 !important; }
+
+.skill-card p,
+.ai-card p,
+.focus-card p,
+.cert-card p { font-size: 9pt !important; margin: 0.5mm 0 0 !important; }
+
+.experience-list { padding-left: 0 !important; }
+.experience-card { padding-left: 0 !important; }
+.experience-card::before,
+.experience-list::before { display: none !important; }
+
+.about-main-card p { font-size: 10pt !important; }
+.about-lead,
+.about-main-card > p:first-child { font-size: 11pt !important; }
+
+/* --------------------------------------------------------------------------
+   KONTAKTBEREICH
+
+   Das Formular ist im Druck sinnlos, die Kanal-Kacheln sind am Bildschirm
+   dunkel gefüllt und würden als schwarze Blöcke auf dem Papier landen.
+   -------------------------------------------------------------------------- */
+.contact-form-card,
+.channel-kicker,
+.channel-icon-wrap,
+.contact-header::before,
+.section-contact .eyebrow {
+    display: none !important;
+}
+
+.contact-channel-card,
+.channel-item {
+    background: #ffffff !important;
+    border: 0 !important;
+    border-top: 0.4pt solid #bbbbbb !important;
+    border-radius: 0 !important;
+    padding: 2mm 0 !important;
+    color: #000000 !important;
+}
+
+.channel-list {
+    display: flex !important;
+    flex-direction: row !important;
+    gap: 10mm !important;
+}
+
+.channel-item { flex: 1; }
+
+.channel-name,
+.channel-handle,
+.channel-title,
+.channel-desc {
+    color: #000000 !important;
+    font-size: 9.5pt !important;
+}
+
+.channel-handle { color: #444444 !important; font-size: 8.5pt !important; }
+.channel-title { font-size: 10.5pt !important; }
+
+/* Dekorative Kreise/Verläufe der Kontaktsektion */
+.section-contact::before,
+.section-contact::after,
+.contact-channel-card::before,
+.contact-channel-card::after { display: none !important; }
+
+/* Der Druck darf nicht an der Bildschirm-Scrollsperre des Overlays hängen */
+body.terminal-overlay-open { overflow: visible !important; }
