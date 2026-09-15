@@ -219,8 +219,22 @@
     const mo = new MutationObserver(update);
     skillCards.forEach((card) => mo.observe(card, { attributes: true, attributeFilter: ['class'] }));
 
-    document.getElementById('lang-de')?.addEventListener('click', () => setTimeout(update, 60));
-    document.getElementById('lang-en')?.addEventListener('click', () => setTimeout(update, 60));
+    // Die Balkenbeschriftungen stammen aus den Kartentiteln — die wechseln
+    // beim Sprachumschalten, das einmal gebaute Diagramm tat es nicht.
+    const relabel = () => {
+        rows.forEach((r, i) => {
+            const el = dist.querySelector(`.stack-dist-row[data-index="${i}"] .stack-dist-label`);
+            const title = r.card.querySelector('.skill-category-title')?.textContent.trim();
+            if (el && title) el.textContent = title;
+        });
+    };
+
+    ['lang-de', 'lang-en'].forEach((id) => {
+        document.getElementById(id)?.addEventListener('click', () => setTimeout(() => {
+            relabel();
+            update();
+        }, 80));
+    });
 
     update();
 })();
