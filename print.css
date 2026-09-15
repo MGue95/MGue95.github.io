@@ -55,12 +55,16 @@ body * {
     transition: none !important;
 }
 
-/* Reveal-Animationen dürfen im Druck nichts verstecken */
+/* Reveal-Animationen dürfen im Druck nichts verstecken.
+   clip-path gehört zwingend dazu: der Auftritt in reveal.css deckt Elemente
+   damit auf, und ohne Zurücksetzen fehlten im PDF ganze Überschriften. */
 .reveal-section,
-.reveal-section * {
+.reveal-section *,
+[data-rv] {
     opacity: 1 !important;
     transform: none !important;
     visibility: visible !important;
+    clip-path: none !important;
 }
 
 /* Filter der Stack-Sektion im Druck aufheben: alles zeigen */
@@ -71,6 +75,10 @@ body * {
 
 .section,
 .hero-section {
+    /* Der negative obere Rand zieht den Hero am Bildschirm unter die
+       Kopfzeile. Im Druck ist die ausgeblendet — ohne Zurücksetzen schob
+       er Name und Kicker über den Seitenrand hinaus. */
+    margin-top: 0 !important;
     padding: 0 0 6mm !important;
     background: #ffffff !important;
     color: #000000 !important;
@@ -172,11 +180,19 @@ body * {
 .section-header { margin-bottom: 3mm !important; }
 .section-header::after { display: none !important; }
 
-.section:not(.section-work):not(.section-contact) .section-header::before {
-    color: #666666 !important;
-    font-size: 7.5pt !important;
+/* Kapitelmarken im Druck ohne Pille und ohne Punkt — nur die Zeile */
+.chapter {
+    display: block !important;
     margin-bottom: 1mm !important;
+    padding: 0 !important;
+    border: 0 !important;
+    background: none !important;
+    font-size: 7.5pt !important;
 }
+
+.chapter-dot { display: none !important; }
+.chapter-num { color: #666666 !important; margin-right: 1.5mm; }
+.chapter-label { color: #666666 !important; }
 
 /* --- Berufserfahrung ---------------------------------------------------- */
 .experience-card { page-break-inside: avoid; break-inside: avoid; }

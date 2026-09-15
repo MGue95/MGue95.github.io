@@ -43,6 +43,15 @@
         window.addEventListener('load', () => requestAnimationFrame(playHero));
     }
 
+    /* Beim Drucken zählt kein Auftritt: alles sofort aufdecken. Der Export
+       wartet nicht auf die Staffelung, sonst fehlen Name und Überschriften
+       im PDF. */
+    const revealAll = () => {
+        document.querySelectorAll('[data-rv]').forEach((el) => { el.dataset.rv = 'in'; });
+    };
+    window.addEventListener('beforeprint', revealAll);
+    window.matchMedia('print').addEventListener?.('change', (e) => { if (e.matches) revealAll(); });
+
     /* ------------------------------ 2. Überschriften beim Hineinscrollen */
 
     if (!reduceMotion && 'IntersectionObserver' in window) {

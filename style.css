@@ -1597,15 +1597,7 @@ a { color: inherit; }
 .spec-label { color: #aeb8c5; font-size: 0.75rem; }
 .spec-val { color: #ffffff; font-weight: 600; text-align: right; }
 
-.contact-header::before {
-    display: block;
-    margin-bottom: 1rem;
-    color: #8da99a;
-    content: '09 / OPEN CHANNEL';
-    font-family: var(--font-mono);
-    font-size: 0.64rem;
-    letter-spacing: 0.12em;
-}
+
 
 /* --------------------------------------------------------------------------
    FOOTER & TOAST
@@ -1645,22 +1637,6 @@ a { color: inherit; }
 /* --------------------------------------------------------------------------
    CHAPTER MARKERS (content really is a numbered sequence: profile → contact)
    -------------------------------------------------------------------------- */
-.section:not(.section-work):not(.section-contact) .section-header::before {
-    display: block;
-    margin-bottom: 1rem;
-    color: #87978c;
-    font-family: var(--font-mono);
-    font-size: 0.64rem;
-    font-weight: 500;
-    letter-spacing: 0.12em;
-}
-
-.section-about .section-header::before { content: '01 / PROFIL'; }
-.section-experience .section-header::before { content: '02 / ERFAHRUNG'; }
-.section-skills .section-header::before { content: '04 / STACK'; }
-.section-ai .section-header::before { content: '06 / INTELLIGENZ'; }
-.section-focus .section-header::before { content: '07 / FOKUS'; }
-.section-certs .section-header::before { content: '08 / NACHWEISE'; }
 
 /* --------------------------------------------------------------------------
    RESPONSIVE

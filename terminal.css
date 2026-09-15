@@ -20,34 +20,6 @@
     margin-bottom: 2.25rem;
 }
 
-.terminal-eyebrow {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.6rem;
-    margin-bottom: 1rem;
-    font-family: var(--font-mono);
-    font-size: 0.72rem;
-    letter-spacing: 0.16em;
-    text-transform: uppercase;
-    color: #8fd3ff;
-}
-
-.terminal-eyebrow::before {
-    content: '';
-    width: 7px;
-    height: 7px;
-    border-radius: 50%;
-    background: #65be9f;
-    box-shadow: 0 0 0 0 rgba(101, 190, 160, 0.6);
-    animation: terminal-pulse 2.4s ease-out infinite;
-}
-
-@keyframes terminal-pulse {
-    0%   { box-shadow: 0 0 0 0 rgba(101, 190, 160, 0.55); }
-    70%  { box-shadow: 0 0 0 9px rgba(101, 190, 160, 0); }
-    100% { box-shadow: 0 0 0 0 rgba(101, 190, 160, 0); }
-}
-
 .terminal-head h2 {
     font-family: var(--font-display);
     font-size: clamp(2rem, 4.4vw, 3.15rem);
@@ -337,7 +309,6 @@
 
 @media (prefers-reduced-motion: reduce) {
     .terminal-input-wrap[data-empty="true"]::after,
-    .terminal-eyebrow::before { animation: none; }
     .terminal-body { scroll-behavior: auto; }
 }
 
