@@ -156,23 +156,19 @@
                                 <i data-lucide="mail" class="icon-sm"></i>
                                 <span data-de="Kontakt aufnehmen" data-en="Get in touch">Kontakt aufnehmen</span>
                             </a>
-                            <a href="#skills" class="btn btn-secondary">
-                                <i data-lucide="cpu" class="icon-sm"></i>
-                                <span data-de="Technischer Stack" data-en="Technical Stack">Technischer Stack</span>
-                            </a>
-                            <a href="https://www.linkedin.com/in/malte-g%C3%BCndisch-4131131ba/" target="_blank" rel="noopener noreferrer" class="btn btn-secondary">
-                                <i class="devicon-linkedin-plain"></i>
-                                <span>LinkedIn</span>
-                            </a>
-                            <a href="https://github.com/MGue95" target="_blank" rel="noopener noreferrer" class="btn btn-secondary">
-                                <i class="devicon-github-original"></i>
-                                <span>GitHub</span>
-                            </a>
                             <button type="button" class="btn btn-secondary" data-print
                                     data-de="Lebenslauf als PDF" data-en="CV as PDF">
                                 <i data-lucide="file-down" class="icon-sm"></i>
                                 <span data-de="Lebenslauf als PDF" data-en="CV as PDF">Lebenslauf als PDF</span>
                             </button>
+                            <span class="hero-social">
+                                <a href="https://www.linkedin.com/in/malte-g%C3%BCndisch-4131131ba/" target="_blank" rel="noopener noreferrer" class="hero-social-link" aria-label="LinkedIn">
+                                    <i class="devicon-linkedin-plain"></i>
+                                </a>
+                                <a href="https://github.com/MGue95" target="_blank" rel="noopener noreferrer" class="hero-social-link" aria-label="GitHub">
+                                    <i class="devicon-github-original"></i>
+                                </a>
+                            </span>
                         </div>
                     </div>
 
@@ -374,7 +370,7 @@
             <div class="container">
                 <div class="work-heading">
                     <div>
-                        <span class="eyebrow mono" data-de="Ausgewählte Arbeitsfelder" data-en="Selected work areas">Ausgewählte Arbeitsfelder</span>
+                        <span class="eyebrow mono" data-de="03 / Ausgewählte Arbeitsfelder" data-en="03 / Selected work areas">03 / Ausgewählte Arbeitsfelder</span>
                         <h2 class="section-title" data-de="Was ich baue" data-en="What I build">Was ich baue</h2>
                     </div>
                     <div class="slider-controls" aria-label="Projekt-Slider-Steuerung">
@@ -416,53 +412,6 @@
                     </article>
                 </div>
                 <div class="slider-progress" aria-hidden="true"><span id="workProgress"></span></div>
-            </div>
-        </section>
-
-        <section class="section-terminal" id="terminal" aria-labelledby="terminalHeading" data-backdrop>
-            <div class="container">
-                <div class="terminal-head">
-                    <span class="terminal-eyebrow mono" data-de="03 / Terminal" data-en="03 / Terminal">03 / Terminal</span>
-                    <h2 id="terminalHeading" data-de="Frag mich per Kommandozeile." data-en="Ask me from the command line.">Frag mich per Kommandozeile.</h2>
-                    <p data-de="Der schnellste Weg durch mein Profil: eine kleine Shell mit echten Befehlen. Tippen oder klicken — beides funktioniert." data-en="The fastest way through my profile: a small shell with real commands. Type or click — both work.">Der schnellste Weg durch mein Profil: eine kleine Shell mit echten Befehlen. Tippen oder klicken — beides funktioniert.</p>
-                </div>
-
-                <div class="terminal-window">
-                    <div class="terminal-bar">
-                        <div class="terminal-dots" aria-hidden="true"><span></span><span></span><span></span></div>
-                        <span class="terminal-title">malte@guendisch — ~/profile — mg-shell</span>
-                        <span class="terminal-badge" aria-hidden="true">LIVE</span>
-                    </div>
-
-                    <div class="terminal-body" id="terminalBody" role="log" aria-live="polite" aria-atomic="false" tabindex="0"></div>
-
-                    <div class="terminal-inputline">
-                        <span class="t-prompt" aria-hidden="true">malte@guendisch<span class="t-dim">:</span><span class="t-path">~/profile</span><span class="t-dim">$</span></span>
-                        <span class="terminal-input-wrap">
-                            <span class="terminal-ghost" id="terminalGhost" aria-hidden="true"></span>
-                            <input type="text" id="terminalInput" autocomplete="off" autocapitalize="off" autocorrect="off" spellcheck="false"
-                                   placeholder="help" aria-label="Terminal-Befehl eingeben">
-                        </span>
-                    </div>
-                </div>
-
-                <div class="terminal-chips" id="terminalChips">
-                    <button type="button" class="terminal-chip" data-cmd="whoami">whoami</button>
-                    <button type="button" class="terminal-chip" data-cmd="experience">experience</button>
-                    <button type="button" class="terminal-chip" data-cmd="stack">stack</button>
-                    <button type="button" class="terminal-chip" data-cmd="ai">ai</button>
-                    <button type="button" class="terminal-chip" data-cmd="projects">projects</button>
-                    <button type="button" class="terminal-chip" data-cmd="certs">certs</button>
-                    <button type="button" class="terminal-chip" data-cmd="neofetch">neofetch</button>
-                    <button type="button" class="terminal-chip" data-cmd="contact">contact</button>
-                </div>
-
-                <p class="terminal-hint">
-                    <span data-de="Tastatur:" data-en="Keyboard:">Tastatur:</span>
-                    <kbd>Tab</kbd> <span data-de="vervollständigen" data-en="complete">vervollständigen</span> ·
-                    <kbd>↑</kbd><kbd>↓</kbd> <span data-de="History" data-en="history">History</span> ·
-                    <kbd>Ctrl</kbd>+<kbd>L</kbd> <span data-de="leeren" data-en="clear">leeren</span>
-                </p>
             </div>
         </section>
 
@@ -661,6 +610,53 @@
                         </div>
                     </div>
                 </div>
+            </div>
+        </section>
+
+        <section class="section-terminal" id="terminal" aria-labelledby="terminalHeading" data-backdrop>
+            <div class="container">
+                <div class="terminal-head">
+                    <span class="terminal-eyebrow mono" data-de="05 / Terminal" data-en="05 / Terminal">05 / Terminal</span>
+                    <h2 id="terminalHeading" data-de="Frag mich per Kommandozeile." data-en="Ask me from the command line.">Frag mich per Kommandozeile.</h2>
+                    <p data-de="Der schnellste Weg durch mein Profil: eine kleine Shell mit echten Befehlen. Tippen oder klicken — beides funktioniert." data-en="The fastest way through my profile: a small shell with real commands. Type or click — both work.">Der schnellste Weg durch mein Profil: eine kleine Shell mit echten Befehlen. Tippen oder klicken — beides funktioniert.</p>
+                </div>
+
+                <div class="terminal-window">
+                    <div class="terminal-bar">
+                        <div class="terminal-dots" aria-hidden="true"><span></span><span></span><span></span></div>
+                        <span class="terminal-title">malte@guendisch — ~/profile — mg-shell</span>
+                        <span class="terminal-badge" aria-hidden="true">LIVE</span>
+                    </div>
+
+                    <div class="terminal-body" id="terminalBody" role="log" aria-live="polite" aria-atomic="false" tabindex="0"></div>
+
+                    <div class="terminal-inputline">
+                        <span class="t-prompt" aria-hidden="true">malte@guendisch<span class="t-dim">:</span><span class="t-path">~/profile</span><span class="t-dim">$</span></span>
+                        <span class="terminal-input-wrap">
+                            <span class="terminal-ghost" id="terminalGhost" aria-hidden="true"></span>
+                            <input type="text" id="terminalInput" autocomplete="off" autocapitalize="off" autocorrect="off" spellcheck="false"
+                                   placeholder="help" aria-label="Terminal-Befehl eingeben">
+                        </span>
+                    </div>
+                </div>
+
+                <div class="terminal-chips" id="terminalChips">
+                    <button type="button" class="terminal-chip" data-cmd="whoami">whoami</button>
+                    <button type="button" class="terminal-chip" data-cmd="experience">experience</button>
+                    <button type="button" class="terminal-chip" data-cmd="stack">stack</button>
+                    <button type="button" class="terminal-chip" data-cmd="ai">ai</button>
+                    <button type="button" class="terminal-chip" data-cmd="projects">projects</button>
+                    <button type="button" class="terminal-chip" data-cmd="certs">certs</button>
+                    <button type="button" class="terminal-chip" data-cmd="neofetch">neofetch</button>
+                    <button type="button" class="terminal-chip" data-cmd="contact">contact</button>
+                </div>
+
+                <p class="terminal-hint">
+                    <span data-de="Tastatur:" data-en="Keyboard:">Tastatur:</span>
+                    <kbd>Tab</kbd> <span data-de="vervollständigen" data-en="complete">vervollständigen</span> ·
+                    <kbd>↑</kbd><kbd>↓</kbd> <span data-de="History" data-en="history">History</span> ·
+                    <kbd>Ctrl</kbd>+<kbd>L</kbd> <span data-de="leeren" data-en="clear">leeren</span>
+                </p>
             </div>
         </section>
 
