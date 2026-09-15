@@ -1,0 +1,177 @@
+/* ==========================================================================
+   KOPFZEILE — passt sich der Sektion an, über der sie liegt
+
+   Vorher: eine helle Leiste über dem dunklen Hero, dazu ein blauer
+   Aktiv-Strich (#0d6efd), der in keiner Palette der Seite vorkommt.
+   ========================================================================== */
+
+.header {
+    transition:
+        background-color 0.35s ease,
+        border-color 0.35s ease,
+        box-shadow 0.35s ease,
+        padding 0.35s ease;
+}
+
+/* Der Hero zieht sich unter die Kopfzeile, damit sie wirklich über ihm
+   liegt. Als sticky-Element verdrängte sie ihn bisher — dahinter schien
+   der helle Seitenhintergrund durch und das Dunkel wurde grau. */
+.hero-section {
+    margin-top: calc(-1 * var(--header-h, 60px));
+    padding-top: calc(7.5rem + var(--header-h, 60px));
+}
+
+/* --- Über dunklen Sektionen -------------------------------------------- */
+.header[data-over="dark"] {
+    background: rgba(16, 19, 24, 0.55);
+    border-bottom-color: rgba(185, 210, 196, 0.14);
+    box-shadow: none;
+}
+
+.header[data-over="dark"].scrolled {
+    background: rgba(16, 19, 24, 0.86);
+}
+
+.header[data-over="dark"] .logo-name,
+.header[data-over="dark"] .nav-link.active { color: #f4f6f4; }
+
+.header[data-over="dark"] .logo-role { color: rgba(185, 210, 196, 0.75); }
+.header[data-over="dark"] .nav-link { color: rgba(226, 232, 229, 0.72); }
+.header[data-over="dark"] .nav-link:hover { color: #ffffff; }
+
+.header[data-over="dark"] .brand-mark {
+    color: #101318;
+    background: #f4f6f4;
+}
+
+.header[data-over="dark"] .shell-trigger {
+    color: rgba(226, 232, 229, 0.8);
+    border-color: rgba(185, 210, 196, 0.26);
+}
+
+.header[data-over="dark"] .shell-trigger:hover {
+    color: #101318;
+    background: #b9d2c4;
+    border-color: #b9d2c4;
+}
+
+.header[data-over="dark"] .shell-trigger kbd {
+    color: rgba(226, 232, 229, 0.75);
+    background: rgba(255, 255, 255, 0.07);
+    border-color: rgba(185, 210, 196, 0.2);
+}
+
+.header[data-over="dark"] .lang-toggle {
+    background: rgba(255, 255, 255, 0.06);
+    border-color: rgba(185, 210, 196, 0.22);
+}
+
+.header[data-over="dark"] .lang-btn { color: rgba(226, 232, 229, 0.7); }
+
+.header[data-over="dark"] .lang-btn.active {
+    color: #101318;
+    background: #f4f6f4;
+}
+
+.header[data-over="dark"] .mobile-icon { color: #f4f6f4; }
+
+/* --- Gleitender Aktiv-Indikator ---------------------------------------- */
+.nav-menu { position: relative; }
+
+/* Der blaue Strich weicht einer Pille, die zum aktiven Punkt wandert. */
+.nav-link.active::after { display: none !important; }
+
+.nav-marker {
+    position: absolute;
+    z-index: -1;
+    left: 0;
+    top: 50%;
+    height: 2.1rem;
+    border-radius: var(--radius-full);
+    background: rgba(32, 34, 31, 0.07);
+    transform: translateY(-50%);
+    opacity: 0;
+    transition:
+        transform 0.42s cubic-bezier(0.22, 1, 0.36, 1),
+        width 0.42s cubic-bezier(0.22, 1, 0.36, 1),
+        opacity 0.3s ease,
+        background-color 0.35s ease;
+    pointer-events: none;
+}
+
+.nav-marker[data-ready="true"] { opacity: 1; }
+
+.header[data-over="dark"] .nav-marker { background: rgba(255, 255, 255, 0.12); }
+
+.nav-link {
+    position: relative;
+    padding: 0.38rem 0.6rem;
+    border-radius: var(--radius-full);
+    white-space: nowrap;
+}
+
+/* --- Kompakter im gescrollten Zustand ---------------------------------- */
+.header.scrolled .logo-role {
+    max-height: 0;
+    opacity: 0;
+    overflow: hidden;
+}
+
+.logo-role {
+    display: block;
+    max-height: 1.4em;
+    opacity: 1;
+    transition: max-height 0.3s ease, opacity 0.25s ease;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .header,
+    .nav-marker,
+    .logo-role { transition: none; }
+}
+
+/* --------------------------------------------------------------------------
+   ENGE BREITEN
+
+   Logo + acht Links + Bedienelemente passen erst ab rund 1350px nebeneinander.
+   Darunter lief die Kopfzeile über den Viewport hinaus (bei 1024px um gut
+   200px). Deshalb in Stufen abbauen, statt erst bei 900px auf das
+   Menü umzuschalten.
+   -------------------------------------------------------------------------- */
+
+/* Ab hier zuerst die Tastenkürzel-Schaltfläche opfern */
+@media (max-width: 1340px) {
+    .shell-trigger { display: none; }
+}
+
+/* Dann die Links enger setzen */
+@media (max-width: 1180px) {
+    .nav-menu { gap: 0.1rem; }
+    .nav-link { padding: 0.34rem 0.45rem; font-size: 0.8rem; }
+    .brand-copy .logo-role { display: none; }
+}
+
+/* Und schließlich auf das Menü umschalten — die Regeln entsprechen denen,
+   die style.css ab 900px setzt. */
+@media (max-width: 1040px) {
+    .nav-menu { display: none; }
+
+    .nav-menu.open {
+        display: flex;
+        flex-direction: column;
+        position: absolute;
+        top: 60px;
+        left: 0;
+        right: 0;
+        padding: 1.5rem;
+        gap: 1.2rem;
+        background: #ffffff;
+        border-bottom: 1px solid var(--border-subtle);
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+    }
+
+    /* Im aufgeklappten Menü ergibt die gleitende Pille keinen Sinn */
+    .nav-menu.open .nav-marker { display: none; }
+
+    .mobile-toggle { display: flex; }
+}
