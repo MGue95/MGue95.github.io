@@ -419,11 +419,18 @@ a { color: inherit; }
        abgeschnitten, weil Foto + Infozeile zusammen mehr Platz brauchen.
        Die Vorderseite gibt die Höhe vor, die Rückseite legt sich darüber. */
     min-height: 420px;
-    padding: 14px 14px 32px;
-    background: #f7f5ef;
-    border-radius: 2px;
-    box-shadow: 0 22px 40px rgba(0, 0, 0, 0.28), 0 3px 7px rgba(0, 0, 0, 0.18);
-    transform: rotate(-2.2deg);
+    /* Polaroid-Proportion: schmaler Rand oben und seitlich, breiter Fuß.
+       Der Fuß trägt die Beschriftung. */
+    padding: 15px 15px 22px;
+    background:
+        linear-gradient(168deg, #fdfcf8 0%, #f6f3ea 58%, #efebe0 100%);
+    border-radius: 3px;
+    box-shadow:
+        0 1px 0 rgba(255, 255, 255, 0.8) inset,
+        0 18px 34px rgba(0, 0, 0, 0.32),
+        0 40px 70px rgba(0, 0, 0, 0.18),
+        0 2px 5px rgba(0, 0, 0, 0.2);
+    transform: rotate(-2.6deg);
     cursor: pointer;
     perspective: 1000px;
     transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.35s ease;
@@ -493,6 +500,10 @@ a { color: inherit; }
     padding-top: 100%;
     background: #d8d5cd;
     overflow: hidden;
+    /* Der Abzug sitzt minimal tiefer als das Papier */
+    box-shadow:
+        0 0 0 1px rgba(32, 34, 31, 0.14),
+        0 1px 3px rgba(32, 34, 31, 0.18) inset;
 }
 
 .photo-wrapper img {
@@ -504,16 +515,22 @@ a { color: inherit; }
     object-fit: cover;
 }
 
-.portrait-info { padding-top: 0.9rem; text-align: left; }
+.portrait-info { padding-top: 0.95rem; text-align: left; }
 
+/* Handschriftlich beschriftet wie ein echtes Polaroid — der Kontrast zu den
+   technischen Tags darunter ist gewollt. */
 .portrait-name {
-    color: #20221f;
-    font-family: var(--font-display);
-    font-size: 1.28rem;
-    letter-spacing: -0.035em;
+    color: #2b2d28;
+    font-family: 'Caveat', 'Segoe Script', cursive;
+    font-size: 1.85rem;
+    font-weight: 600;
+    line-height: 1;
+    letter-spacing: 0;
+    transform: rotate(-0.8deg);
+    transform-origin: left center;
 }
 
-.portrait-sub { margin-bottom: 0.65rem; color: #777970; font-size: 0.68rem; }
+.portrait-sub { margin-top: 0.3rem; margin-bottom: 0.7rem; color: #8a8c82; font-size: 0.66rem; }
 
 .portrait-badges { display: flex; justify-content: flex-start; flex-wrap: wrap; gap: 0.3rem; }
 
