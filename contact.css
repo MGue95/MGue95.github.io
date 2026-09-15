@@ -34,19 +34,33 @@
     color: #8da99a;
 }
 
+/* Der Link trägt eine Handlung, nicht die Adresse — die steht bewusst
+   nirgends auf der Seite und wird erst beim Klick bzw. Kopieren eingesetzt. */
 .contact-direct-mail {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
     font-family: var(--font-display);
     font-size: clamp(1.15rem, 2.2vw, 1.6rem);
     font-weight: 600;
     letter-spacing: -0.02em;
     color: #ffffff;
     text-decoration: none;
-    word-break: break-all;
     border-bottom: 1px solid transparent;
-    transition: border-color 0.25s ease;
+    transition: border-color 0.25s ease, gap 0.25s ease;
 }
 
-.contact-direct-mail:hover { border-bottom-color: rgba(255, 255, 255, 0.5); }
+.contact-direct-mail:hover {
+    border-bottom-color: rgba(255, 255, 255, 0.5);
+    gap: 0.85rem;
+}
+
+.contact-direct-icon {
+    width: 1em;
+    height: 1em;
+    flex-shrink: 0;
+    color: #8da99a;
+}
 
 .contact-direct-actions {
     display: flex;
