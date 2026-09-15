@@ -1245,7 +1245,9 @@ a { color: inherit; }
 .section-focus { background: var(--bg-surface); }
 .section-certs { background: #ffffff; }
 
-.ai-grid, .focus-grid, .certs-grid { gap: 0; }
+/* `display: grid` fehlte hier — die grid-template-columns darunter blieben
+   wirkungslos und alle Karten stapelten in voller Breite untereinander. */
+.ai-grid, .focus-grid, .certs-grid { display: grid; align-items: stretch; gap: 0; }
 
 .ai-grid { grid-template-columns: repeat(4, minmax(0, 1fr)); }
 .focus-grid { grid-template-columns: 1.25fr 1fr 1fr; align-items: stretch; }

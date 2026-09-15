@@ -1,0 +1,178 @@
+/* ==========================================================================
+   KARTEN-INTERAKTION — gemeinsames Verhalten für Stack, KI, Fokus,
+   Zertifikate und die Kontaktkanäle.
+
+   Ergänzt style.css; eigene Datei, damit das Grundlayout unangetastet bleibt.
+   Zwei Effekte, konsequent über alle Sektionen:
+   1. ein Lichtkegel, der dem Zeiger folgt
+   2. gestaffeltes Einblenden beim Scrollen
+   ========================================================================== */
+
+.skill-card,
+.ai-card,
+.focus-card,
+.cert-card,
+.channel-item {
+    position: relative;
+    isolation: isolate;
+}
+
+/* --- 1. Lichtkegel ------------------------------------------------------ */
+.skill-card::before,
+.ai-card::before,
+.focus-card::before,
+.cert-card::before,
+.channel-item::before {
+    content: '';
+    position: absolute;
+    z-index: -1;
+    inset: 0;
+    background: radial-gradient(
+        420px circle at var(--mx, 50%) var(--my, 0%),
+        rgba(101, 115, 106, 0.16),
+        rgba(101, 115, 106, 0.05) 40%,
+        transparent 70%
+    );
+    opacity: 0;
+    transition: opacity 0.4s ease;
+    pointer-events: none;
+}
+
+/* Auf den dunklen Karten muss das Licht heller sein, sonst sieht man nichts. */
+.ai-card:first-child::before,
+.focus-card:first-child::before,
+.channel-item::before {
+    background: radial-gradient(
+        420px circle at var(--mx, 50%) var(--my, 0%),
+        rgba(185, 210, 196, 0.16),
+        rgba(185, 210, 196, 0.05) 40%,
+        transparent 70%
+    );
+}
+
+[data-lit="true"]::before { opacity: 1; }
+
+/* --- 2. Gestaffeltes Einblenden ---------------------------------------- */
+[data-reveal] {
+    opacity: 0;
+    transform: translateY(18px);
+}
+
+[data-reveal="in"] {
+    opacity: 1;
+    transform: none;
+    transition: opacity 0.6s cubic-bezier(0.22, 1, 0.36, 1),
+                transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/* --- Stack: Zählerleiste ------------------------------------------------ */
+.stack-meter {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: 0.6rem 2rem;
+    margin-top: 1.5rem;
+    padding-top: 1.2rem;
+    border-top: 1px solid var(--border-subtle);
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    color: var(--text-muted);
+}
+
+.stack-meter-item {
+    display: inline-flex;
+    align-items: baseline;
+    gap: 0.5rem;
+}
+
+.stack-meter-num {
+    min-width: 2ch;
+    font-family: var(--font-display);
+    font-size: 1.55rem;
+    font-weight: 700;
+    line-height: 1;
+    letter-spacing: -0.03em;
+    color: var(--text-primary);
+    font-variant-numeric: tabular-nums;
+}
+
+.stack-meter-label {
+    letter-spacing: 0.11em;
+    text-transform: uppercase;
+}
+
+.stack-meter-status {
+    margin-left: auto;
+    padding: 0.3rem 0.7rem;
+    border: 1px solid var(--border-subtle);
+    border-radius: var(--radius-full);
+    background: var(--accent-sage-soft);
+    color: var(--accent-sage);
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-3px);
+    transition: opacity 0.25s ease, transform 0.25s ease, visibility 0.25s;
+}
+
+.stack-meter-status[data-active="true"] {
+    opacity: 1;
+    visibility: visible;
+    transform: none;
+}
+
+/* Sanftes Setzen nach dem Filtern */
+@keyframes card-settle {
+    from { opacity: 0; transform: translateY(10px) scale(0.99); }
+    to   { opacity: 1; transform: none; }
+}
+
+.skill-card[data-settling="true"] {
+    animation: card-settle 0.36s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+/* Leerzustand der Suche */
+.stack-empty {
+    grid-column: 1 / -1;
+    padding: 3rem 0;
+    text-align: center;
+    color: var(--text-muted);
+    font-family: var(--font-mono);
+    font-size: 0.82rem;
+}
+
+.stack-empty[hidden] { display: none; }
+
+.stack-empty button {
+    margin-left: 0.5rem;
+    padding: 0;
+    color: var(--text-primary);
+    background: none;
+    border: 0;
+    font: inherit;
+    text-decoration: underline;
+    text-underline-offset: 3px;
+    cursor: pointer;
+}
+
+@media (max-width: 640px) {
+    .stack-meter { gap: 0.5rem 1.2rem; font-size: 0.66rem; }
+    .stack-meter-num { font-size: 1.3rem; }
+    .stack-meter-status { margin-left: 0; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    [data-reveal],
+    [data-reveal="in"] { opacity: 1; transform: none; transition: none; }
+    .skill-card[data-settling="true"] { animation: none; }
+    .skill-card::before,
+    .ai-card::before,
+    .focus-card::before,
+    .cert-card::before,
+    .channel-item::before { transition: none; }
+}
+
+/* Das GitHub-Icon hat keine eigene Markenfarbe und erbt deshalb die
+   Textfarbe — auf der dunklen Kontaktkachel war es praktisch unsichtbar. */
+.section-contact .channel-item .devicon-github-original {
+    color: #f4f6f4;
+}
