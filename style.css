@@ -415,8 +415,11 @@ a { color: inherit; }
 .portrait-card {
     position: relative;
     width: 326px;
-    height: 420px;
-    padding: 14px 14px 40px;
+    /* Keine feste Höhe: bei 420px wurden die Badges unter dem Namen
+       abgeschnitten, weil Foto + Infozeile zusammen mehr Platz brauchen.
+       Die Vorderseite gibt die Höhe vor, die Rückseite legt sich darüber. */
+    min-height: 420px;
+    padding: 14px 14px 32px;
     background: #f7f5ef;
     border-radius: 2px;
     box-shadow: 0 22px 40px rgba(0, 0, 0, 0.28), 0 3px 7px rgba(0, 0, 0, 0.18);
@@ -461,11 +464,18 @@ a { color: inherit; }
 }
 
 .portrait-face {
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+}
+
+/* Die Vorderseite steht im Fluss und bestimmt damit die Kartenhöhe … */
+.portrait-front { position: relative; }
+
+/* … die Rückseite liegt deckungsgleich darüber. */
+.portrait-back {
     position: absolute;
     inset: 0;
     overflow: hidden;
-    backface-visibility: hidden;
-    -webkit-backface-visibility: hidden;
 }
 
 .portrait-front {
@@ -1674,7 +1684,7 @@ a { color: inherit; }
     .hero-skill-rail { margin-bottom: 1.25rem; }
     .hero-visual { width: 100%; max-width: 350px; }
 
-    .portrait-card { height: 360px; max-width: 276px; }
+    .portrait-card { min-height: 0; max-width: 276px; }
     .portrait-back { padding: 1.1rem; }
     .portrait-back h2 { margin-top: 1.35rem; font-size: 2.1rem; }
     .portrait-back-intro { margin-top: 0.65rem; font-size: 0.72rem; }
