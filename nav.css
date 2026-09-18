@@ -241,3 +241,27 @@
     .hero-visual { max-width: 290px; }
     .portrait-card { width: 252px; }
 }
+
+/* --------------------------------------------------------------------------
+   PORTRÄT NICHT ANSCHNEIDEN
+
+   Die Karte ist gedreht und wirft einen Schatten. Beides vergrößert sie
+   optisch, aber nicht im Layout — der Hero reservierte deshalb zu wenig
+   Platz, und sein overflow: hidden schnitt Fuß und Schatten waagerecht ab
+   (auf der Rückseite fehlten "MG / 095" und "CONNECT").
+
+   clip statt hidden, und nur waagerecht: der horizontale Überlauf, für den
+   hidden ursprünglich da war, bleibt gekappt, senkrecht wird nichts mehr
+   abgeschnitten. */
+.hero-section {
+    overflow: visible;
+    overflow-x: clip;
+}
+
+/* Dazu echter Layout-Platz für Drehung und Schatten, damit die Karte nicht
+   bloß unbeschnitten in die Techleiste hineinragt. */
+.hero-visual { padding-bottom: 1.5rem; }
+
+@media (max-width: 900px) {
+    .hero-visual { padding-bottom: 2.75rem; }
+}
